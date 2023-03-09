@@ -1,21 +1,24 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Deals() {
   const [deals, setDeals] = useState<
     {
       dealID: string;
       title: string;
-      salePrice: number;
-      normalPrice: number;
+      salePrice: string;
+      normalPrice: string;
       thumb: string;
+      steamAppID: string;
     }[]
   >([]);
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
-        "https://www.cheapshark.com/api/1.0/deals?pageSize=50"
+        "https://www.cheapshark.com/api/1.0/deals?pageSize=20",
+        { next: { revalidate: 600 } }
       );
       const res = await response.json();
       console.log(res);
@@ -39,6 +42,7 @@ export default function Deals() {
                   blurDataURL={"/loading.jpg"}
                 />
                 {`${deal.title} || current: ${deal.salePrice} | normal: ${deal.normalPrice}`}
+                <Link href={`/gameDetails/${deal.dealID}`}>{deal.dealID}</Link>
               </li>
             ))
           : null}
