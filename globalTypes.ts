@@ -63,7 +63,7 @@ type SteamSuccess = {
     dlc: number[];
     genres: { id: string; description: string }[];
     header_image: string;
-    screenshots: string[];
+    screenshots: { id: number; path_full: string; path_thumbnail: string }[];
     short_description: string;
     pc_requirements: {
       minimum: string;

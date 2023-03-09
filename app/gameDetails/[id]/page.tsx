@@ -56,9 +56,9 @@ export default function GameDetails({ params }: { params: { id: string } }) {
           )}
           )
         </h3>
+        <SteamSection steamID={gameFromShark.info.steamAppID} />
       </div>
       <ListOfDeals deals={gameFromShark.deals} />
-      <SteamSection steamID={gameFromShark.info.steamAppID} />
     </main>
   );
 }
