@@ -3,14 +3,29 @@
 import { useEffect, useState } from "react";
 
 export default function GameDetails({ params }: { params: { id: string } }) {
-  //   const [message, setMessage] = useState("");
-  //   useEffect(() => {
-  //     async function fetchData() {
-  //       const res = await fetch("http://localhost:3000/api/example");
-  //       const toReturn = await res.json();
-  //       setMessage(toReturn.mess);
-  //     }
-  //     fetchData();
-  //   }, []);
-  return <h2>{params.id}</h2>;
+  const [gameFromShark, setGameFromShark] = useState("loading");
+
+  useEffect(() => {
+    async function fetchDataFromShark() {
+      const response = await fetch(
+        `https://www.cheapshark.com/api/1.0/games?id=${params.id}`
+      );
+      const responseAfterJSON = await response.json();
+      console.log(responseAfterJSON);
+      setGameFromShark(responseAfterJSON);
+    }
+    fetchDataFromShark();
+  }, [params.id]);
+
+  if (gameFromShark == "loading") {
+    return null;
+  }
+
+  return (
+    <main>
+      <div>
+        <h1>{gameFromShark.info.title}</h1>
+      </div>
+    </main>
+  );
 }

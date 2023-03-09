@@ -2,18 +2,10 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { DealsListItem } from "@/globalTypes";
 
 export default function Deals() {
-  const [deals, setDeals] = useState<
-    {
-      dealID: string;
-      title: string;
-      salePrice: string;
-      normalPrice: string;
-      thumb: string;
-      steamAppID: string;
-    }[]
-  >([]);
+  const [deals, setDeals] = useState<DealsListItem[]>([]);
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
@@ -41,8 +33,11 @@ export default function Deals() {
                   placeholder={"blur"}
                   blurDataURL={"/loading.jpg"}
                 />
-                {`${deal.title} || current: ${deal.salePrice} | normal: ${deal.normalPrice}`}
-                <Link href={`/gameDetails/${deal.dealID}`}>{deal.dealID}</Link>
+                {`${deal.title} || current: ${deal.salePrice} | normal: ${
+                  deal.normalPrice
+                  //*1000 to convert from milliseconds to seconds
+                } | lastChange: ${new Date(deal.lastChange * 1000)}`}
+                <Link href={`/gameDetails/${deal.gameID}`}>{deal.gameID}</Link>
               </li>
             ))
           : null}
