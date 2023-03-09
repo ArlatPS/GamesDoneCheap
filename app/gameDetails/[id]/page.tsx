@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { GameFromShark } from "@/globalTypes";
-import ListOfDeals from "../listOfDeals";
+import ListOfDeals from "./listOfDeals";
 
 type GameSharkState = GameFromShark | "loading";
 
@@ -22,21 +22,19 @@ export default function GameDetails({ params }: { params: { id: string } }) {
   }, [params.id]);
 
   if (gameFromShark == "loading") {
-    return null;
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   return (
     <main>
       <div>
         <h1>{gameFromShark.info.title}</h1>
-        {gameFromShark.deals.map((deal) => (
-          <div key={deal.dealID}>
-            <h3>Shop:{deal.storeID}</h3>
-            <h4></h4>
-          </div>
-        ))}
       </div>
-      <ListOfDeals />
+      <ListOfDeals deals={gameFromShark.deals} />
     </main>
   );
 }
