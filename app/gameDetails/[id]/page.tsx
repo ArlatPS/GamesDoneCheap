@@ -1,9 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { GameFromShark } from "@/globalTypes";
+import ListOfDeals from "../listOfDeals";
+
+type GameSharkState = GameFromShark | "loading";
 
 export default function GameDetails({ params }: { params: { id: string } }) {
-  const [gameFromShark, setGameFromShark] = useState("loading");
+  const [gameFromShark, setGameFromShark] = useState<GameSharkState>("loading");
 
   useEffect(() => {
     async function fetchDataFromShark() {
@@ -12,7 +16,7 @@ export default function GameDetails({ params }: { params: { id: string } }) {
       );
       const responseAfterJSON = await response.json();
       console.log(responseAfterJSON);
-      setGameFromShark(responseAfterJSON);
+      setGameFromShark(responseAfterJSON as GameFromShark);
     }
     fetchDataFromShark();
   }, [params.id]);
@@ -25,7 +29,14 @@ export default function GameDetails({ params }: { params: { id: string } }) {
     <main>
       <div>
         <h1>{gameFromShark.info.title}</h1>
+        {gameFromShark.deals.map((deal) => (
+          <div key={deal.dealID}>
+            <h3>Shop:{deal.storeID}</h3>
+            <h4></h4>
+          </div>
+        ))}
       </div>
+      <ListOfDeals />
     </main>
   );
 }

@@ -19,3 +19,22 @@ export type DealsListItem = {
   title: string;
   thumb: string;
 };
+
+export type GameFromShark = {
+  info: {
+    steamAppID: string | null;
+    thumb: string;
+    title: string;
+  };
+  cheapestPriceEver: {
+    date: number;
+    price: string;
+  };
+  deals: {
+    dealID: string;
+    price: string;
+    retailPrice: string;
+    savings: string;
+    storeID: string;
+  }[];
+};
