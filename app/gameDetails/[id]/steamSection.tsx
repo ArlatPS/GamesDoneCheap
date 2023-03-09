@@ -4,11 +4,14 @@ import parse from "html-react-parser";
 import Link from "next/link";
 import Image from "next/image";
 
+import ScreenshotGallery from "./screenshotGallery";
+
 export default function SteamSection({ steamID }: { steamID: string | null }) {
   const [steamInfo, setSteamInfo] = useState<ResponseFromSteam | "loading">(
     "loading"
   );
 
+  // fetch steam data
   useEffect(() => {
     async function fetchSteam() {
       if (steamID != null) {
@@ -24,30 +27,6 @@ export default function SteamSection({ steamID }: { steamID: string | null }) {
     }
     fetchSteam();
   }, [steamID]);
-
-  //screenshot gallery control
-  const [currScreenshot, setCurrScreenshot] = useState(0);
-
-  function handleScreenshots(action: "next" | "prev") {
-    if (steamInfo != "loading" && steamInfo.success) {
-      if (action == "next") {
-        if (currScreenshot == steamInfo.data.screenshots.length - 1) {
-          setCurrScreenshot(0);
-        } else {
-          setCurrScreenshot((curr) => curr + 1);
-        }
-      } else if (action == "prev") {
-        if (currScreenshot == 0) {
-          setCurrScreenshot(steamInfo.data.screenshots.length - 1);
-        } else {
-          setCurrScreenshot((curr) => curr - 1);
-        }
-      }
-    }
-  }
-  //   useEffect(() => {
-  //     setInterval();
-  //   });
 
   //checks for earlier return
   if (steamID == null) {
@@ -73,22 +52,18 @@ export default function SteamSection({ steamID }: { steamID: string | null }) {
         width={460}
         height={215}
       />
-      <br />
-      <Image
-        src={steamInfo.data.screenshots[currScreenshot].path_full}
-        alt={`Photo of a game with id ${steamID}`}
-        width={650}
-        height={365}
-      />
-      <button onClick={() => handleScreenshots("prev")}>prev</button>
-      <button onClick={() => handleScreenshots("next")}>next</button>
-      <div>
-        <h4>DLC</h4>
-        {/* another component and for every dlc fetch for list of games */}
-        {steamInfo.data.dlc.map((dlc) => (
-          <h5 key={dlc}>DLC num: {dlc}</h5>
-        ))}
-      </div>
+      <ScreenshotGallery screenshots={steamInfo.data.screenshots} />
+      {/* <button onClick={() => handleScreenshots("prev")}>prev</button>
+      <button onClick={() => handleScreenshots("next")}>next</button> */}
+      {!steamInfo.data.dlc ? null : (
+        <div>
+          <h4>DLC</h4>
+          {/* another component and for every dlc fetch for list of games */}
+          {steamInfo.data.dlc.map((dlc) => (
+            <h5 key={dlc}>DLC num: {dlc}</h5>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

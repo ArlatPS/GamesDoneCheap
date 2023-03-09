@@ -5,8 +5,9 @@ import StyledComponentsRegistry from "../lib/styledComponentsRegistry";
 
 // metadata for the site
 export const metadata: Metadata = {
-  title: "GG clone",
-  description: "Ongoing project of GG.deals clone with CheapShark API",
+  title: "GG",
+  description:
+    "Ongoing project of game prices comparison website using CheapShark API",
 };
 
 // layout for the root
