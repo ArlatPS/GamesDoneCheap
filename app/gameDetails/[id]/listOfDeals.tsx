@@ -12,7 +12,6 @@ export default function ListOfDeals({ deals }: { deals: DealsList }) {
     async function getStores() {
       const response = await fetch("/api/stores");
       const responseAfterJSON = await response.json();
-      console.log(responseAfterJSON);
       setStores(responseAfterJSON);
     }
     getStores();

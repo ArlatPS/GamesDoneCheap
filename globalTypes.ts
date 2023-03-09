@@ -51,3 +51,25 @@ export type StoreFromShark = {
   storeID: string;
   storeName: string;
 };
+
+type SteamFailure = {
+  success: false;
+  data: null;
+};
+
+type SteamSuccess = {
+  success: true;
+  data: {
+    dlc: number[];
+    genres: { id: string; description: string }[];
+    header_image: string;
+    screenshots: string[];
+    short_description: string;
+    pc_requirements: {
+      minimum: string;
+      recommended: string;
+    };
+  };
+};
+
+export type ResponseFromSteam = SteamFailure | SteamSuccess;
