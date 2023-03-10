@@ -1,17 +1,31 @@
 "use client";
 import Image from "next/image";
-import { cache, useEffect, useState } from "react";
+import { cache, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { DealsListItem } from "@/globalTypes";
 
 export default function AllDeals() {
   const [deals, setDeals] = useState<DealsListItem[]>([]);
+
+  // pages controls
   const [page, setPage] = useState(0);
+  const handlePageChange = useCallback(
+    (action: "prev" | "next") => {
+      if (action == "next") {
+        setPage((n) => n + 1);
+      } else if (action == "prev") {
+        if (page > 0) setPage((n) => n - 1);
+      }
+    },
+    [page]
+  );
+
   useEffect(() => {
     async function fetchData() {
+      // revalidate all deals every 10 minutes
       const response = await fetch(
-        `https://www.cheapshark.com/api/1.0/deals?pageSize=20?page=${page}`,
-        { next: { revalidate: 600 } }
+        `https://www.cheapshark.com/api/1.0/deals?pageNumber=${page}&pageSize=20`,
+        { next: { revalidate: 10 * 60 } }
       );
       const res = await response.json();
       setDeals(res);
@@ -25,15 +39,15 @@ export default function AllDeals() {
 
   return (
     <div>
-      <h2>Best Deals</h2>
+      <h2>All Deals</h2>
       <ol>
         {deals.length > 0
           ? deals.map((deal) => (
               <li key={deal.dealID}>
                 <Image
                   src={deal.thumb}
-                  width={80}
-                  height={120}
+                  width={40}
+                  height={60}
                   alt={deal.title}
                   placeholder={"blur"}
                   blurDataURL={"/loading.jpg"}
@@ -47,6 +61,8 @@ export default function AllDeals() {
             ))
           : null}
       </ol>
+      <button onClick={() => handlePageChange("prev")}>Prev</button>
+      <button onClick={() => handlePageChange("next")}>Next</button>
     </div>
   );
 }
