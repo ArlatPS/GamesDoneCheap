@@ -4,19 +4,19 @@
 
 import { NextResponse } from "next/server";
 export async function GET(request: Request) {
+  // get ids from search params
   const { searchParams } = new URL(request.url);
-  const id = searchParams.get("ids");
-  if (!id) {
+  const idsParams = searchParams.get("ids");
+  if (!idsParams) {
     return NextResponse.json({ success: false, ids: [] });
   }
-  console.log(id);
-  // const body = JSON.parse(id);
-  // const body = await request.text();
+
   const names: string[] = [];
   const gameIDs: string[] = [];
   // conversion to array of ids
-  const ids = id.slice(1, id.length - 2).split(",");
+  const ids = idsParams.slice(1, idsParams.length - 2).split(",");
   for (let i = 0; i < ids.length; i++) {
+    // find name on steam API
     const res = await fetch(`http://localhost:3000/api/steam?id=${ids[i]}`);
     const resAfterJSON = await res.json();
     if (resAfterJSON.success) {
@@ -24,6 +24,7 @@ export async function GET(request: Request) {
       const res = await fetch(
         `https://www.cheapshark.com/api/1.0/games?title=${resAfterJSON.data.name}&limit=5`
       );
+      // add first result to gameIDs
       const resAfterJ = await res.json();
       if (resAfterJ[0]) {
         gameIDs.push(resAfterJ[0].gameID);
