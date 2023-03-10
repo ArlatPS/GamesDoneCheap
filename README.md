@@ -40,3 +40,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 No Turbopack because babel is needed for styled components
 
 styled components in use client
+
+to get request body
+await request.text()

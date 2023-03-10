@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import ScreenshotGallery from "./screenshotGallery";
+import SectionDLC from "./sectionDLC";
 
 export default function SteamSection({ steamID }: { steamID: string | null }) {
   const [steamInfo, setSteamInfo] = useState<ResponseFromSteam | "loading">(
@@ -55,15 +56,13 @@ export default function SteamSection({ steamID }: { steamID: string | null }) {
       <ScreenshotGallery screenshots={steamInfo.data.screenshots} />
       {/* <button onClick={() => handleScreenshots("prev")}>prev</button>
       <button onClick={() => handleScreenshots("next")}>next</button> */}
-      {!steamInfo.data.dlc ? null : (
-        <div>
-          <h4>DLC</h4>
-          {/* another component and for every dlc fetch for list of games */}
-          {steamInfo.data.dlc.map((dlc) => (
-            <h5 key={dlc}>DLC num: {dlc}</h5>
-          ))}
-        </div>
-      )}
+      <div>
+        <h4>Genres</h4>
+        {steamInfo.data.genres.map((genre) => (
+          <h5 key={genre.id}>{genre.description}</h5>
+        ))}
+      </div>
+      {steamInfo.data.dlc ? <SectionDLC ids={steamInfo.data.dlc} /> : null}
     </div>
   );
 }

@@ -37,7 +37,7 @@ export default function Deals() {
                   deal.normalPrice
                   //*1000 to convert from milliseconds to seconds
                 } | lastChange: ${new Date(deal.lastChange * 1000)}`}
-                <Link href={`/gameDetails/${deal.gameID}`}>{deal.gameID}</Link>
+                <Link href={`/game-details/${deal.gameID}`}>{deal.gameID}</Link>
               </li>
             ))
           : null}
