@@ -1,40 +1,21 @@
-import { useEffect, useState } from "react";
 import { DealsList, StoreFromShark } from "@/globalTypes";
 import Image from "next/image";
 import Link from "next/link";
 
 async function getStores() {
+  // revalidate stores every 24h
   const response = await fetch("http://localhost:3000/api/stores", {
     next: { revalidate: 24 * 60 * 60 },
   });
-  console.log(response);
   const responseAfterJSON = await response.json();
   return responseAfterJSON;
 }
 
 // component with lists of deals, it needs stores list
 export default async function ListOfDeals({ deals }: { deals: DealsList }) {
-  // const [stores, setStores] = useState<StoreFromShark[]>([]);
-
-  // useEffect for fetching stores when component is mounted
-  // useEffect(() => {
-  //   async function getStores() {
-  //     const response = await fetch("/api/stores");
-  //     const responseAfterJSON = await response.json();
-  //     setStores(responseAfterJSON);
-  //   }
-  //   getStores();
-  // }, []);
   const stores = (await getStores()) as StoreFromShark[];
-  // console.log(stores);
-  // if not fetched yet loading pane
+  // if stores fetched return component
   if (stores?.length != 0) {
-    // return (
-    //   <div>
-    //     <p>Loading...</p>
-    //   </div>
-    // );
-
     return (
       <div>
         {deals.map((deal) => {

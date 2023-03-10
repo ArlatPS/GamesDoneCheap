@@ -31,7 +31,6 @@ export async function GET(request: Request) {
       }
     }
   }
-  console.log(gameIDs);
   return NextResponse.json({ success: true, ids: gameIDs });
 }
 

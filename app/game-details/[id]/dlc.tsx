@@ -34,11 +34,6 @@ export default function DLC({ idShark }: { idShark: string }) {
         alt={"DLC Cover Photo"}
       />
       <h5>{dlc.info.title}</h5>
-      {/* {dlc.deals.map((deal) => (
-        <div key={deal.dealID}>
-          <h6>{deal.price}</h6>
-        </div>
-      ))} */}
       <ListOfDlcDeals deals={dlc.deals} />
     </div>
   );

@@ -14,41 +14,16 @@ async function fetchDataFromShark(id: string) {
     `https://www.cheapshark.com/api/1.0/games?id=${id}`
   );
   const responseAfterJSON = await response.json();
-  // setGameFromShark(responseAfterJSON as GameFromShark);
   return responseAfterJSON;
 }
-
-// type GameSharkState = GameFromShark | "loading";
 
 export default async function GameDetails({
   params,
 }: {
   params: { id: string };
 }) {
-  // const [gameFromShark, setGameFromShark] = useState<GameSharkState>("loading");
-
-  // fetch game when component mounts
-  // useEffect(() => {
-  //   async function fetchDataFromShark() {
-  //     const response = await fetch(
-  //       `https://www.cheapshark.com/api/1.0/games?id=${params.id}`
-  //     );
-  //     const responseAfterJSON = await response.json();
-  //     setGameFromShark(responseAfterJSON as GameFromShark);
-  //   }
-  //   fetchDataFromShark();
-  // }, [params.id]);
-
   const gameFromShark = (await fetchDataFromShark(params.id)) as GameFromShark;
-
-  // if (gameFromShark == "loading") {
-  //   return (
-  //     <div>
-  //       <p>Loading...</p>
-  //     </div>
-  //   );
-  // }
-
+  // it doesn't need earlier return for loading - loading.tsx provides loading pane
   return (
     <main>
       <div>
