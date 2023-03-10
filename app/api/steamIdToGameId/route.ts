@@ -3,12 +3,19 @@
 //add type
 
 import { NextResponse } from "next/server";
-export async function POST(request: Request) {
-  const body = await request.text();
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("ids");
+  if (!id) {
+    return NextResponse.json({ success: false, ids: [] });
+  }
+  console.log(id);
+  // const body = JSON.parse(id);
+  // const body = await request.text();
   const names: string[] = [];
   const gameIDs: string[] = [];
   // conversion to array of ids
-  const ids = body.slice(1, body.length - 2).split(",");
+  const ids = id.slice(1, id.length - 2).split(",");
   for (let i = 0; i < ids.length; i++) {
     const res = await fetch(`http://localhost:3000/api/steam?id=${ids[i]}`);
     const resAfterJSON = await res.json();

@@ -5,9 +5,8 @@ function SectionDlc({ ids }: { ids: number[] }) {
   const [dlc, setDlc] = useState("loading");
   useEffect(() => {
     async function fetchDlc() {
-      const response = await fetch("/api/steamIdToGameId", {
-        method: "POST",
-        body: JSON.stringify(ids),
+      const response = await fetch(`/api/steamIdToGameId?ids=${ids}`, {
+        next: { revalidate: 24 * 60 * 60 },
       });
       const res = await response.json();
       console.log(res);
