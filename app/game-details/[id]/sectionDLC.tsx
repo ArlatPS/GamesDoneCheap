@@ -6,17 +6,18 @@ function SectionDlc({ ids }: { ids: number[] }) {
   const [dlc, setDlc] = useState<"loading" | string[]>("loading");
   useEffect(() => {
     async function fetchDlc() {
-      const response = await fetch(`/api/steamIdToGameId?ids=${ids}`, {
-        next: { revalidate: 24 * 60 * 60 },
-      });
+      const response = await fetch(`/api/steamIdToGameId?ids=${ids}`);
       const res = await response.json();
       console.log(res);
       setDlc(res.ids as string[]);
     }
     fetchDlc();
   }, [ids]);
-  if (!dlc?.length || dlc == "loading") {
+  if (dlc == "loading") {
     return <h5>loading</h5>;
+  }
+  if (dlc.length == 0) {
+    return <h5>No DLCs found</h5>;
   }
   return (
     <div>

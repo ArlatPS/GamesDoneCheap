@@ -43,9 +43,6 @@ export default function SteamSection({ steamID }: { steamID: string | null }) {
 
   return (
     <div>
-      <h2>{steamInfo.data.short_description}</h2>
-      <h5>{parse(steamInfo.data.pc_requirements.minimum)}</h5>
-
       {/* this dimension are original */}
       <Image
         src={steamInfo.data.header_image}
@@ -53,6 +50,9 @@ export default function SteamSection({ steamID }: { steamID: string | null }) {
         width={460}
         height={215}
       />
+      <h2>{steamInfo.data.short_description}</h2>
+      <h5>{parse(steamInfo.data.pc_requirements.minimum)}</h5>
+
       <ScreenshotGallery screenshots={steamInfo.data.screenshots} />
       {/* <button onClick={() => handleScreenshots("prev")}>prev</button>
       <button onClick={() => handleScreenshots("next")}>next</button> */}
