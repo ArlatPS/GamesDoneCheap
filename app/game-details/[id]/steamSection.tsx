@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { ResponseFromSteam } from "@/globalTypes";
 import parse from "html-react-parser";
 import Link from "next/link";
@@ -6,35 +6,56 @@ import Image from "next/image";
 
 import ScreenshotGallery from "./screenshotGallery";
 import SectionDLC from "./sectionDLC";
+const SectionDLCAsync = SectionDLC as any;
 
-export default function SteamSection({ steamID }: { steamID: string | null }) {
-  const [steamInfo, setSteamInfo] = useState<ResponseFromSteam | "loading">(
-    "loading"
-  );
+async function fetchSteam(steamID: string) {
+  if (steamID != null) {
+    try {
+      const res = await fetch(`http://localhost:3000/api/steam?id=${steamID}`, {
+        next: { revalidate: 24 * 60 * 60 },
+      });
+      const resAfterJSON = await res.json();
+      return resAfterJSON as ResponseFromSteam;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
+
+export default async function SteamSection({
+  steamID,
+}: {
+  steamID: string | null;
+}) {
+  // const [steamInfo, setSteamInfo] = useState<ResponseFromSteam | "loading">(
+  //   "loading"
+  // );
 
   // fetch steam data
-  useEffect(() => {
-    async function fetchSteam() {
-      if (steamID != null) {
-        try {
-          const res = await fetch(`/api/steam?id=${steamID}`);
-          const resAfterJSON = await res.json();
-          console.log(resAfterJSON);
-          setSteamInfo(resAfterJSON);
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    }
-    fetchSteam();
-  }, [steamID]);
+  // useEffect(() => {
+  //   async function fetchSteam() {
+  //     if (steamID != null) {
+  //       try {
+  //         const res = await fetch(`/api/steam?id=${steamID}`);
+  //         const resAfterJSON = await res.json();
+  //         console.log(resAfterJSON);
+  //         setSteamInfo(resAfterJSON);
+  //       } catch (e) {
+  //         console.log(e);
+  //       }
+  //     }
+  //   }
+  //   fetchSteam();
+  // }, [steamID]);
 
   //checks for earlier return
   if (steamID == null) {
     return <h3>Steam Page Unavailable</h3>;
   }
 
-  if (steamInfo === "loading") {
+  const steamInfo = await fetchSteam(steamID);
+
+  if (steamInfo == undefined) {
     return <h2>Loading...</h2>;
   }
   if (!steamInfo.success) {
@@ -62,7 +83,7 @@ export default function SteamSection({ steamID }: { steamID: string | null }) {
           <h5 key={genre.id}>{genre.description}</h5>
         ))}
       </div>
-      {steamInfo.data.dlc ? <SectionDLC ids={steamInfo.data.dlc} /> : null}
+      {steamInfo.data.dlc ? <SectionDLCAsync ids={steamInfo.data.dlc} /> : null}
     </div>
   );
 }

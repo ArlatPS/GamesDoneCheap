@@ -1,3 +1,15 @@
+# Current Component Structure
+
+- / - server
+  - bestDeals - server
+- /game-details/id - server
+  - listOfDeals - server
+  - steamSection - server
+    - screenshotGallery - client
+    - sectionDlc - server
+    - DLC - client
+    - listOfDlcDeals - client
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

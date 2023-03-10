@@ -1,7 +1,9 @@
+"use client";
+
 import { GameFromShark } from "@/globalTypes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import ListOfDeals from "./listOfDeals";
+import ListOfDlcDeals from "./listOfDlcDeals";
 
 export default function DLC({ idShark }: { idShark: string }) {
   const [dlc, setDlc] = useState<"loading" | GameFromShark>("loading");
@@ -37,7 +39,7 @@ export default function DLC({ idShark }: { idShark: string }) {
           <h6>{deal.price}</h6>
         </div>
       ))} */}
-      <ListOfDeals deals={dlc.deals} />
+      <ListOfDlcDeals deals={dlc.deals} />
     </div>
   );
 }

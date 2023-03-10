@@ -7,6 +7,7 @@ import { GameFromShark } from "@/globalTypes";
 import ListOfDeals from "./listOfDeals";
 const ListOfDealsAsync = ListOfDeals as any;
 import SteamSection from "./steamSection";
+const SteamSectionAsync = SteamSection as any;
 
 async function fetchDataFromShark(id: string) {
   const response = await fetch(
@@ -17,7 +18,7 @@ async function fetchDataFromShark(id: string) {
   return responseAfterJSON;
 }
 
-type GameSharkState = GameFromShark | "loading";
+// type GameSharkState = GameFromShark | "loading";
 
 export default async function GameDetails({
   params,
@@ -59,7 +60,7 @@ export default async function GameDetails({
           alt={gameFromShark.info.title}
         /> */}
         {/* lowest price with date formatting */}
-        {/* <SteamSection steamID={gameFromShark.info.steamAppID} /> */}
+        <SteamSectionAsync steamID={gameFromShark.info.steamAppID} />
         <h3>
           Lowest recorded price: {gameFromShark.cheapestPriceEver.price}USD{" "}
           {formatDistanceToNow(
