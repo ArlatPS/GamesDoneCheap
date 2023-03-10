@@ -41,21 +41,22 @@ export default function ListOfDeals({ deals }: { deals: DealsList }) {
           <div key={deal.dealID}>
             <Image
               src={`https://www.cheapshark.com/${store.images.logo}`}
-              width={50}
-              height={50}
+              width={25}
+              height={25}
               alt="store logo"
             />
-            <h2>{store.storeName}</h2>
+            <h4>{store.storeName}</h4>
             {/* show savings in % with one space after coma*/}
-            <h3>Savings: {Math.floor(+deal.savings * 10) / 10}%</h3>
+            <h5>Savings: {Math.floor(+deal.savings * 10) / 10}%</h5>
             <Link
               href={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}
             >
               Check out
             </Link>
-            <h3>
+            <h5>
               offered: {deal.price} USD / retail: {deal.retailPrice} USD
-            </h3>
+            </h5>
+            <hr />
           </div>
         );
       })}

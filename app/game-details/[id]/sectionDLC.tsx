@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { memo } from "react";
+import DLC from "./dlc";
 
 function SectionDlc({ ids }: { ids: number[] }) {
-  const [dlc, setDlc] = useState("loading");
+  const [dlc, setDlc] = useState<"loading" | string[]>("loading");
   useEffect(() => {
     async function fetchDlc() {
       const response = await fetch(`/api/steamIdToGameId?ids=${ids}`, {
@@ -10,16 +11,20 @@ function SectionDlc({ ids }: { ids: number[] }) {
       });
       const res = await response.json();
       console.log(res);
-      setDlc(res);
+      setDlc(res.ids as string[]);
     }
     fetchDlc();
   }, [ids]);
+  if (!dlc?.length || dlc == "loading") {
+    return <h5>loading</h5>;
+  }
   return (
     <div>
-      <h4>Sth will happen here</h4>
+      {dlc.map((id) => (
+        <DLC key={id} idShark={id} />
+      ))}
     </div>
   );
 }
-
-// a lot of fetching so
+// to prevent rerenders
 export default memo(SectionDlc);
