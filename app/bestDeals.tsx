@@ -20,7 +20,7 @@ const fetchBestDeals = cache(async (length: number) => {
 });
 
 export default async function BestDeals() {
-  const deals = await fetchBestDeals(15);
+  const deals = await fetchBestDeals(20);
   if (deals && deals?.length) {
     return (
       <div>
@@ -31,8 +31,8 @@ export default async function BestDeals() {
                 <li key={deal.dealID}>
                   <Image
                     src={deal.thumb}
-                    width={80}
-                    height={120}
+                    width={40}
+                    height={60}
                     alt={deal.title}
                     placeholder={"blur"}
                     blurDataURL={"/loading.jpg"}
