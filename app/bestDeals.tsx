@@ -4,10 +4,10 @@ import Link from "next/link";
 import { DealsListItem } from "@/globalTypes";
 
 const fetchBestDeals = cache(async (length: number) => {
-  // revalidate best deals every 5 minutes
+  // revalidate best deals every 10 minutes
   const response = await fetch(
     "https://www.cheapshark.com/api/1.0/deals?pageSize=60",
-    { next: { revalidate: 5 * 60 } }
+    { next: { revalidate: 10 * 60 } }
   );
   try {
     const res = (await response.json()) as DealsListItem[];
@@ -20,7 +20,7 @@ const fetchBestDeals = cache(async (length: number) => {
 });
 
 export default async function BestDeals() {
-  const deals = await fetchBestDeals(20);
+  const deals = await fetchBestDeals(10);
   if (deals && deals?.length) {
     return (
       <div>
