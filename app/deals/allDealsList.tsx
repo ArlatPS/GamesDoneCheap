@@ -3,14 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 
-export default function AllDealsList({
+function AllDealsList({
   deals,
-  updating,
+  hasUpdated,
 }: {
   deals: DealsListGame[];
-  updating: boolean;
+  hasUpdated: boolean;
 }) {
-  if (updating) {
+  if (hasUpdated) {
     return (
       <ol>
         {deals.length > 0
@@ -37,3 +37,4 @@ export default function AllDealsList({
   }
   return <h1>WE ARE LOADING</h1>;
 }
+export default memo(AllDealsList);
