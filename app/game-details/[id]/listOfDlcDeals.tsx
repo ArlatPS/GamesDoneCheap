@@ -50,6 +50,8 @@ export default function ListOfDlcDeals({ deals }: { deals: DealsList }) {
             <h5>Savings: {Math.floor(+deal.savings * 10) / 10}%</h5>
             <Link
               href={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Check out
             </Link>

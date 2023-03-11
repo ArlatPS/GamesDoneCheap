@@ -1,11 +1,11 @@
-import { DealsList, StoreFromShark } from "@/globalTypes";
+import { DealsList } from "@/globalTypes";
 import Image from "next/image";
 import Link from "next/link";
 import getStores from "@/lib/getStores";
 
 // component with lists of deals, it needs stores list
 export default async function ListOfDeals({ deals }: { deals: DealsList }) {
-  const stores = (await getStores()) as StoreFromShark[];
+  const stores = await getStores();
   // if stores fetched return component
   if (stores?.length != 0) {
     return (
@@ -32,6 +32,8 @@ export default async function ListOfDeals({ deals }: { deals: DealsList }) {
               <h5>Savings: {Math.floor(+deal.savings * 10) / 10}%</h5>
               <Link
                 href={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 Check out
               </Link>
