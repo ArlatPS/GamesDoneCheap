@@ -1,25 +1,11 @@
-import { ResponseFromSteam } from "@/globalTypes";
 import parse from "html-react-parser";
 import Image from "next/image";
+
+import fetchSteam from "@/lib/fetchSteam";
 
 import ScreenshotGallery from "./screenshotGallery";
 import SectionDLC from "./sectionDLC";
 const SectionDLCAsync = SectionDLC as any;
-
-async function fetchSteam(steamID: string) {
-  if (steamID != null) {
-    try {
-      // revalidate steam section once per 24h
-      const res = await fetch(`http://localhost:3000/api/steam?id=${steamID}`, {
-        next: { revalidate: 24 * 60 * 60 },
-      });
-      const resAfterJSON = await res.json();
-      return resAfterJSON as ResponseFromSteam;
-    } catch (e) {
-      console.error("Failed Steam Fetch");
-    }
-  }
-}
 
 export default async function SteamSection({
   steamID,

@@ -1,15 +1,7 @@
 import { DealsList, StoreFromShark } from "@/globalTypes";
 import Image from "next/image";
 import Link from "next/link";
-
-async function getStores() {
-  // revalidate stores every 24h
-  const response = await fetch("http://localhost:3000/api/stores", {
-    next: { revalidate: 24 * 60 * 60 },
-  });
-  const responseAfterJSON = await response.json();
-  return responseAfterJSON;
-}
+import getStores from "@/lib/getStores";
 
 // component with lists of deals, it needs stores list
 export default async function ListOfDeals({ deals }: { deals: DealsList }) {

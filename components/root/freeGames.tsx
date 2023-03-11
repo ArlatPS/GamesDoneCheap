@@ -1,8 +1,12 @@
 import { DealsListGame } from "@/globalTypes";
+import FreeGame from "./freeGame";
+
+// due to lack of support from TS to async server components
+const FreeGameAny = FreeGame as any;
 
 // need to fetch for better image
 
-export default function FreeGames({
+export default async function FreeGames({
   freeGames,
 }: {
   freeGames: DealsListGame[];
@@ -18,10 +22,7 @@ export default function FreeGames({
     <div>
       <h2>Free Games</h2>
       {freeGames.map((game) => (
-        <div key={game.dealID}>
-          {/* <Image /> */}
-          <h4>{game.title}</h4>
-        </div>
+        <FreeGameAny game={game} key={game.dealID} />
       ))}
     </div>
   );

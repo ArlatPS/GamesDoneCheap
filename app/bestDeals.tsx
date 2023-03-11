@@ -3,6 +3,9 @@ import Link from "next/link";
 import { DealsListGame } from "@/globalTypes";
 import FreeGames from "@/components/root/freeGames";
 
+// due to lack of support from TS to async server components
+const FreeGamesAny = FreeGames as any;
+
 const fetchBestDeals = async (length: number) => {
   // revalidate best deals every 10 minutes
   const response = await fetch(
@@ -13,7 +16,6 @@ const fetchBestDeals = async (length: number) => {
     const responseJSON = (await response.json()) as DealsListGame[];
     // filtering
     const [filteredDeals, freeGames] = filterDeals(responseJSON);
-    console.log(filteredDeals.slice(0, length));
     return { deals: filteredDeals.slice(0, length), freeGames };
   } catch {
     console.error("CHEAP SHARK API UNAVAILABLE");
@@ -54,7 +56,7 @@ export default async function BestDeals() {
     if (deals && deals?.length) {
       return (
         <section>
-          <FreeGames freeGames={freeGames} />
+          <FreeGamesAny freeGames={freeGames} />
           <div>
             <h2>Best Deals</h2>
             <ol>
