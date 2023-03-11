@@ -6,6 +6,7 @@ export type State = {
   maxPages: number;
   deals: DealsListGame[];
   pageSize: number;
+  sortBy: string;
 };
 
 type SetMaxPages = {
@@ -23,7 +24,12 @@ type SetPageSize = {
   payload: number;
 };
 
-type StateActionsWithPayload = SetMaxPages | SetDeals;
+type SetSortBy = {
+  type: "setSortBy";
+  payload: string;
+};
+
+type StateActionsWithPayload = SetMaxPages | SetDeals | SetPageSize | SetSortBy;
 
 type StateActionsWithoutPayload = {
   type: "nextPage" | "prevPage" | "setHasUpdatedTrue" | "setHasUpdatedFalse";
@@ -77,6 +83,14 @@ export function stateReducer(state: State, action: StateActions) {
         ...state,
         hasUpdated: false,
       };
+    case "setPageSize":
+      if (action.payload) {
+        return { ...state, pageSize: action.payload, hasUpdated: false };
+      }
+    case "setSortBy":
+      if (typeof action.payload == "string") {
+        return { ...state, sortBy: action.payload, hasUpdated: false };
+      }
 
     default:
       // if action.type doesn't match throw Error
