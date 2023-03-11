@@ -1,20 +1,25 @@
 "use client";
 import Image from "next/image";
-import { cache, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, memo, useRef } from "react";
 import Link from "next/link";
 import { DealsListItem } from "@/globalTypes";
 
-export default function AllDeals() {
+function AllDeals() {
   const [deals, setDeals] = useState<DealsListItem[]>([]);
-
+  // ref for keeping track of whether user is waiting for next page to load
+  const hasUpdated = useRef(true);
   // pages controls
   const [page, setPage] = useState(0);
   const handlePageChange = useCallback(
     (action: "prev" | "next") => {
       if (action == "next") {
         setPage((n) => n + 1);
+        hasUpdated.current = false;
       } else if (action == "prev") {
-        if (page > 0) setPage((n) => n - 1);
+        if (page > 0) {
+          setPage((n) => n - 1);
+          hasUpdated.current = false;
+        }
       }
     },
     [page]
@@ -28,6 +33,7 @@ export default function AllDeals() {
         { next: { revalidate: 10 * 60 } }
       );
       const res = await response.json();
+      hasUpdated.current = true;
       setDeals(res);
     }
     fetchData();
@@ -63,6 +69,10 @@ export default function AllDeals() {
       </ol>
       <button onClick={() => handlePageChange("prev")}>Prev</button>
       <button onClick={() => handlePageChange("next")}>Next</button>
+      {/* indicator for the user that fetching is being done */}
+      {hasUpdated.current ? null : <h4>🌀</h4>}
     </div>
   );
 }
+
+export default memo(AllDeals);
