@@ -1,6 +1,4 @@
-// "use client";
-
-// import { useEffect, useState } from "react";
+import { Suspense } from "react";
 import { format, formatDistanceToNow } from "date-fns"; // date formatting
 
 import { GameFromShark } from "@/globalTypes";
@@ -35,7 +33,9 @@ export default async function GameDetails({
           alt={gameFromShark.info.title}
         /> */}
         {/* lowest price with date formatting */}
-        <SteamSectionAsync steamID={gameFromShark.info.steamAppID} />
+        <Suspense fallback={<h3>I am loading Steam Page</h3>}>
+          <SteamSectionAsync steamID={gameFromShark.info.steamAppID} />
+        </Suspense>
         <h3>
           Lowest recorded price: {gameFromShark.cheapestPriceEver.price}USD{" "}
           {formatDistanceToNow(
@@ -49,7 +49,9 @@ export default async function GameDetails({
           )
         </h3>
       </div>
-      <ListOfDealsAsync deals={gameFromShark.deals} />
+      <Suspense fallback={<h3>I am loading List of Deals</h3>}>
+        <ListOfDealsAsync deals={gameFromShark.deals} />
+      </Suspense>
     </main>
   );
 }
