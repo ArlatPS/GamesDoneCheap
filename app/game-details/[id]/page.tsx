@@ -1,10 +1,10 @@
 import { Suspense } from "react";
-import { format, formatDistanceToNow } from "date-fns"; // date formatting
 
 import { GameFromShark } from "@/globalTypes";
-import ListOfDeals from "./listOfDeals";
+import ListOfDeals from "./listOfDeal";
 const ListOfDealsAsync = ListOfDeals as any;
 import SteamSection from "./steamSection";
+import LowestPrice from "./lowestPrice";
 const SteamSectionAsync = SteamSection as any;
 
 async function fetchDataFromShark(id: string) {
@@ -36,18 +36,7 @@ export default async function GameDetails({
         <Suspense fallback={<h3>I am loading Steam Page</h3>}>
           <SteamSectionAsync steamID={gameFromShark.info.steamAppID} />
         </Suspense>
-        <h3>
-          Lowest recorded price: {gameFromShark.cheapestPriceEver.price}USD{" "}
-          {formatDistanceToNow(
-            new Date(gameFromShark.cheapestPriceEver.date * 1000)
-          )}{" "}
-          ago (
-          {format(
-            new Date(gameFromShark.cheapestPriceEver.date * 1000),
-            "dd/LL/yyyy"
-          )}
-          )
-        </h3>
+        <LowestPrice game={gameFromShark} />
       </div>
       <Suspense fallback={<h3>I am loading List of Deals</h3>}>
         <ListOfDealsAsync deals={gameFromShark.deals} />

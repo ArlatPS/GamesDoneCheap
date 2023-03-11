@@ -1,10 +1,11 @@
 "use client";
 import Image from "next/image";
-import { useCallback, useEffect, useState, memo, useRef } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { DealsListGame } from "@/globalTypes";
+import AllDealsList from "./allDealsList";
 
-function AllDeals() {
+export default function Deals() {
   const [deals, setDeals] = useState<DealsListGame[]>([]);
   // ref for keeping track of whether user is waiting for next page to load
   const hasUpdated = useRef(true);
@@ -46,27 +47,7 @@ function AllDeals() {
   return (
     <div>
       <h2>All Deals</h2>
-      <ol>
-        {deals.length > 0
-          ? deals.map((deal) => (
-              <li key={deal.dealID}>
-                <Image
-                  src={deal.thumb}
-                  width={40}
-                  height={60}
-                  alt={deal.title}
-                  placeholder={"blur"}
-                  blurDataURL={"/loading.jpg"}
-                />
-                {`${deal.title} || current: ${deal.salePrice} | normal: ${
-                  deal.normalPrice
-                  //*1000 to convert from milliseconds to seconds
-                } | lastChange: ${new Date(deal.lastChange * 1000)}`}
-                <Link href={`/game-details/${deal.gameID}`}>{deal.gameID}</Link>
-              </li>
-            ))
-          : null}
-      </ol>
+      <AllDealsList deals={deals} updating={hasUpdated.current} />
       <button onClick={() => handlePageChange("prev")}>Prev</button>
       <button onClick={() => handlePageChange("next")}>Next</button>
       {/* indicator for the user that fetching is being done */}
@@ -74,5 +55,3 @@ function AllDeals() {
     </div>
   );
 }
-
-export default memo(AllDeals);
