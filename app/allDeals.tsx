@@ -2,10 +2,10 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState, memo, useRef } from "react";
 import Link from "next/link";
-import { DealsListItem } from "@/globalTypes";
+import { DealsListGame } from "@/globalTypes";
 
 function AllDeals() {
-  const [deals, setDeals] = useState<DealsListItem[]>([]);
+  const [deals, setDeals] = useState<DealsListGame[]>([]);
   // ref for keeping track of whether user is waiting for next page to load
   const hasUpdated = useRef(true);
   // pages controls

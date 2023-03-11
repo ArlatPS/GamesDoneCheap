@@ -1,4 +1,4 @@
-export type DealsListItem = {
+export type DealsListGame = {
   dealID: string;
   dealRating: string;
   gameID: string;
