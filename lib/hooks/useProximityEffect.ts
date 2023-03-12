@@ -1,11 +1,4 @@
-import {
-  RefObject,
-  useDeferredValue,
-  useEffect,
-  useRef,
-  useState,
-  useTransition,
-} from "react";
+import { RefObject, useDeferredValue, useEffect, useState } from "react";
 
 function calculateDistanceFromElement(
   top: number,
@@ -84,17 +77,12 @@ export default function useProximityEffect(
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    if (distance.current <= threshold) {
-      setDistanceToReturn(distance.current);
-    }
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [threshold]);
-
-  const distance = useRef(threshold + 1);
-  const [distanceToReturn, setDistanceToReturn] = useState(threshold + 1);
+  const [distance, setDistance] = useState(threshold + 1);
 
   useEffect(() => {
     if (
@@ -103,18 +91,17 @@ export default function useProximityEffect(
       proximityRef.current?.offsetHeight &&
       proximityRef.current?.offsetWidth
     ) {
-      distance.current = calculateDistanceFromElement(
-        proximityRef.current.offsetTop,
-        proximityRef.current.offsetLeft,
-        proximityRef.current.offsetHeight,
-        proximityRef.current.offsetWidth,
-        globalPositionDeferred.x,
-        globalPositionDeferred.y
+      setDistance(
+        calculateDistanceFromElement(
+          proximityRef.current.offsetTop,
+          proximityRef.current.offsetLeft,
+          proximityRef.current.offsetHeight,
+          proximityRef.current.offsetWidth,
+          globalPositionDeferred.x,
+          globalPositionDeferred.y
+        )
       );
     }
-    if (distance.current <= threshold) {
-      setDistanceToReturn(distance.current);
-    }
   }, [proximityRef, threshold, globalPositionDeferred]);
-  return distanceToReturn;
+  return distance;
 }

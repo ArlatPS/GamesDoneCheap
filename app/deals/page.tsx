@@ -11,6 +11,8 @@ const initialState: State = {
   deals: [],
   pageSize: 20,
   sortBy: "Deal Rating",
+  minPrice: 0,
+  maxPrice: 50,
 };
 
 export default function Deals() {
@@ -21,7 +23,7 @@ export default function Deals() {
     async function fetchData() {
       // revalidate all deals every 10 minutes
       const response = await fetch(
-        `https://www.cheapshark.com/api/1.0/deals?pageNumber=${state.page}&pageSize=${state.pageSize}&sortBy=${state.sortBy}`,
+        `https://www.cheapshark.com/api/1.0/deals?pageNumber=${state.page}&pageSize=${state.pageSize}&sortBy=${state.sortBy}&lowerPrice=${state.minPrice}&upperPrice=${state.maxPrice}`,
         { next: { revalidate: 10 * 60 } }
       );
       const res = await response.json();
@@ -37,7 +39,7 @@ export default function Deals() {
       dispatchState({ type: "setDeals", payload: res });
     }
     fetchData();
-  }, [state.page, state.pageSize, state.sortBy]);
+  }, [state]);
 
   return (
     <div>

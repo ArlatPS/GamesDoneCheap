@@ -1,6 +1,8 @@
 import { Dispatch, useState } from "react";
 import { StateActions } from "./reducer";
 
+import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
+
 import styled from "styled-components";
 
 const DivDropdownAbsolute = styled.div`
@@ -29,6 +31,12 @@ export default function SearchControls({
 }) {
   const [opened, setOpened] = useState(false);
   const [sortBy, setSortBy] = useState("Deal Rating");
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(50);
+  const handleChange = (e: ChangeResult) => {
+    setMinValue(e.minValue);
+    setMaxValue(e.maxValue);
+  };
   return (
     <section>
       <div onClick={() => setOpened((n) => !n)}>
@@ -41,6 +49,10 @@ export default function SearchControls({
             onSubmit={(e) => {
               e.preventDefault();
               dispatch({ type: "setSortBy", payload: sortBy });
+              dispatch({
+                type: "setPrices",
+                payload: { min: minValue, max: maxValue },
+              });
             }}
           >
             <label htmlFor="sortBy">Sort Results By</label>
@@ -55,6 +67,31 @@ export default function SearchControls({
                 </option>
               ))}
             </select>
+            <br />
+            <h3>Price</h3>
+            <MultiRangeSlider
+              min={0}
+              max={50}
+              step={5}
+              labels={[
+                "0",
+                "5",
+                "10",
+                "15",
+                "20",
+                "25",
+                "30",
+                "40",
+                "45",
+                "max",
+              ]}
+              minValue={minValue}
+              maxValue={maxValue}
+              barInnerColor="blue"
+              onChange={(e) => {
+                handleChange(e);
+              }}
+            />
             <br />
             <button>Filter</button>
           </form>

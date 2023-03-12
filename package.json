@@ -16,6 +16,7 @@
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
     "html-react-parser": "^3.0.12",
+    "multi-range-slider-react": "^2.0.2",
     "next": "^13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",

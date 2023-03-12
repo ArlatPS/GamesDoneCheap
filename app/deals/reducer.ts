@@ -7,6 +7,8 @@ export type State = {
   deals: DealsListGame[];
   pageSize: number;
   sortBy: string;
+  minPrice: number;
+  maxPrice: number;
 };
 
 type SetMaxPages = {
@@ -29,7 +31,20 @@ type SetSortBy = {
   payload: string;
 };
 
-type StateActionsWithPayload = SetMaxPages | SetDeals | SetPageSize | SetSortBy;
+type SetPrices = {
+  type: "setPrices";
+  payload: {
+    min: number;
+    max: number;
+  };
+};
+
+type StateActionsWithPayload =
+  | SetMaxPages
+  | SetDeals
+  | SetPageSize
+  | SetSortBy
+  | SetPrices;
 
 type StateActionsWithoutPayload = {
   type: "nextPage" | "prevPage" | "setHasUpdatedTrue" | "setHasUpdatedFalse";
@@ -85,11 +100,26 @@ export function stateReducer(state: State, action: StateActions) {
       };
     case "setPageSize":
       if (action.payload) {
-        return { ...state, pageSize: action.payload, hasUpdated: false };
+        return {
+          ...state,
+          pageSize: action.payload,
+          hasUpdated: false,
+          page: 0,
+        };
       }
     case "setSortBy":
       if (typeof action.payload == "string") {
-        return { ...state, sortBy: action.payload, hasUpdated: false };
+        return { ...state, sortBy: action.payload, hasUpdated: false, page: 0 };
+      }
+    case "setPrices":
+      // another if because TS doesn't want to accept payload
+      if (action.type == "setPrices") {
+        return {
+          ...state,
+          minPrice: action.payload.min,
+          maxPrice: action.payload.max,
+          page: 0,
+        };
       }
 
     default:
