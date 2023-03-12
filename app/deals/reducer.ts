@@ -1,4 +1,4 @@
-import { DealsListGame } from "@/globalTypes";
+import { DealsListGame, StoreFromShark } from "@/globalTypes";
 
 export type State = {
   page: number;
@@ -9,6 +9,7 @@ export type State = {
   sortBy: string;
   minPrice: number;
   maxPrice: number;
+  stores: StoreFromShark[];
 };
 
 type SetMaxPages = {
@@ -39,12 +40,18 @@ type SetPrices = {
   };
 };
 
+type SetStores = {
+  type: "setStores";
+  payload: StoreFromShark[];
+};
+
 type StateActionsWithPayload =
   | SetMaxPages
   | SetDeals
   | SetPageSize
   | SetSortBy
-  | SetPrices;
+  | SetPrices
+  | SetStores;
 
 type StateActionsWithoutPayload = {
   type: "nextPage" | "prevPage" | "setHasUpdatedTrue" | "setHasUpdatedFalse";
@@ -120,6 +127,11 @@ export function stateReducer(state: State, action: StateActions) {
           maxPrice: action.payload.max,
           page: 0,
         };
+      }
+    case "setStores":
+      if (action.payload) {
+        const stores = action.payload as StoreFromShark[];
+        return { ...state, stores };
       }
 
     default:

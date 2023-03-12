@@ -10,7 +10,7 @@ const fetchBestDeals = async (length: number) => {
   // revalidate best deals every 10 minutes
   const response = await fetch(
     "https://www.cheapshark.com/api/1.0/deals?pageSize=60",
-    { next: { revalidate: 2 } }
+    { next: { revalidate: 10 * 60 } }
   );
   try {
     const responseJSON = (await response.json()) as DealsListGame[];

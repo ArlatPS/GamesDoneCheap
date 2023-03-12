@@ -1,9 +1,11 @@
-import { Dispatch, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 import { StateActions } from "./reducer";
 
 import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
 
 import styled from "styled-components";
+import { StoreFromShark } from "@/globalTypes";
+import StorePicker from "@/components/deals/storePicker";
 
 const DivDropdownAbsolute = styled.div`
   background-color: aliceblue;
@@ -26,13 +28,22 @@ const sortingOptions = [
 
 export default function SearchControls({
   dispatch,
+  stores,
 }: {
   dispatch: Dispatch<StateActions>;
+  stores: StoreFromShark[];
 }) {
   const [opened, setOpened] = useState(false);
   const [sortBy, setSortBy] = useState("Deal Rating");
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(50);
+  const [chosenStores, setChosenStores] = useState<string[]>([]);
+
+  // set default chosen stores
+  useEffect(() => {
+    setChosenStores(stores.map((store) => store.storeID));
+  }, [stores]);
+
   const handleChange = (e: ChangeResult) => {
     setMinValue(e.minValue);
     setMaxValue(e.maxValue);
@@ -53,6 +64,7 @@ export default function SearchControls({
                 type: "setPrices",
                 payload: { min: minValue, max: maxValue },
               });
+              setOpened(false);
             }}
           >
             <label htmlFor="sortBy">Sort Results By</label>
@@ -93,6 +105,11 @@ export default function SearchControls({
               }}
             />
             <br />
+            <StorePicker
+              stores={stores}
+              chosenStores={chosenStores}
+              setChosenStores={setChosenStores}
+            />
             <button>Filter</button>
           </form>
         </DivDropdownAbsolute>
