@@ -5,12 +5,15 @@ import Link from "next/link";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-const DIVV = styled.div`
+const DIVV = styled("div")<{ widthOfEffect: number }>`
   background-color: beige;
   div {
     background-color: blue;
     width: 50%;
     margin-left: 25%;
+    border-color: red;
+    border-width: ${(props) => props.widthOfEffect}px;
+    border-style: solid;
   }
   padding-bottom: 5rem;
 `;
@@ -76,6 +79,7 @@ function calculateDistanceFromElement(
       Math.sqrt(Math.pow(x - left - width, 2) + Math.pow(top - y, 2))
     );
   }
+  // right bottom corner
   return Math.floor(
     Math.sqrt(Math.pow(x - left - width, 2) + Math.pow(y - top - height, 2))
   );
@@ -95,31 +99,6 @@ export default function FreeGame({
 
   const myRef = useRef<HTMLDivElement>(null);
   // console.log(myRef.current.offsetLeft)
-  // X
-  const [x, setX] = useState<number | undefined>();
-
-  // Y
-  const [y, setY] = useState<number | undefined>();
-
-  // This function calculate X and Y
-  const getPosition = () => {
-    const x = myRef.current?.offsetLeft;
-    setX(x);
-
-    console.log(myRef.current?.offsetWidth);
-
-    const y = myRef.current?.offsetTop;
-    setY(y);
-  };
-
-  // Get the position of the red box in the beginning
-  useEffect(() => {
-    getPosition();
-  }, []);
-  useEffect(() => {
-    window.addEventListener("resize", getPosition);
-  }, []);
-
   useEffect(() => {
     const handleMouseMove = (event: any) => {
       setGlobalMousePos({
@@ -158,17 +137,9 @@ export default function FreeGame({
   }, [globalMousePos]);
 
   return (
-    <DIVV>
+    <DIVV widthOfEffect={distance < 100 ? (100 - distance) / 10 : 0}>
       <h5>
         GX {globalMousePos.x} GY {globalMousePos.y}
-      </h5>
-      <h5>
-        X {x} Y {y}
-      </h5>
-      <h5>
-        {x && y
-          ? Math.abs(globalMousePos.x - x) + Math.abs(globalMousePos.y - y)
-          : null}
       </h5>
       <h4>Function Result: {distance}</h4>
       <div ref={myRef}>
