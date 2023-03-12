@@ -39,7 +39,13 @@ export default function Deals() {
       dispatchState({ type: "setDeals", payload: res });
     }
     fetchData();
-  }, [state]);
+  }, [
+    state.page,
+    state.pageSize,
+    state.sortBy,
+    state.minPrice,
+    state.maxPrice,
+  ]);
 
   return (
     <div>
