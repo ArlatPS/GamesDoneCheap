@@ -10,6 +10,7 @@ export type State = {
   minPrice: number;
   maxPrice: number;
   stores: StoreFromShark[];
+  chosenStores: string[];
 };
 
 type SetMaxPages = {
@@ -45,13 +46,19 @@ type SetStores = {
   payload: StoreFromShark[];
 };
 
+type SetChosenStores = {
+  type: "setChosenStores";
+  payload: string[];
+};
+
 type StateActionsWithPayload =
   | SetMaxPages
   | SetDeals
   | SetPageSize
   | SetSortBy
   | SetPrices
-  | SetStores;
+  | SetStores
+  | SetChosenStores;
 
 type StateActionsWithoutPayload = {
   type: "nextPage" | "prevPage" | "setHasUpdatedTrue" | "setHasUpdatedFalse";
@@ -132,6 +139,10 @@ export function stateReducer(state: State, action: StateActions) {
       if (action.payload) {
         const stores = action.payload as StoreFromShark[];
         return { ...state, stores };
+      }
+    case "setChosenStores":
+      if (action.payload) {
+        return { ...state, chosenStores: action.payload as string[] };
       }
 
     default:
