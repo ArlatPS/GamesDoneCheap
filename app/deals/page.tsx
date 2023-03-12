@@ -15,6 +15,7 @@ const initialState: State = {
   minPrice: 0,
   maxPrice: 50,
   stores: [],
+  chosenStores: [],
 };
 
 export default function Deals() {
@@ -32,12 +33,23 @@ export default function Deals() {
   useEffect(() => {
     async function fetchData() {
       // revalidate all deals every 10 minutes
-      const response = await fetch(
-        `https://www.cheapshark.com/api/1.0/deals?pageNumber=${state.page}\
-        &pageSize=${state.pageSize}&sortBy=${state.sortBy}&lowerPrice=${state.minPrice}\
-        &upperPrice=${state.maxPrice}`,
-        { next: { revalidate: 10 * 60 } }
-      );
+      let response;
+      // if picked
+      if (state.chosenStores.length > 0) {
+        response = await fetch(
+          `https://www.cheapshark.com/api/1.0/deals?pageNumber=${state.page}\
+          &pageSize=${state.pageSize}&sortBy=${state.sortBy}&lowerPrice=${state.minPrice}\
+          &upperPrice=${state.maxPrice}&storeID=${state.chosenStores}`,
+          { next: { revalidate: 10 * 60 } }
+        );
+      } else {
+        response = await fetch(
+          `https://www.cheapshark.com/api/1.0/deals?pageNumber=${state.page}\
+          &pageSize=${state.pageSize}&sortBy=${state.sortBy}&lowerPrice=${state.minPrice}\
+          &upperPrice=${state.maxPrice}`,
+          { next: { revalidate: 10 * 60 } }
+        );
+      }
       const res = await response.json();
       // get max-pages from header
       if (response.headers.get("x-total-page-count")) {
@@ -57,6 +69,7 @@ export default function Deals() {
     state.sortBy,
     state.minPrice,
     state.maxPrice,
+    state.chosenStores,
   ]);
 
   return (

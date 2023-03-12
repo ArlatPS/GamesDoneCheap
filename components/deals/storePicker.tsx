@@ -11,31 +11,54 @@ export default function StorePicker({
   setChosenStores: Dispatch<SetStateAction<string[]>>;
 }) {
   const [opened, setOpened] = useState(false);
-  console.log(chosenStores);
-  console.log(stores);
+
   return (
     <div>
       <h3 onClick={() => setOpened((n) => !n)}>Choose Stores</h3>
       {opened ? (
-        <ul>
-          {stores.map((store) => {
-            console.log(store.storeID);
-            if (store.storeID in chosenStores) {
+        <div>
+          <button
+            type="button"
+            onClick={() => {
+              if (chosenStores.length > 0) {
+                setChosenStores([]);
+              } else {
+                setChosenStores(stores.map((store) => store.storeID));
+              }
+            }}
+          >
+            Change All
+          </button>
+          <ul>
+            {stores.map((store) => {
+              // store.storeID omitted last item
+              let isChecked = false;
+              for (let i = 0; i < chosenStores.length; i++) {
+                if (store.storeID == chosenStores[i]) isChecked = true;
+              }
               return (
                 <div key={store.storeID}>
                   <input
                     type="checkbox"
                     id={store.storeID}
                     value={store.storeID}
-                    onChange={(e) => console.log(e.target.value)}
-                    checked
+                    onChange={(e) => {
+                      if (isChecked) {
+                        setChosenStores((stores) =>
+                          stores.filter((id) => id != e.target.value)
+                        );
+                      } else {
+                        setChosenStores([...chosenStores, e.target.value]);
+                      }
+                    }}
+                    checked={isChecked}
                   />
                   <label htmlFor={store.storeID}>{store.storeName}</label>
                 </div>
               );
-            }
-          })}
-        </ul>
+            })}
+          </ul>
+        </div>
       ) : null}
     </div>
   );

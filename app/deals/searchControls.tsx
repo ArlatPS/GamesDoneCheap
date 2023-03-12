@@ -64,6 +64,10 @@ export default function SearchControls({
                 type: "setPrices",
                 payload: { min: minValue, max: maxValue },
               });
+              dispatch({
+                type: "setChosenStores",
+                payload: chosenStores,
+              });
               setOpened(false);
             }}
           >
@@ -110,7 +114,11 @@ export default function SearchControls({
               chosenStores={chosenStores}
               setChosenStores={setChosenStores}
             />
-            <button>Filter</button>
+            {chosenStores.length > 0 ? (
+              <button>Filter</button>
+            ) : (
+              <h5>choose at least one store</h5>
+            )}
           </form>
         </DivDropdownAbsolute>
       ) : null}
