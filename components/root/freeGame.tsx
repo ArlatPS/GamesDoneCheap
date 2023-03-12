@@ -7,7 +7,7 @@ import styled from "styled-components";
 
 const DIVV = styled("div")<{ widthOfEffect: number }>`
   background-color: beige;
-  div {
+  div:first-of-type {
     background-color: blue;
     width: 50%;
     margin-left: 25%;
@@ -37,7 +37,7 @@ function calculateDistanceFromElement(
   y: number
 ) {
   // if inside return 0
-  if (x > left && x < left + width && y > top && y < top + height) {
+  if (x >= left && x <= left + width && y >= top && y <= top + height) {
     return 0;
   }
   // on right height but not inside
@@ -159,6 +159,8 @@ export default function FreeGame({
           />
         )}
         <h3>{game.title}</h3>
+
+        <Link href={`/game-details/${game.gameID}`}>{game.gameID}</Link>
         <Link
           href={`https://www.cheapshark.com/redirect?dealID=${game.dealID}`}
           rel="noopener noreferrer"
@@ -168,7 +170,7 @@ export default function FreeGame({
         </Link>
 
         {gameStore ? (
-          <div>
+          <section>
             {/* good dimensions */}
             <Image
               width={256}
@@ -177,7 +179,7 @@ export default function FreeGame({
               alt="shop logo"
             />
             <h3>{gameStore.storeName}</h3>
-          </div>
+          </section>
         ) : null}
       </div>
     </DIVV>

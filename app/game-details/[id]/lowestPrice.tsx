@@ -2,7 +2,9 @@ import { GameFromShark } from "@/globalTypes";
 import { format, formatDistanceToNow } from "date-fns"; //date formatting
 
 export default function LowestPrice({ game }: { game: GameFromShark }) {
-  const isLowestEver = game.deals[0].price == game.cheapestPriceEver.price;
+  const isLowestEver =
+    game.deals[0].price == game.cheapestPriceEver.price ||
+    Number(game.deals[0].price) === 0;
   return (
     <div>
       {isLowestEver ? (
