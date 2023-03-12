@@ -96,12 +96,11 @@ export function stateReducer(state: State, action: StateActions) {
         return { ...state };
       }
     case "setMaxPages":
-      if (action.payload) {
-        return {
-          ...state,
-          maxPages: action.payload,
-        };
-      }
+      return {
+        ...state,
+        maxPages: action.payload,
+      };
+
     case "setHasUpdatedTrue":
       return {
         ...state,

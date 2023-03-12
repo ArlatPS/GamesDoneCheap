@@ -52,7 +52,9 @@ export default function Deals() {
       }
       const res = await response.json();
       // get max-pages from header
-      if (response.headers.get("x-total-page-count")) {
+      console.log(response.headers.get("x-total-page-count"));
+      if (response.headers.get("x-total-page-count") !== null) {
+        console.log("we doin");
         dispatchState({
           type: "setMaxPages",
           payload: Number(response.headers.get("x-total-page-count")),
@@ -96,7 +98,7 @@ export default function Deals() {
         <button onClick={() => dispatchState({ type: "nextPage" })}>
           Next
         </button>
-        Page {state.page + 1}/{state.maxPages}
+        Page {state.page + 1}/{state.maxPages + 1}
       </h5>
     </div>
   );
