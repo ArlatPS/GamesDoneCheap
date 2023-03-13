@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import createTrie from "@/lib/tries";
 import { DealsListGame } from "@/globalTypes";
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 // route to handle communication with steam api
 export async function GET(request: Request) {
@@ -38,11 +38,14 @@ export async function GET(request: Request) {
     const namesToTrie = listOfAllDeals.map((deal) => deal.title);
     // create a trie
     const Trie = createTrie(namesToTrie);
-    const completions = Trie.complete(query);
+
+    const listOfAllDealsSchema = new Schema({
+      data: String,
+    });
 
     // to simplify response [id]
-    return NextResponse.json({ success: true, completions });
+    return NextResponse.json({ success: true });
   } catch {
-    return NextResponse.json({ success: false, completions: [] });
+    return NextResponse.json({ success: false });
   }
 }
