@@ -10,7 +10,8 @@ export default function SearchBar() {
     async function fetchAutoCompletes() {
       if (query.length >= 3) {
         const response = await fetch(
-          `http://localhost:3000/api/autocomplete?query=${query}`
+          `http://localhost:3000/api/autocomplete?query=${query}`,
+          { next: { revalidate: 60 } }
         );
         const responseAfterJSON = (await response.json()) as {
           success: boolean;

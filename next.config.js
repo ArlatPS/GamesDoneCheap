@@ -7,6 +7,7 @@ dns.setDefaultResultOrder("ipv4first");
 const nextConfig = {
   experimental: {
     appDir: true,
+    serverComponentsExternalPackages: ["mongoose"],
   },
   images: {
     remotePatterns: [

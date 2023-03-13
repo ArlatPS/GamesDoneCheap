@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import createTrie from "@/lib/tries";
 import { DealsListGame } from "@/globalTypes";
+import mongoose from "mongoose";
 
 // route to handle communication with steam api
 export async function GET(request: Request) {
@@ -12,12 +13,29 @@ export async function GET(request: Request) {
     return NextResponse.json({ success: false, data: null });
   }
   try {
-    const res = await fetch("https://www.cheapshark.com/api/1.0/deals", {
-      next: { revalidate: 60 },
-    });
-    const resAfterJSON = (await res.json()) as DealsListGame[];
+    let listOfAllDeals: DealsListGame[] = [];
+    for (let i = 0; i < 1; i++) {
+      const res = await fetch(
+        `https://www.cheapshark.com/api/1.0/deals?pageNumber=${i}`,
+        {
+          next: { revalidate: 7 * 24 * 60 * 60 },
+        }
+      );
+      const resAfterJSON = (await res.json()) as DealsListGame[];
+      listOfAllDeals = [...listOfAllDeals, ...resAfterJSON];
+      console.log(`fetched ${i}`);
+    }
 
-    const namesToTrie = resAfterJSON.map((deal) => deal.title);
+    mongoose.connect(
+      "mongodb+srv://admin:rerNb8QCXlYsMgPJ@gamesdb.uzko2yt.mongodb.net/?retryWrites=true&w=majority"
+    );
+    const db = mongoose.connection;
+    db.on("error", () => console.log("error"));
+    db.once("open", () => {
+      console.log("CONNECTED WITH DB");
+    });
+
+    const namesToTrie = listOfAllDeals.map((deal) => deal.title);
     // create a trie
     const Trie = createTrie(namesToTrie);
     const completions = Trie.complete(query);
