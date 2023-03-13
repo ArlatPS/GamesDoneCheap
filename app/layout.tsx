@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 // styled components configuration
 import StyledComponentsRegistry from "../lib/styledComponentsRegistry";
 import Link from "next/link";
+import Nav from "@/components/nav";
 
 // metadata for the site
 export const metadata: Metadata = {
@@ -20,10 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <nav>
-          <Link href={"/"}>Home</Link>
-          <Link href={"/deals"}>All Deals</Link>
-        </nav>
+        <Nav />
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>

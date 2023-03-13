@@ -4,6 +4,7 @@ import AllDealsList from "../../components/deals/allDealsList";
 import SearchControls from "./searchControls";
 import { State, stateReducer } from "./reducer";
 import getStores from "@/lib/getStores";
+import { DealsListGame } from "@/globalTypes";
 
 const initialState: State = {
   page: 0,
@@ -50,11 +51,10 @@ export default function Deals() {
           { next: { revalidate: 10 * 60 } }
         );
       }
-      const res = await response.json();
+      const res = (await response.json()) as DealsListGame[];
       // get max-pages from header
       console.log(response.headers.get("x-total-page-count"));
       if (response.headers.get("x-total-page-count") !== null) {
-        console.log("we doin");
         dispatchState({
           type: "setMaxPages",
           payload: Number(response.headers.get("x-total-page-count")),
