@@ -3,15 +3,7 @@ import createTrie from "@/lib/tries";
 import { DealsListGame } from "@/globalTypes";
 import mongoose, { Schema } from "mongoose";
 
-// route to handle communication with steam api
 export async function GET(request: Request) {
-  // get id from url
-  const { searchParams } = new URL(request.url);
-  const query = searchParams.get("query");
-  // if no id return
-  if (query == null) {
-    return NextResponse.json({ success: false, data: null });
-  }
   try {
     let listOfAllDeals: DealsListGame[] = [];
     for (let i = 0; i < 1; i++) {
@@ -43,6 +35,16 @@ export async function GET(request: Request) {
       data: String,
     });
 
+    const ListOfAllDealsDb =
+      mongoose.models.ListOfAllDealsDb ||
+      mongoose.model("ListOfAllDealsDb", listOfAllDealsSchema);
+    const record = new ListOfAllDealsDb({
+      data: JSON.stringify(listOfAllDeals),
+    });
+
+    await ListOfAllDealsDb.deleteMany({});
+    await record.save();
+    console.log("saved");
     // to simplify response [id]
     return NextResponse.json({ success: true });
   } catch {
