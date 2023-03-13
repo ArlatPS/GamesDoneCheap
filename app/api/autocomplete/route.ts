@@ -20,7 +20,6 @@ export async function GET(request: Request) {
     const namesToTrie = resAfterJSON.map((deal) => deal.title);
     // create a trie
     const Trie = createTrie(namesToTrie);
-    console.log(JSON.stringify(Trie));
     const completions = Trie.complete(query);
 
     // to simplify response [id]
