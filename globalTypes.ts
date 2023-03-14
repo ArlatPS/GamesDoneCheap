@@ -73,3 +73,9 @@ type SteamSuccess = {
 };
 
 export type ResponseFromSteam = SteamFailure | SteamSuccess;
+
+export type GameForDB = {
+  title: string;
+  name: string;
+  gameID: string;
+};

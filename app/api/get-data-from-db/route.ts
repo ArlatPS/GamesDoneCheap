@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
 import mongoose, { Schema } from "mongoose";
-import { DealsListGame } from "@/globalTypes";
+import { DealsListGame, GameForDB } from "@/globalTypes";
 import createTrie from "@/lib/tries";
 
 export async function GET(request: Request) {
   try {
-    mongoose.connect(
-      "mongodb+srv://admin:rerNb8QCXlYsMgPJ@gamesdb.uzko2yt.mongodb.net/?retryWrites=true&w=majority"
-    );
+    mongoose.connect(process.env.DBUrl as string);
     const db = mongoose.connection;
     db.on("error", () => console.log("error"));
     db.once("open", () => {
@@ -23,13 +21,11 @@ export async function GET(request: Request) {
       mongoose.model("ListOfAllDealsDb", listOfAllDealsSchema);
 
     const listFromDb = await ListOfAllDealsDb.find({});
-    const listOfAllDealsFromDb = JSON.parse(
-      listFromDb[0].data
-    ) as DealsListGame[];
+    const listOfAllGamesFromDB = JSON.parse(listFromDb[0].data) as GameForDB[];
 
     return NextResponse.json({
       success: true,
-      listOfDeals: listOfAllDealsFromDb,
+      listOfGames: listOfAllGamesFromDB,
     });
   } catch (e) {
     console.error(e);

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import createTrie from "@/lib/tries";
-import { DealsListGame } from "@/globalTypes";
+import { DealsListGame, GameForDB } from "@/globalTypes";
 import mongoose, { Schema } from "mongoose";
 
 export async function GET(request: Request) {
@@ -17,10 +17,26 @@ export async function GET(request: Request) {
       listOfAllDeals = [...listOfAllDeals, ...resAfterJSON];
       console.log(`fetched ${i}`);
     }
+    // modify the list to only store name and gameID (CheapShark)
+    // and filter for repetitions with Set
 
-    mongoose.connect(
-      "mongodb+srv://admin:rerNb8QCXlYsMgPJ@gamesdb.uzko2yt.mongodb.net/?retryWrites=true&w=majority"
-    );
+    const listToSave: GameForDB[] = [];
+    const namesSeen = new Set();
+    for (let i = 0; i < listOfAllDeals.length; i++) {
+      const game = listOfAllDeals[i];
+      // if hasn't been seen
+      if (!namesSeen.has(game.title.toLowerCase())) {
+        namesSeen.add(game.title.toLowerCase());
+        // save in GameForDB type
+        listToSave.push({
+          title: game.title,
+          name: game.title.toLowerCase(),
+          gameID: game.gameID,
+        });
+      }
+    }
+
+    mongoose.connect(process.env.DBUrl as string);
     const db = mongoose.connection;
     db.on("error", () => console.log("error"));
     db.once("open", () => {
@@ -36,7 +52,7 @@ export async function GET(request: Request) {
       mongoose.model("ListOfAllDealsDb", listOfAllDealsSchema);
 
     const record = new ListOfAllDealsDb({
-      data: JSON.stringify(listOfAllDeals),
+      data: JSON.stringify(listToSave),
     });
     await ListOfAllDealsDb.deleteMany({});
     await record.save();
