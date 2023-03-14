@@ -2,6 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { DealsListGame } from "@/globalTypes";
 import FreeGames from "@/components/root/freeGames";
+import { BestDealsSectionStyled, DealTableStyled } from "@/style/bestDeals";
+import { format } from "date-fns"; //date formatting
+import getStores from "@/lib/getStores";
 
 // due to lack of support from TS to async server components
 const FreeGamesAny = FreeGames as any;
@@ -51,39 +54,72 @@ function filterDeals(deals: DealsListGame[]) {
 
 export default async function BestDeals() {
   const response = await fetchBestDeals(15);
+  // get stores
+  const stores = await getStores();
   if (response) {
     const { deals, freeGames } = response;
     if (deals && deals?.length) {
       return (
-        <section>
+        <main>
           <FreeGamesAny freeGames={freeGames} />
-          <div>
+          <BestDealsSectionStyled>
             <h2>Best Deals</h2>
-            <ol>
-              {deals.length > 0
-                ? deals.map((deal) => (
-                    <li key={deal.dealID}>
-                      <Image
-                        src={deal.thumb}
-                        width={120}
-                        height={45}
-                        alt={deal.title}
-                        placeholder={"blur"}
-                        blurDataURL={"/loading.jpg"}
-                      />
-                      {`${deal.title} || current: ${deal.salePrice} | normal: ${
-                        deal.normalPrice
-                        //*1000 to convert from milliseconds to seconds
-                      } | lastChange: ${new Date(deal.lastChange * 1000)}`}
-                      <Link href={`/game-details/${deal.gameID}`}>
-                        {deal.gameID}
-                      </Link>
-                    </li>
-                  ))
-                : null}
-            </ol>
-          </div>
-        </section>
+            <DealTableStyled>
+              <tbody>
+                <tr>
+                  <th>Store</th>
+                  <th>Cover</th>
+                  <th>Title</th>
+                  <th>Current Price</th>
+                  <th>Retail Price</th>
+                  <th>Deal since</th>
+                </tr>
+                {deals.length > 0
+                  ? deals.map((deal) => (
+                      <tr key={deal.dealID}>
+                        {/* get store icon for store id  */}
+                        <td>
+                          <Image
+                            src={`https://www.cheapshark.com/${
+                              stores[+deal.storeID - 1].images.logo
+                            }`}
+                            width={48}
+                            height={48}
+                            alt={`store ${
+                              stores[+deal.storeID - 1].storeName
+                            } icon`}
+                          />
+                        </td>
+                        <td>
+                          <Image
+                            src={deal.thumb}
+                            width={120}
+                            height={45}
+                            alt={deal.title}
+                            placeholder={"blur"}
+                            blurDataURL={"/loading.jpg"}
+                          />
+                        </td>
+                        <td>
+                          <Link href={`/game-details/${deal.gameID}`}>
+                            {deal.title}
+                          </Link>
+                        </td>
+                        <td>{deal.salePrice} $</td>
+                        <td>{deal.normalPrice} $</td>
+                        <td>
+                          {format(
+                            new Date(deal.lastChange * 1000),
+                            "dd/LL/yyyy"
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  : null}
+              </tbody>
+            </DealTableStyled>
+          </BestDealsSectionStyled>
+        </main>
       );
     }
   }
