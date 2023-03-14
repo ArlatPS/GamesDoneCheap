@@ -1,31 +1,38 @@
-import { StoreFromShark } from "@/globalTypes";
-import getStores from "@/lib/getStores";
-
+import AllDealsList from "@/components/deals/allDealsList";
+import { DealsListGame } from "@/globalTypes";
+import { storesOfInterest, StoreOfInterest } from "@/public/storesOfInterest";
 export default async function StorePage({
   params,
 }: {
   params: { name: string };
 }) {
-  const stores = await getStores();
-  let found: StoreFromShark = {
+  let found: StoreOfInterest = {
     storeName: "not found",
-    images: {
-      banner: "",
-      icon: "",
-      logo: "",
-    },
-    isActive: 0,
     storeID: "-1",
   };
-  for (let i = 0; i < stores.length; i++) {
-    if (stores[i].storeName === params.name) {
-      found = stores[i];
+
+  for (let i = 0; i < storesOfInterest.length; i++) {
+    if (storesOfInterest[i].storeName === params.name) {
+      found = storesOfInterest[i];
     }
   }
+  if (found.storeID === "-1") {
+    return (
+      <div>
+        <h1>Store not found</h1>
+      </div>
+    );
+  }
+  const res = await fetch(
+    `https://www.cheapshark.com/api/1.0/deals?storeID=${found.storeID}`,
+    { next: { revalidate: 60 * 60 } }
+  );
+  const deals = (await res.json()) as DealsListGame[];
+
   return (
     <div>
-      <h1>Search results for {params.name}</h1>
-      <h4>{found.storeName}</h4>{" "}
+      <h1>Best Deals on {params.name}</h1>
+      <AllDealsList deals={deals} hasUpdated={true} />
     </div>
   );
 }

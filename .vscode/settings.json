@@ -3,6 +3,7 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": [
     "ABCDEFGHIJKLMNOPQRSTUWXYZ",
-    "metacritic"
+    "metacritic",
+    "uplay"
   ]
 }
