@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const H1WithHoverEffect = styled.h1`
-  font-family: monospace;
+  font-family: var(--space-mono);
   font-size: 42px;
 `;
 
