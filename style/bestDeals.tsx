@@ -4,29 +4,65 @@ import { theme } from "@/theme";
 
 export const BestDealsSectionStyled = styled.section`
   margin: 10%;
+  max-width: 1000px;
   border: 1px solid ${theme.colors.red};
   border-radius: 12px;
   box-shadow: 0px 0px 12px 1px ${theme.colors.red};
   color: #f7f7ff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   h2 {
-    margin-left: 5%;
     font-family: var(--orienta);
-    font-size: 28px;
+    font-size: 32px;
+    margin: 2rem;
   }
 `;
 
 export const DealTableStyled = styled.table`
   font-family: var(--prompt);
-  margin-left: 5%;
-  margin-right: 5%;
-  display: flex;
-  /* justify-content: space-evenly; */
-  justify-content: space-between;
-  tbody {
-    tr {
-      td {
-        padding: 0.5rem;
+  font-size: 16px;
+  margin-bottom: 2rem;
+  // borders need to collapse
+  border-collapse: separate;
+  // space between rows
+  border-spacing: 0 1rem;
+  td {
+    border: 1px dotted ${theme.colors.red};
+  }
+  // left border of row with radius
+  td:nth-of-type(1) {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+  }
+  // right border of row with radius
+  td:nth-of-type(7) {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+  // td styling
+  th,
+  td {
+    padding: 0.5em;
+    text-align: center;
+    a {
+      color: ${theme.colors.white};
+      /* font-size: 16px; */
+      transition: 250ms ease-in;
+      &:hover {
+        color: ${theme.colors.blue};
       }
+    }
+  }
+  // hovering row
+  tr {
+    transition: 250ms ease-in;
+    &:hover {
+      background: ${theme.colors.grey};
+    }
+    // first row with headers doesn't turn grey
+    &:nth-of-type(1):hover {
+      background: ${theme.colors.night};
     }
   }
 `;

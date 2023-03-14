@@ -70,9 +70,10 @@ export default async function BestDeals() {
                   <th>Store</th>
                   <th>Cover</th>
                   <th>Title</th>
-                  <th>Current Price</th>
-                  <th>Retail Price</th>
+                  <th>Price</th>
+                  <th>Savings</th>
                   <th>Deal since</th>
+                  <th>Deal</th>
                 </tr>
                 {deals.length > 0
                   ? deals.map((deal) => (
@@ -106,12 +107,21 @@ export default async function BestDeals() {
                           </Link>
                         </td>
                         <td>{deal.salePrice} $</td>
-                        <td>{deal.normalPrice} $</td>
+                        <td>{Math.floor(+deal.savings)}%</td>
                         <td>
                           {format(
                             new Date(deal.lastChange * 1000),
                             "dd/LL/yyyy"
                           )}
+                        </td>
+                        <td>
+                          <Link
+                            href={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            Check Out!
+                          </Link>
                         </td>
                       </tr>
                     ))
