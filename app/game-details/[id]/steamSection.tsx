@@ -29,13 +29,15 @@ export default async function SteamSection({ steamID }: { steamID: string }) {
         width={460}
         height={215}
       />
-      <Link
-        href={steamInfo.data.metacritic.url}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <h2>Metacritic: {steamInfo.data.metacritic.score}</h2>
-      </Link>
+      {steamInfo.data.metacritic ? (
+        <Link
+          href={steamInfo.data.metacritic.url}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <h2>Metacritic: {steamInfo.data.metacritic.score}</h2>
+        </Link>
+      ) : null}
       <h2>Release Date: {steamInfo.data.release_date.date}</h2>
       <h2>{steamInfo.data.short_description}</h2>
       <h3>Developer: {steamInfo.data.developers[0]}</h3>

@@ -9,7 +9,7 @@ export default function SearchResults({
 }) {
   return (
     <div>
-      <ol>
+      <ul>
         {results.length > 0 ? (
           results.map((game) => (
             <li key={game.gameID}>
@@ -21,13 +21,15 @@ export default function SearchResults({
                 placeholder={"blur"}
                 blurDataURL={"/loading.jpg"}
               />
-              <Link href={`/game-details/${game.gameID}`}>{game.external}</Link>
+              <Link href={`/game-details/${game.gameID}`}>
+                {game.external} at {game.cheapest}$
+              </Link>
             </li>
           ))
         ) : (
           <h4>Nothing found</h4>
         )}
-      </ol>
+      </ul>
     </div>
   );
 }
