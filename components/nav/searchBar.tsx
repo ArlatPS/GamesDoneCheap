@@ -2,17 +2,24 @@
 
 import { GameForDB } from "@/globalTypes";
 import Link from "next/link";
-import { cache, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useDeferredValue, useEffect, useState } from "react";
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [completes, setCompletes] = useState<GameForDB[]>([]);
 
+  // router hook for searching if nothing in autocomplete
+  const router = useRouter();
+
+  // defer query for performance
+  const queryDeferred = useDeferredValue(query);
+
   useEffect(() => {
     async function fetchAutoCompletes() {
-      if (query.length >= 3) {
+      if (queryDeferred.length >= 3) {
         const response = await fetch(
-          `http://localhost:3000/api/autocomplete?query=${query}`,
+          `http://localhost:3000/api/autocomplete?query=${queryDeferred}`,
           // { next: { revalidate: 60 } }
           { cache: "no-store" }
         );
@@ -28,10 +35,16 @@ export default function SearchBar() {
       }
     }
     fetchAutoCompletes();
-  }, [query]);
+  }, [queryDeferred]);
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        router.push(`/search/${query}`);
+        setQuery("");
+      }}
+    >
       <label htmlFor="search">Search</label>
       <input
         type="text"
