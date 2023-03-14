@@ -65,8 +65,8 @@ export default async function BestDeals() {
                     <li key={deal.dealID}>
                       <Image
                         src={deal.thumb}
-                        width={40}
-                        height={60}
+                        width={120}
+                        height={45}
                         alt={deal.title}
                         placeholder={"blur"}
                         blurDataURL={"/loading.jpg"}

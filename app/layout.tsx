@@ -2,8 +2,7 @@ import "./global.css";
 import type { Metadata } from "next";
 // styled components configuration
 import StyledComponentsRegistry from "../lib/styledComponentsRegistry";
-import Link from "next/link";
-import Nav from "@/components/nav";
+import Nav from "@/components/nav/nav";
 
 // metadata for the site
 export const metadata: Metadata = {
