@@ -1,11 +1,13 @@
 "use client";
 
+import { theme } from "@/theme";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const H1WithHoverEffect = styled.h1`
   font-family: var(--space-mono);
   font-size: 42px;
+  background-color: ${({ theme }) => theme.colors.blue200};
 `;
 
 const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //26
@@ -48,6 +50,7 @@ export default function HeaderWithEffect({ text }: { text: string }) {
       <H1WithHoverEffect
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
+        theme={theme}
       >
         {textDisplayed}
       </H1WithHoverEffect>
