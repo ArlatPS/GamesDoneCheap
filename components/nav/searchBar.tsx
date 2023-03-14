@@ -21,7 +21,6 @@ export default function SearchBar() {
           completionsWithData: GameForDB[];
         };
         if (responseAfterJSON.success) {
-          console.log(responseAfterJSON);
           setCompletes(responseAfterJSON.completionsWithData);
         }
       } else {

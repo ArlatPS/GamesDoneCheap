@@ -11,6 +11,7 @@ export type State = {
   maxPrice: number;
   stores: StoreFromShark[];
   chosenStores: string[];
+  steamRating: number;
 };
 
 type SetMaxPages = {
@@ -51,6 +52,11 @@ type SetChosenStores = {
   payload: string[];
 };
 
+type SetSteamRating = {
+  type: "setSteamRating";
+  payload: number;
+};
+
 type StateActionsWithPayload =
   | SetMaxPages
   | SetDeals
@@ -58,7 +64,8 @@ type StateActionsWithPayload =
   | SetSortBy
   | SetPrices
   | SetStores
-  | SetChosenStores;
+  | SetChosenStores
+  | SetSteamRating;
 
 type StateActionsWithoutPayload = {
   type: "nextPage" | "prevPage" | "setHasUpdatedTrue" | "setHasUpdatedFalse";
@@ -142,6 +149,14 @@ export function stateReducer(state: State, action: StateActions) {
     case "setChosenStores":
       if (action.payload) {
         return { ...state, chosenStores: action.payload as string[] };
+      }
+    case "setSteamRating":
+      if (
+        typeof action.payload == "number" &&
+        action.payload >= 0 &&
+        action.payload <= 100
+      ) {
+        return { ...state, steamRating: action.payload };
       }
 
     default:

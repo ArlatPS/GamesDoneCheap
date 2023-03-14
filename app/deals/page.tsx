@@ -17,6 +17,7 @@ const initialState: State = {
   maxPrice: 50,
   stores: [],
   chosenStores: [],
+  steamRating: 0,
 };
 
 export default function Deals() {
@@ -40,20 +41,19 @@ export default function Deals() {
         response = await fetch(
           `https://www.cheapshark.com/api/1.0/deals?pageNumber=${state.page}\
           &pageSize=${state.pageSize}&sortBy=${state.sortBy}&lowerPrice=${state.minPrice}\
-          &upperPrice=${state.maxPrice}&storeID=${state.chosenStores}`,
+          &upperPrice=${state.maxPrice}&steamRating=${state.steamRating}&storeID=${state.chosenStores}`,
           { next: { revalidate: 10 * 60 } }
         );
       } else {
         response = await fetch(
           `https://www.cheapshark.com/api/1.0/deals?pageNumber=${state.page}\
           &pageSize=${state.pageSize}&sortBy=${state.sortBy}&lowerPrice=${state.minPrice}\
-          &upperPrice=${state.maxPrice}`,
+          &upperPrice=${state.maxPrice}&steamRating=${state.steamRating}`,
           { next: { revalidate: 10 * 60 } }
         );
       }
       const res = (await response.json()) as DealsListGame[];
       // get max-pages from header
-      console.log(response.headers.get("x-total-page-count"));
       if (response.headers.get("x-total-page-count") !== null) {
         dispatchState({
           type: "setMaxPages",
@@ -72,6 +72,7 @@ export default function Deals() {
     state.minPrice,
     state.maxPrice,
     state.chosenStores,
+    state.steamRating,
   ]);
 
   return (

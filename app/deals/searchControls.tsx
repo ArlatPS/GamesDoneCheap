@@ -38,6 +38,7 @@ export default function SearchControls({
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(50);
   const [chosenStores, setChosenStores] = useState<string[]>([]);
+  const [steamRating, setSteamRating] = useState(0);
 
   // set default chosen stores
   useEffect(() => {
@@ -68,6 +69,11 @@ export default function SearchControls({
                 type: "setChosenStores",
                 payload: chosenStores,
               });
+              dispatch({
+                type: "setSteamRating",
+                payload: steamRating,
+              });
+
               setOpened(false);
             }}
           >
@@ -114,6 +120,17 @@ export default function SearchControls({
               chosenStores={chosenStores}
               setChosenStores={setChosenStores}
             />
+            <label htmlFor="rating">Minimum Steam rating</label>
+            <input
+              type="range"
+              id="rating"
+              value={steamRating}
+              onChange={(e) => setSteamRating(+e.target.value)}
+              min={0}
+              max={100}
+            />
+            <p>{steamRating}</p>
+            <br />
             {chosenStores.length > 0 ? (
               <button>Filter</button>
             ) : (

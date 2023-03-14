@@ -27,7 +27,7 @@ export default function StorePicker({
               }
             }}
           >
-            Change All
+            Reset
           </button>
           <ul>
             {stores.map((store) => {
