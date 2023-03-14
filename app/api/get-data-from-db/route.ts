@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import mongoose, { Schema } from "mongoose";
-import { DealsListGame, GameForDB } from "@/globalTypes";
-import createTrie from "@/lib/tries";
+import { GameForDB } from "@/globalTypes";
 
 export async function GET(request: Request) {
   try {
+    // connect with Mondo DB Atlas
     mongoose.connect(process.env.DBUrl as string);
     const db = mongoose.connection;
     db.on("error", () => console.log("error"));
@@ -20,6 +20,7 @@ export async function GET(request: Request) {
       mongoose.models.ListOfAllDealsDb ||
       mongoose.model("ListOfAllDealsDb", listOfAllDealsSchema);
 
+    // pass found list to Response
     const listFromDb = await ListOfAllDealsDb.find({});
     const listOfAllGamesFromDB = JSON.parse(listFromDb[0].data) as GameForDB[];
 

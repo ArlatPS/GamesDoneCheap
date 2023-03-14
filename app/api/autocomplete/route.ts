@@ -4,20 +4,23 @@ import { DealsListGame, GameForDB } from "@/globalTypes";
 import mongoose, { Schema } from "mongoose";
 
 export async function GET(request: Request) {
-  // get id from url
+  // get query
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("query");
-  // if no search return
+  // if  query search return
   if (query == null) {
     return NextResponse.json({ success: false, data: null });
   }
   try {
+    // hit internal API and revalidate every 4h
     const dataFromDB = await fetch(
       "http://localhost:3000/api/get-data-from-db",
       {
-        cache: "no-store",
+        // next: { revalidate: 1 },
+        cache: "no-cache",
       }
     );
+
     const dataFromDBAfterJSON = (await dataFromDB.json()) as {
       success: boolean;
       listOfGames: GameForDB[];
@@ -26,9 +29,11 @@ export async function GET(request: Request) {
     if (dataFromDBAfterJSON.success) {
       const listOfGames = dataFromDBAfterJSON.listOfGames;
       const namesToTrie = listOfGames.map((deal) => deal.name);
-      const trie = createTrie(namesToTrie);
 
+      // crate Trie and use it to find completions
+      const trie = createTrie(namesToTrie);
       const completions = trie.complete(query);
+
       // add data from db - original title (with upper cases) and gameId for Link
       const completionsWithData: GameForDB[] = [];
       completions.forEach((completion) => {
