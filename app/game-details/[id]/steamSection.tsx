@@ -5,18 +5,10 @@ import fetchSteam from "@/lib/fetchSteam";
 
 import ScreenshotGallery from "./screenshotGallery";
 import SectionDLC from "./sectionDLC";
+import Link from "next/link";
 const SectionDLCAsync = SectionDLC as any;
 
-export default async function SteamSection({
-  steamID,
-}: {
-  steamID: string | null;
-}) {
-  // if game doesn't have steamID return Unavailable
-  if (steamID == null) {
-    return <h3>Steam Page Unavailable</h3>;
-  }
-
+export default async function SteamSection({ steamID }: { steamID: string }) {
   // async fetch
   const steamInfo = await fetchSteam(steamID);
 
@@ -37,7 +29,20 @@ export default async function SteamSection({
         width={460}
         height={215}
       />
+      <Link
+        href={steamInfo.data.metacritic.url}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <h2>Metacritic: {steamInfo.data.metacritic.score}</h2>
+      </Link>
+      <h2>Release Date: {steamInfo.data.release_date.date}</h2>
       <h2>{steamInfo.data.short_description}</h2>
+      <h3>Developer: {steamInfo.data.developers[0]}</h3>
+      <h3>Publisher: {steamInfo.data.publishers[0]}</h3>
+      <h4>Windows: {steamInfo.data.platforms.windows ? "🟢" : "❌"}</h4>
+      <h4>Mac: {steamInfo.data.platforms.mac ? "🟢" : "❌"}</h4>
+      <h4>Linux: {steamInfo.data.platforms.linux ? "🟢" : "❌"}</h4>
       <h5>{parse(steamInfo.data.pc_requirements.minimum)}</h5>
       <ScreenshotGallery screenshots={steamInfo.data.screenshots} />
       <div>

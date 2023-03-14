@@ -69,6 +69,21 @@ type SteamSuccess = {
       minimum: string;
       recommended: string;
     };
+    metacritic: {
+      score: number;
+      url: string;
+    };
+    release_date: {
+      coming_soon: boolean;
+      date: string;
+    };
+    developers: string[];
+    publishers: string[];
+    platforms: {
+      windows: boolean;
+      mac: boolean;
+      linux: boolean;
+    };
   };
 };
 
