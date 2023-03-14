@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import createTrie from "@/lib/tries";
+import createTrie, { Node } from "@/lib/tries";
 import { DealsListGame } from "@/globalTypes";
 import mongoose, { Schema } from "mongoose";
 
@@ -12,23 +12,10 @@ export async function GET(request: Request) {
     return NextResponse.json({ success: false, data: null });
   }
   try {
-    let listOfAllDeals: DealsListGame[] = [];
-    for (let i = 0; i < 1; i++) {
-      const res = await fetch(
-        `https://www.cheapshark.com/api/1.0/deals?pageNumber=${i}`,
-        {
-          next: { revalidate: 7 * 24 * 60 * 60 },
-        }
-      );
-      const resAfterJSON = (await res.json()) as DealsListGame[];
-      listOfAllDeals = [...listOfAllDeals, ...resAfterJSON];
-      console.log(`fetched ${i}`);
-    }
-
     const dataFromDB = await fetch(
       "http://localhost:3000/api/get-data-from-db",
       {
-        next: { revalidate: 7 * 24 * 60 * 60 },
+        cache: "no-store",
       }
     );
     const dataFromDBAfterJSON = (await dataFromDB.json()) as {
@@ -38,16 +25,12 @@ export async function GET(request: Request) {
 
     if (dataFromDBAfterJSON.success) {
       const listOfDeals = dataFromDBAfterJSON.listOfDeals;
-      console.log(listOfDeals);
+      const namesToTrie = listOfDeals.map((deal) => deal.title);
+      const trie = createTrie(namesToTrie);
+
+      const completions = trie.complete(query);
+      return NextResponse.json({ success: true, completions });
     }
-
-    const namesToTrie = listOfAllDeals.map((deal) => deal.title);
-    // create a trie
-    const Trie = createTrie(namesToTrie);
-    const completions = Trie.complete(query);
-
-    // to simplify response [id]
-    return NextResponse.json({ success: true, completions });
   } catch (e) {
     console.error(e);
     return NextResponse.json({ success: false, completions: [] });

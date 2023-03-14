@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import mongoose, { Schema } from "mongoose";
 import { DealsListGame } from "@/globalTypes";
+import createTrie from "@/lib/tries";
 
 export async function GET(request: Request) {
   try {
@@ -21,10 +22,11 @@ export async function GET(request: Request) {
       mongoose.models.ListOfAllDealsDb ||
       mongoose.model("ListOfAllDealsDb", listOfAllDealsSchema);
 
-    const fromDb = await ListOfAllDealsDb.find({});
-    const listOfAllDealsFromDb = JSON.parse(fromDb[0].data) as DealsListGame[];
+    const listFromDb = await ListOfAllDealsDb.find({});
+    const listOfAllDealsFromDb = JSON.parse(
+      listFromDb[0].data
+    ) as DealsListGame[];
 
-    // to simplify response [id]
     return NextResponse.json({
       success: true,
       listOfDeals: listOfAllDealsFromDb,
