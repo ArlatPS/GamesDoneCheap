@@ -8,4 +8,6 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
+    color: #F7F7FF;
+    background-color: #131112;
 }
