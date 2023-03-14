@@ -6,11 +6,11 @@ import mongoose, { Schema } from "mongoose";
 export async function GET(request: Request) {
   try {
     let listOfAllDeals: DealsListGame[] = [];
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 30; i++) {
       const res = await fetch(
         `https://www.cheapshark.com/api/1.0/deals?pageNumber=${i}`,
         {
-          next: { revalidate: 7 * 24 * 60 * 60 },
+          next: { revalidate: 24 * 60 * 60 },
         }
       );
       const resAfterJSON = (await res.json()) as DealsListGame[];
@@ -27,25 +27,21 @@ export async function GET(request: Request) {
       console.log("CONNECTED WITH DB");
     });
 
-    const namesToTrie = listOfAllDeals.map((deal) => deal.title);
-    // create a trie
-    const Trie = createTrie(namesToTrie);
-
+    // save list of all deals
     const listOfAllDealsSchema = new Schema({
       data: String,
     });
-
     const ListOfAllDealsDb =
       mongoose.models.ListOfAllDealsDb ||
       mongoose.model("ListOfAllDealsDb", listOfAllDealsSchema);
+
     const record = new ListOfAllDealsDb({
       data: JSON.stringify(listOfAllDeals),
     });
-
     await ListOfAllDealsDb.deleteMany({});
     await record.save();
-    console.log("saved");
-    // to simplify response [id]
+    console.log("List saved");
+
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ success: false });

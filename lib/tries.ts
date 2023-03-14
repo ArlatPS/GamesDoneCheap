@@ -1,11 +1,11 @@
 // interface to type Node
-interface Node {
+export interface Node {
   children: Node[];
   end: boolean;
   value: string;
 }
 
-class Node {
+export class Node {
   // node created with array of children, boolean end and first letter from passed string
   constructor(string: string) {
     this.children = [];
