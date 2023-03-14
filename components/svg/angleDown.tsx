@@ -1,6 +1,10 @@
 export default function AngleDownSVG() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420">
+    <svg
+      className="arrow"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 700 420"
+    >
       <defs>
         <symbol id="a" overflow="visible">
           <path d="M19-1a13 13 0 0 1-7 1L4-2c-2-2-3-5-3-8s1-6 3-8 5-3 8-3a14 14 0 0 1 7 2v4l-3-2h-3l-5 2-1 5 1 5 5 2a10 10 0 0 0 6-2z" />

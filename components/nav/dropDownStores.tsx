@@ -12,16 +12,20 @@ export default function DropDownStores() {
       onMouseEnter={() => setOpened(true)}
       onMouseLeave={() => setOpened(false)}
     >
-      <h4>
+      <span>
         Stores <AngleDownSVG />
-      </h4>
-      {opened
-        ? storesOfInterest.map((store) => (
-            <div key={store.storeID}>
-              <Link href={`/store/${store.storeName}`}>{store.storeName}</Link>
-            </div>
-          ))
-        : null}
+      </span>
+      <section>
+        {opened
+          ? storesOfInterest.map((store) => (
+              <div key={store.storeID}>
+                <Link href={`/store/${store.storeName}`}>
+                  {store.storeName}
+                </Link>
+              </div>
+            ))
+          : null}
+      </section>
     </div>
   );
 }
