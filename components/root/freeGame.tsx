@@ -35,46 +35,37 @@ export default function FreeGame({
     <ArticleWithProximityEffect
       widthOfEffect={distance < 200 ? (200 - distance) / 10 : 0}
     >
-      <FreeGameDiv ref={proximityRef}>
-        {game.steamAppID !== null ? (
-          <Image
-            width={400}
-            height={200}
-            src={`https://cdn.akamai.steamstatic.com/steam/apps/${game.steamAppID}/header.jpg`}
-            alt="Cover photo from Steam"
-          />
-        ) : (
-          <Image
-            width={400}
-            height={200}
-            src={game.thumb}
-            alt="Cover photo from CheapShark API"
-          />
-        )}
-        <h3>{game.title}</h3>
-
-        <Link href={`/game-details/${game.gameID}`}>{game.gameID}</Link>
-        <Link
-          href={`https://www.cheapshark.com/redirect?dealID=${game.dealID}`}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Check Out
-        </Link>
-
-        {gameStore ? (
-          <section>
-            {/* good dimensions */}
+      <Link href={`/game-details/${game.gameID}`}>
+        <FreeGameDiv ref={proximityRef}>
+          {gameStore ? (
+            <div className="storeDiv">
+              <Image
+                width={256}
+                height={256}
+                src={`https://www.cheapshark.com/${gameStore.images.logo}`}
+                alt="shop logo"
+              />
+              <h4>{gameStore.storeName}</h4>
+            </div>
+          ) : null}
+          {game.steamAppID !== null ? (
             <Image
-              width={256}
-              height={256}
-              src={`https://www.cheapshark.com/${gameStore.images.logo}`}
-              alt="shop logo"
+              width={400}
+              height={200}
+              src={`https://cdn.akamai.steamstatic.com/steam/apps/${game.steamAppID}/header.jpg`}
+              alt="Cover photo from Steam"
             />
-            <h3>{gameStore.storeName}</h3>
-          </section>
-        ) : null}
-      </FreeGameDiv>
+          ) : (
+            <Image
+              width={400}
+              height={200}
+              src={game.thumb}
+              alt="Cover photo from CheapShark API"
+            />
+          )}
+          <h3>{game.title}</h3>
+        </FreeGameDiv>
+      </Link>
     </ArticleWithProximityEffect>
   );
 }

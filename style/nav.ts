@@ -7,12 +7,15 @@ export const NavStyled = styled.nav`
   top: 0;
   font-family: var(--orienta);
   background-color: ${theme.colors.red};
+  box-shadow: 0px 0px 10px 2px ${theme.colors.red};
   display: flex;
   padding: 0.5rem;
   justify-content: space-between;
   align-items: center;
+  color: ${theme.colors.white};
   .arrow {
     height: 10px;
+    fill: ${theme.colors.white};
   }
   .logo {
     height: 50px;
@@ -24,7 +27,7 @@ export const NavStyled = styled.nav`
     a {
       margin-right: 1em;
       padding: 1rem 0.25rem;
-      color: ${theme.colors.night};
+      color: ${theme.colors.white};
     }
     // dropdown stores
     div {
@@ -32,7 +35,6 @@ export const NavStyled = styled.nav`
       padding: 1rem 0.25rem;
       // Stores
       span {
-        color: ${theme.colors.night};
       }
       // dropdown div
       section {
@@ -51,6 +53,7 @@ export const NavStyled = styled.nav`
     align-items: center;
     svg {
       margin: 0 0.5rem;
+      fill: ${theme.colors.white};
     }
     font-family: var(--space-mono);
     font-size: 20px;
