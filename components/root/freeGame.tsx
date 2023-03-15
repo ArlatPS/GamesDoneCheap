@@ -1,23 +1,12 @@
 "use client";
 import { DealsListGame, StoreFromShark } from "@/globalTypes";
 import useProximityEffect from "@/lib/hooks/useProximityEffect";
+import { ArticleWithProximityEffect } from "@/style/articleWithProximityEffect";
+import { FreeGameDiv } from "@/style/freeGame";
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-
-const DIVV = styled("div")<{ widthOfEffect: number }>`
-  background-color: beige;
-  div:first-of-type {
-    background-color: blue;
-    width: 50%;
-    margin-left: 25%;
-    border-color: red;
-    border-width: ${(props) => props.widthOfEffect}px;
-    border-style: solid;
-  }
-  padding-bottom: 5rem;
-`;
 
 function getStoreToDisplay(game: DealsListGame, stores: StoreFromShark[]) {
   let gameStoreToDisplay: StoreFromShark | undefined = undefined;
@@ -43,9 +32,10 @@ export default function FreeGame({
   const proximityRef = useRef<HTMLDivElement>(null);
   const distance = useProximityEffect(proximityRef, 100);
   return (
-    <DIVV widthOfEffect={distance < 100 ? (100 - distance) / 10 : 0}>
-      <h2>{distance}</h2>
-      <div ref={proximityRef}>
+    <ArticleWithProximityEffect
+      widthOfEffect={distance < 200 ? (200 - distance) / 10 : 0}
+    >
+      <FreeGameDiv ref={proximityRef}>
         {game.steamAppID !== null ? (
           <Image
             width={400}
@@ -84,7 +74,7 @@ export default function FreeGame({
             <h3>{gameStore.storeName}</h3>
           </section>
         ) : null}
-      </div>
-    </DIVV>
+      </FreeGameDiv>
+    </ArticleWithProximityEffect>
   );
 }

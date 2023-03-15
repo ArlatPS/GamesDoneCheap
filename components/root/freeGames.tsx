@@ -11,20 +11,16 @@ export default async function FreeGames({
   freeGames: DealsListGame[];
 }) {
   if (freeGames.length == 0) {
-    return (
-      <div>
-        <h3>No Free Games Available</h3>
-      </div>
-    );
+    return null;
   }
   // get stores to display their names and logos
   const stores = await getStores();
   return (
-    <div>
+    <section className="mainPageSection">
       <h2>Free Games</h2>
       {freeGames.map((game) => (
         <FreeGameAny game={game} key={game.dealID} stores={stores} />
       ))}
-    </div>
+    </section>
   );
 }
