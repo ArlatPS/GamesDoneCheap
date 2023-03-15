@@ -21,3 +21,23 @@ export const MainPageWithSections = styled.main`
     }
   }
 `;
+
+export const H1WithHoverEffect = styled.h1`
+  font-family: var(--space-mono);
+  font-size: 52px;
+  /* width: 30%; */
+`;
+
+export const HeroSection = styled.section`
+  margin: 0 10%;
+  display: flex;
+  iframe {
+    border: none;
+    /* margin-left: 50%; */
+    height: 450px;
+  }
+  svg {
+    fill: white;
+    height: 30vh;
+  }
+`;

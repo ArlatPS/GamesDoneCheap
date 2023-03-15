@@ -1,15 +1,6 @@
 "use client";
-
-import { theme } from "@/theme";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-
-const H1WithHoverEffect = styled.h1`
-  font-family: var(--space-mono);
-  font-size: 42px;
-  background-color: ${({ theme }) => theme.colors.blue200};
-`;
-
+import { H1WithHoverEffect } from "@/style/flexMain";
 const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //26
 
 // it will need Suspense with good fallback
@@ -46,14 +37,11 @@ export default function HeaderWithEffect({ text }: { text: string }) {
   }, [text, hovering]);
 
   return (
-    <section className="mainPageSection">
-      <H1WithHoverEffect
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
-        theme={theme}
-      >
-        {textDisplayed}
-      </H1WithHoverEffect>
-    </section>
+    <H1WithHoverEffect
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+    >
+      {textDisplayed}
+    </H1WithHoverEffect>
   );
 }

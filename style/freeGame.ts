@@ -42,7 +42,7 @@ export const FreeGameDiv = styled.div`
     }
     h4 {
       font-size: 28px;
-      margin-top: 0.5em;
+      margin-top: 0;
       margin-bottom: 1rem;
     }
   }
