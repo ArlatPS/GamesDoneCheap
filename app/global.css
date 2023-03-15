@@ -11,3 +11,7 @@ body {
     color: #F7F7FF;
     background-color: #131112;
 }
+
+.deleteTextDecoration {
+    text-decoration: none;
+}

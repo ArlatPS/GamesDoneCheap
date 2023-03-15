@@ -29,6 +29,27 @@ export const FreeGameDiv = styled.div`
   h3 {
     font-size: 30px;
     text-align: center;
-    text-decoration: none;
+    margin: 0.5em;
+  }
+  .daysLeft,
+  .hoursLeft {
+    text-align: center;
+    h3 {
+      font-size: 42px;
+      margin: 0;
+      margin-top: 0.5em;
+      text-decoration: none;
+    }
+    h4 {
+      font-size: 28px;
+      margin-top: 0.5em;
+      margin-bottom: 1rem;
+    }
+  }
+  .daysLeft {
+    color: ${theme.colors.blue};
+  }
+  .hoursLeft {
+    color: ${theme.colors.red};
   }
 `;

@@ -45,7 +45,10 @@ export default function FreeGame({
     <ArticleWithProximityEffect
       widthOfEffect={distance < 200 ? (200 - distance) / 10 : 0}
     >
-      <Link href={`/game-details/${game.gameID}`}>
+      <Link
+        href={`/game-details/${game.gameID}`}
+        className="deleteTextDecoration"
+      >
         <FreeGameDiv ref={proximityRef}>
           {gameStore ? (
             <div className="storeDiv">
@@ -79,12 +82,12 @@ export default function FreeGame({
             // if days then div with days class otherwise hours
             timeLeft.format === "days" ? (
               <div className="daysLeft">
-                <h4>{timeLeft.value}</h4>
+                <h3>{timeLeft.value}</h3>
                 <h4>days left</h4>
               </div>
             ) : (
               <div className="hoursLeft">
-                <h4>{timeLeft.value}</h4>
+                <h3>{timeLeft.value}</h3>
                 <h4>hours left</h4>
               </div>
             )
