@@ -60,7 +60,7 @@ export default async function BestDeals() {
     const { deals, freeGames } = response;
     if (deals && deals?.length) {
       return (
-        <main>
+        <section>
           <FreeGamesAny freeGames={freeGames} />
           <BestDealsSectionStyled>
             <h2>Best Deals</h2>
@@ -129,7 +129,7 @@ export default async function BestDeals() {
               </tbody>
             </DealTableStyled>
           </BestDealsSectionStyled>
-        </main>
+        </section>
       );
     }
   }

@@ -18,7 +18,7 @@ export const NavStyled = styled.nav`
     height: 50px;
   }
   // left section
-  section:nth-of-type(1) {
+  section {
     display: flex;
     margin-left: 10%;
     a {
@@ -59,8 +59,23 @@ export const NavStyled = styled.nav`
 
   form {
     margin-right: 10%;
+    position: relative;
     label {
       margin-right: 1rem;
+    }
+    section {
+      position: absolute;
+      background-color: ${theme.colors.red};
+      display: flex;
+      flex-wrap: wrap;
+      left: 40px;
+      right: -40px;
+      top: 30px;
+      div {
+        width: 100%;
+        padding: 0.5em 0.25em;
+        border-bottom: 1px solid ${theme.colors.night};
+      }
     }
   }
 `;
