@@ -46,7 +46,7 @@ export default function HeaderWithEffect({ text }: { text: string }) {
   }, [text, hovering]);
 
   return (
-    <div>
+    <section className="mainPageSection">
       <H1WithHoverEffect
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
@@ -54,6 +54,6 @@ export default function HeaderWithEffect({ text }: { text: string }) {
       >
         {textDisplayed}
       </H1WithHoverEffect>
-    </div>
+    </section>
   );
 }

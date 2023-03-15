@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { theme } from "@/theme";
 
 export const BestDealsSectionStyled = styled.section`
-  margin: 10%;
-  max-width: 1000px;
+  /* max-width: 1500px; */
+  width: 100%;
   border: 1px solid ${theme.colors.red};
   border-radius: 12px;
   box-shadow: 0px 0px 12px 1px ${theme.colors.red};
@@ -12,17 +12,12 @@ export const BestDealsSectionStyled = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  h2 {
-    font-family: var(--orienta);
-    font-size: 32px;
-    margin: 2rem;
-  }
 `;
 
 export const DealTableStyled = styled.table`
   font-family: var(--prompt);
   font-size: 16px;
-  margin-bottom: 2rem;
+  margin: 2rem 0;
   // borders need to collapse
   border-collapse: separate;
   // space between rows
