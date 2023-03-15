@@ -5,6 +5,7 @@ import { theme } from "@/theme";
 export const FreeGameDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   font-family: var(--prompt), sans-serif;
   color: ${theme.colors.white};
