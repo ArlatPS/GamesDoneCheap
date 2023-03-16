@@ -5,7 +5,8 @@ import SearchControls from "./searchControls";
 import { State, stateReducer } from "./reducer";
 import getStores from "@/lib/getStores";
 import { DealsListGame } from "@/globalTypes";
-import { MainAllDealsStyled } from "@/style/allDeals/mainStyled";
+import { MainAllDealsStyled, PageControl } from "@/style/allDeals/mainStyled";
+import { ButtonStyled } from "@/style/button";
 
 const initialState: State = {
   page: 0,
@@ -99,15 +100,19 @@ export default function Deals() {
         hasUpdated={state.hasUpdated}
         stores={state.stores}
       />
-      <h5>
-        <button onClick={() => dispatchState({ type: "prevPage" })}>
-          Prev
-        </button>
-        <button onClick={() => dispatchState({ type: "nextPage" })}>
-          Next
-        </button>
-        Page {state.page + 1}/{state.maxPages + 1}
-      </h5>
+      <PageControl>
+        <div>
+          <h4>
+            Page {state.page + 1}/{state.maxPages + 1}
+          </h4>
+          <ButtonStyled onClick={() => dispatchState({ type: "prevPage" })}>
+            Prev
+          </ButtonStyled>
+          <ButtonStyled onClick={() => dispatchState({ type: "nextPage" })}>
+            Next
+          </ButtonStyled>
+        </div>
+      </PageControl>
     </MainAllDealsStyled>
   );
 }

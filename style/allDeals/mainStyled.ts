@@ -176,3 +176,35 @@ export const StorePickerStyled = styled.div`
     }
   }
 `;
+
+export const PageControl = styled.div`
+  margin: 0 10%;
+  display: flex;
+  justify-content: center;
+  div {
+    width: 15%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    h4 {
+      font-family: var(--orienta);
+      font-size: 20px;
+      width: 100%;
+      text-align: center;
+      margin: 0;
+      margin-bottom: 1em;
+    }
+    button:first-of-type {
+      margin-right: 1em;
+    }
+    button {
+      font-size: 24px;
+    }
+    margin-bottom: 2em;
+  }
+`;
+
+export const SectionAroundAllDealsResult = styled.section`
+  margin: 2rem 10%;
+  min-height: 70vh;
+`;
