@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { DealsListGame } from "@/globalTypes";
 import FreeGames from "@/components/root/freeGames";
-import { BestDealsSectionStyled, DealTableStyled } from "@/style/bestDeals";
 import { format } from "date-fns"; //date formatting
 import getStores from "@/lib/getStores";
 import ListOfDeals from "@/components/listOfDeals";

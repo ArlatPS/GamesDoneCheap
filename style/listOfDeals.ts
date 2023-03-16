@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { theme } from "@/theme";
 
-export const BestDealsSectionStyled = styled.section`
+export const ListOfDealsSectionStyled = styled.section`
   /* max-width: 1500px; */
   width: 100%;
   border: 1px solid ${theme.colors.red};
@@ -14,7 +14,7 @@ export const BestDealsSectionStyled = styled.section`
   justify-content: center;
 `;
 
-export const DealTableStyled = styled.table`
+export const ListOfDealsTableStyled = styled.table`
   font-family: var(--prompt);
   font-size: 16px;
   margin: 2rem 0;
@@ -59,5 +59,18 @@ export const DealTableStyled = styled.table`
     &:nth-of-type(1):hover {
       background: ${theme.colors.night};
     }
+  }
+  // it fixes wrong placement caused by next/image
+  img {
+    margin-top: 10px;
+  }
+  // for normal img add margins to center and make row the same height as high img
+  .normalImg {
+    margin: 20px 0 10px 0;
+  }
+  .higherImg {
+    height: 70px;
+    // aspect ratio 16:23
+    width: ${(70 / 23) * 16}px;
   }
 `;

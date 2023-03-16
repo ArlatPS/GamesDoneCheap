@@ -1,5 +1,8 @@
 import { DealsListGame, StoreFromShark } from "@/globalTypes";
-import { BestDealsSectionStyled, DealTableStyled } from "@/style/bestDeals";
+import {
+  ListOfDealsTableStyled,
+  ListOfDealsSectionStyled,
+} from "@/style/listOfDeals";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,8 +15,8 @@ export default function ListOfDeals({
   stores: StoreFromShark[];
 }) {
   return (
-    <BestDealsSectionStyled>
-      <DealTableStyled>
+    <ListOfDealsSectionStyled>
+      <ListOfDealsTableStyled>
         <tbody>
           <tr>
             <th>Store</th>
@@ -38,7 +41,7 @@ export default function ListOfDeals({
                       alt={`store ${stores[+deal.storeID - 1].storeName} icon`}
                     />
                   </td>
-                  {/* if it has steamAppID then it has nice cover, if not add class to manage the worse one */}
+                  {/* if it has steamAppID then it has nice cover, if not add class to manage the higher one */}
                   <td>
                     {deal.steamAppID !== null ? (
                       <Image
@@ -48,8 +51,19 @@ export default function ListOfDeals({
                         alt={deal.title}
                         placeholder={"blur"}
                         blurDataURL={"/loading.jpg"}
+                        className={"normalImg"}
                       />
-                    ) : null}
+                    ) : (
+                      <Image
+                        src={deal.thumb}
+                        width={128}
+                        height={184}
+                        alt={deal.title}
+                        placeholder={"blur"}
+                        blurDataURL={"/loading.jpg"}
+                        className={"higherImg"}
+                      />
+                    )}
                   </td>
                   <td>
                     <Link href={`/game-details/${deal.gameID}`}>
@@ -74,7 +88,7 @@ export default function ListOfDeals({
               ))
             : null}
         </tbody>
-      </DealTableStyled>
-    </BestDealsSectionStyled>
+      </ListOfDealsTableStyled>
+    </ListOfDealsSectionStyled>
   );
 }
