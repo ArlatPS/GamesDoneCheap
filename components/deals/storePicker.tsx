@@ -1,5 +1,8 @@
 import { StoreFromShark } from "@/globalTypes";
+import { StorePickerStyled } from "@/style/allDeals/mainStyled";
+import { ButtonStyled } from "@/style/button";
 import { Dispatch, SetStateAction, useState } from "react";
+import AngleDownSVG from "../svg/angleDown";
 
 export default function StorePicker({
   stores,
@@ -14,10 +17,18 @@ export default function StorePicker({
 
   return (
     <div>
-      <h3 onClick={() => setOpened((n) => !n)}>Choose Stores</h3>
+      <button
+        className="dropdownButton"
+        onClick={(e) => {
+          e.preventDefault();
+          setOpened((n) => !n);
+        }}
+      >
+        Choose Stores <AngleDownSVG />
+      </button>
       {opened ? (
-        <div>
-          <button
+        <StorePickerStyled>
+          <ButtonStyled
             type="button"
             onClick={() => {
               if (chosenStores.length > 0) {
@@ -28,7 +39,7 @@ export default function StorePicker({
             }}
           >
             Reset
-          </button>
+          </ButtonStyled>
           <ul>
             {stores.map((store) => {
               // store.storeID omitted last item
@@ -58,7 +69,7 @@ export default function StorePicker({
               );
             })}
           </ul>
-        </div>
+        </StorePickerStyled>
       ) : null}
     </div>
   );

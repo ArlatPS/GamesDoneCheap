@@ -11,6 +11,7 @@ import {
   SearchControlsStyled,
 } from "@/style/allDeals/mainStyled";
 import AngleDownSVG from "@/components/svg/angleDown";
+import { ButtonStyled } from "@/style/button";
 
 const sortingOptions = [
   "Deal Rating",
@@ -50,13 +51,13 @@ export default function SearchControls({
   return (
     <SearchControlsStyled>
       <div>
-        <button onClick={() => setOpened((n) => !n)}>
+        <button className="dropdownButton" onClick={() => setOpened((n) => !n)}>
           Filters <AngleDownSVG />
         </button>
       </div>
       {opened ? (
         <DivDropdownAbsolute>
-          <h5>Choose filters</h5>
+          <h3>Choose filters</h3>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -90,7 +91,7 @@ export default function SearchControls({
               ))}
             </select>
             <br />
-            <h3>Price</h3>
+            <h4>Price</h4>
             <MultiRangeSlider
               min={0}
               max={50}
@@ -129,10 +130,10 @@ export default function SearchControls({
               min={0}
               max={100}
             />
-            <p>{steamRating}</p>
+            <span>{steamRating}</span>
             <br />
             {chosenStores.length > 0 ? (
-              <button>Filter</button>
+              <ButtonStyled>Filter</ButtonStyled>
             ) : (
               <h5>choose at least one store</h5>
             )}
