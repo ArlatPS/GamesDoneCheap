@@ -12,6 +12,7 @@ export const ListOfDealsSectionStyled = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  min-height: 70vh;
 `;
 
 export const ListOfDealsTableStyled = styled.table`

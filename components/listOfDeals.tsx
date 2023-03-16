@@ -32,14 +32,18 @@ export default function ListOfDeals({
                 <tr key={deal.dealID}>
                   {/* get store icon for store id  */}
                   <td>
-                    <Image
-                      src={`https://www.cheapshark.com/${
-                        stores[+deal.storeID - 1].images.logo
-                      }`}
-                      width={48}
-                      height={48}
-                      alt={`store ${stores[+deal.storeID - 1].storeName} icon`}
-                    />
+                    {stores[+deal.storeID - 1]?.images?.logo !== undefined ? (
+                      <Image
+                        src={`https://www.cheapshark.com/${
+                          stores[+deal.storeID - 1].images.logo
+                        }`}
+                        width={48}
+                        height={48}
+                        alt={`store ${
+                          stores[+deal.storeID - 1].storeName
+                        } icon`}
+                      />
+                    ) : null}
                   </td>
                   {/* if it has steamAppID then it has nice cover, if not add class to manage the higher one */}
                   <td>
