@@ -1,40 +1,27 @@
-import { DealsListGame } from "@/globalTypes";
+import { DealsListGame, StoreFromShark } from "@/globalTypes";
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
+import ListOfDeals from "../listOfDeals";
 
 function AllDealsList({
   deals,
   hasUpdated,
+  stores,
 }: {
   deals: DealsListGame[];
   hasUpdated: boolean;
+  stores: StoreFromShark[];
 }) {
   if (hasUpdated) {
     return (
-      <ol>
+      <section>
         {deals.length > 0 ? (
-          deals.map((deal) => (
-            <li key={deal.dealID}>
-              <Image
-                src={deal.thumb}
-                width={40}
-                height={60}
-                alt={deal.title}
-                placeholder={"blur"}
-                blurDataURL={"/loading.jpg"}
-              />
-              {`${deal.title} || current: ${deal.salePrice} | normal: ${
-                deal.normalPrice
-                //*1000 to convert from milliseconds to seconds
-              } | lastChange: ${new Date(deal.lastChange * 1000)}`}
-              <Link href={`/game-details/${deal.gameID}`}>{deal.gameID}</Link>
-            </li>
-          ))
+          <ListOfDeals deals={deals} stores={stores} />
         ) : (
           <h4>No Deals found for current filters</h4>
         )}
-      </ol>
+      </section>
     );
   }
   return <h1>WE ARE LOADING</h1>;

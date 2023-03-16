@@ -91,7 +91,11 @@ export default function Deals() {
         <option value="40">40</option>
         <option value="60">60</option>
       </select>
-      <AllDealsList deals={state.deals} hasUpdated={state.hasUpdated} />
+      <AllDealsList
+        deals={state.deals}
+        hasUpdated={state.hasUpdated}
+        stores={state.stores}
+      />
       <h5>
         <button onClick={() => dispatchState({ type: "prevPage" })}>
           Prev

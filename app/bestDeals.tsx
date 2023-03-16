@@ -5,6 +5,7 @@ import FreeGames from "@/components/root/freeGames";
 import { BestDealsSectionStyled, DealTableStyled } from "@/style/bestDeals";
 import { format } from "date-fns"; //date formatting
 import getStores from "@/lib/getStores";
+import ListOfDeals from "@/components/listOfDeals";
 
 // due to lack of support from TS to async server components
 const FreeGamesAny = FreeGames as any;
@@ -69,72 +70,7 @@ export default async function BestDeals() {
           <FreeGamesAny freeGames={freeGames} />
           <section className="mainPageSection">
             <h2>Best Deals</h2>
-            <BestDealsSectionStyled>
-              <DealTableStyled>
-                <tbody>
-                  <tr>
-                    <th>Store</th>
-                    <th>Cover</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                    <th>Savings</th>
-                    <th>Deal since</th>
-                    <th>Deal</th>
-                  </tr>
-                  {deals.length > 0
-                    ? deals.map((deal) => (
-                        <tr key={deal.dealID}>
-                          {/* get store icon for store id  */}
-                          <td>
-                            <Image
-                              src={`https://www.cheapshark.com/${
-                                stores[+deal.storeID - 1].images.logo
-                              }`}
-                              width={48}
-                              height={48}
-                              alt={`store ${
-                                stores[+deal.storeID - 1].storeName
-                              } icon`}
-                            />
-                          </td>
-                          <td>
-                            <Image
-                              src={deal.thumb}
-                              width={120}
-                              height={45}
-                              alt={deal.title}
-                              placeholder={"blur"}
-                              blurDataURL={"/loading.jpg"}
-                            />
-                          </td>
-                          <td>
-                            <Link href={`/game-details/${deal.gameID}`}>
-                              {deal.title}
-                            </Link>
-                          </td>
-                          <td>{deal.salePrice} $</td>
-                          <td>{Math.floor(+deal.savings)}%</td>
-                          <td>
-                            {format(
-                              new Date(deal.lastChange * 1000),
-                              "dd/LL/yyyy"
-                            )}
-                          </td>
-                          <td>
-                            <Link
-                              href={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              Check Out!
-                            </Link>
-                          </td>
-                        </tr>
-                      ))
-                    : null}
-                </tbody>
-              </DealTableStyled>
-            </BestDealsSectionStyled>
+            <ListOfDeals deals={deals} stores={stores} />
           </section>
         </section>
       );
