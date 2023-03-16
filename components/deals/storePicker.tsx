@@ -49,22 +49,26 @@ export default function StorePicker({
               }
               return (
                 <div key={store.storeID}>
-                  <input
-                    type="checkbox"
-                    id={store.storeID}
-                    value={store.storeID}
-                    onChange={(e) => {
-                      if (isChecked) {
-                        setChosenStores((stores) =>
-                          stores.filter((id) => id != e.target.value)
-                        );
-                      } else {
-                        setChosenStores([...chosenStores, e.target.value]);
-                      }
-                    }}
-                    checked={isChecked}
-                  />
-                  <label htmlFor={store.storeID}>{store.storeName}</label>
+                  <label htmlFor={store.storeID}>
+                    {" "}
+                    <input
+                      type="checkbox"
+                      id={store.storeID}
+                      value={store.storeID}
+                      onChange={(e) => {
+                        if (isChecked) {
+                          setChosenStores((stores) =>
+                            stores.filter((id) => id != e.target.value)
+                          );
+                        } else {
+                          setChosenStores([...chosenStores, e.target.value]);
+                        }
+                      }}
+                      checked={isChecked}
+                    />
+                    <span className="checkbox" />
+                    {store.storeName}
+                  </label>
                 </div>
               );
             })}

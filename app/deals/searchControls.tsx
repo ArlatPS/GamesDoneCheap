@@ -12,6 +12,7 @@ import {
 } from "@/style/allDeals/mainStyled";
 import AngleDownSVG from "@/components/svg/angleDown";
 import { ButtonStyled } from "@/style/button";
+import { theme } from "@/theme";
 
 const sortingOptions = [
   "Deal Rating",
@@ -110,30 +111,30 @@ export default function SearchControls({
               ]}
               minValue={minValue}
               maxValue={maxValue}
-              barInnerColor="blue"
+              barInnerColor={theme.colors.red}
               onChange={(e) => {
                 handleChange(e);
               }}
             />
-            <br />
             <StorePicker
               stores={stores}
               chosenStores={chosenStores}
               setChosenStores={setChosenStores}
             />
-            <label htmlFor="rating">Minimum Steam rating</label>
-            <input
-              type="range"
-              id="rating"
-              value={steamRating}
-              onChange={(e) => setSteamRating(+e.target.value)}
-              min={0}
-              max={100}
-            />
-            <span>{steamRating}</span>
-            <br />
+            <div className="steamRating">
+              <label htmlFor="rating">Minimum Steam rating</label>
+              <input
+                type="range"
+                id="rating"
+                value={steamRating}
+                onChange={(e) => setSteamRating(+e.target.value)}
+                min={0}
+                max={100}
+              />
+              <span>{steamRating}</span>
+            </div>
             {chosenStores.length > 0 ? (
-              <ButtonStyled>Filter</ButtonStyled>
+              <ButtonStyled className="submitButton">Filter</ButtonStyled>
             ) : (
               <h5>choose at least one store</h5>
             )}

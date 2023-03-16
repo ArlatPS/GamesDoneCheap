@@ -8,6 +8,7 @@ export const ButtonStyled = styled.button`
   border: 1px solid ${theme.colors.red};
   box-shadow: 0px 0px 12px 1px ${theme.colors.red};
   border-radius: 12px;
+  user-select: none;
   padding: 0.1em 0.4em;
   transition: 250ms ease-in;
   background-color: ${theme.colors.night};

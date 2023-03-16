@@ -36,6 +36,8 @@ export const SearchControlsStyled = styled.section`
 
   .dropdownButton {
     background-color: ${theme.colors.night};
+    margin-top: 0.5em;
+    user-select: none;
     padding: 0;
     border: none;
     color: ${theme.colors.white};
@@ -48,6 +50,12 @@ export const SearchControlsStyled = styled.section`
     }
     &:hover {
       cursor: pointer;
+    }
+  }
+  .steamRating {
+    margin-top: 1rem;
+    span {
+      margin-left: 0.5rem;
     }
   }
 `;
@@ -68,7 +76,7 @@ export const DivDropdownAbsolute = styled.div`
     }
     70% {
       transform: rotateX(20deg);
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
     100% {
       transform: rotateX(0deg);
@@ -99,10 +107,72 @@ export const DivDropdownAbsolute = styled.div`
     margin: 0.5em 0;
     font-weight: 400;
   }
+  .submitButton {
+    margin-top: 1em;
+    font-size: 24px;
+  }
 `;
 
 export const StorePickerStyled = styled.div`
+  @keyframes animate-dropdown {
+    0% {
+      transform: rotateX(-90deg);
+    }
+    100% {
+      transform: rotateX(0deg);
+    }
+  }
+  transform-origin: top center;
+  animation: animate-dropdown 500ms ease-in-out;
+
   button {
     margin-top: 0.5em;
+  }
+  ul {
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* .checkbox:after {
+    left: 8px;
+    bottom: 5px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  } */
+  div {
+    label {
+      padding-left: 10px;
+      position: relative;
+      user-select: none;
+      &:hover {
+        cursor: pointer;
+      }
+      .checkbox {
+        position: absolute;
+        top: 2px;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: ${theme.colors.white};
+        border: 1px solid ${theme.colors.red};
+        box-shadow: 0px 0px 3px 1px ${theme.colors.red};
+        border-radius: 5px;
+      }
+      input {
+        visibility: hidden;
+      }
+      input:checked ~ .checkbox {
+        background-color: ${theme.colors.red};
+      }
+      input:hover ~ .checkbox {
+        cursor: pointer;
+      }
+    }
   }
 `;
