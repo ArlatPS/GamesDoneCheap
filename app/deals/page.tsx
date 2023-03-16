@@ -80,18 +80,20 @@ export default function Deals() {
     <MainAllDealsStyled>
       <h1>All Deals</h1>
       <SearchControls dispatch={dispatchState} stores={state.stores} />
-      <label htmlFor="pageSize">Deals per page </label>
-      <select
-        name="pageSize"
-        id="pageSize"
-        onChange={(e) => {
-          dispatchState({ type: "setPageSize", payload: +e.target.value });
-        }}
-      >
-        <option value="20">20</option>
-        <option value="40">40</option>
-        <option value="60">60</option>
-      </select>
+      <div className="dealsPerPage">
+        <label htmlFor="pageSize">Deals per page </label>
+        <select
+          name="pageSize"
+          id="pageSize"
+          onChange={(e) => {
+            dispatchState({ type: "setPageSize", payload: +e.target.value });
+          }}
+        >
+          <option value="20">20</option>
+          <option value="40">40</option>
+          <option value="60">60</option>
+        </select>
+      </div>
       <AllDealsList
         deals={state.deals}
         hasUpdated={state.hasUpdated}

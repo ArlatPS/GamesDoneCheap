@@ -49,10 +49,10 @@ export default function SearchControls({
   };
   return (
     <SearchControlsStyled>
-      <div onClick={() => setOpened((n) => !n)}>
-        <h3>
+      <div>
+        <button onClick={() => setOpened((n) => !n)}>
           Filters <AngleDownSVG />
-        </h3>
+        </button>
       </div>
       {opened ? (
         <DivDropdownAbsolute>
