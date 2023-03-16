@@ -3,7 +3,6 @@ import { memo } from "react";
 import ListOfDeals from "../listOfDeals";
 import styled from "styled-components";
 import AllDealsListLoader from "./allDealsListLoader";
-
 const SectionAroundAllDealsResult = styled.section`
   margin: 2rem 10%;
   min-height: 70vh;

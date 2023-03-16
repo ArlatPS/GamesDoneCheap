@@ -53,8 +53,6 @@ export default function ListOfDeals({
                         width={120}
                         height={45}
                         alt={deal.title}
-                        placeholder={"blur"}
-                        blurDataURL={"/loading.jpg"}
                         className={"normalImg"}
                       />
                     ) : (
@@ -63,8 +61,6 @@ export default function ListOfDeals({
                         width={128}
                         height={184}
                         alt={deal.title}
-                        placeholder={"blur"}
-                        blurDataURL={"/loading.jpg"}
                         className={"higherImg"}
                       />
                     )}

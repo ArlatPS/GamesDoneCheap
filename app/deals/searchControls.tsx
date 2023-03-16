@@ -6,13 +6,11 @@ import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
 import styled from "styled-components";
 import { StoreFromShark } from "@/globalTypes";
 import StorePicker from "@/components/deals/storePicker";
-
-const DivDropdownAbsolute = styled.div`
-  background-color: aliceblue;
-  font-size: 18px;
-  position: absolute;
-  width: 50%;
-`;
+import {
+  DivDropdownAbsolute,
+  SearchControlsStyled,
+} from "@/style/allDeals/mainStyled";
+import AngleDownSVG from "@/components/svg/angleDown";
 
 const sortingOptions = [
   "Deal Rating",
@@ -50,9 +48,11 @@ export default function SearchControls({
     setMaxValue(e.maxValue);
   };
   return (
-    <section>
+    <SearchControlsStyled>
       <div onClick={() => setOpened((n) => !n)}>
-        <h4>Filters</h4>
+        <h3>
+          Filters <AngleDownSVG />
+        </h3>
       </div>
       {opened ? (
         <DivDropdownAbsolute>
@@ -139,6 +139,6 @@ export default function SearchControls({
           </form>
         </DivDropdownAbsolute>
       ) : null}
-    </section>
+    </SearchControlsStyled>
   );
 }

@@ -5,6 +5,7 @@ import SearchControls from "./searchControls";
 import { State, stateReducer } from "./reducer";
 import getStores from "@/lib/getStores";
 import { DealsListGame } from "@/globalTypes";
+import { MainAllDealsStyled } from "@/style/allDeals/mainStyled";
 
 const initialState: State = {
   page: 0,
@@ -76,8 +77,8 @@ export default function Deals() {
   ]);
 
   return (
-    <div>
-      <h2>All Deals</h2>
+    <MainAllDealsStyled>
+      <h1>All Deals</h1>
       <SearchControls dispatch={dispatchState} stores={state.stores} />
       <label htmlFor="pageSize">Deals per page </label>
       <select
@@ -105,6 +106,6 @@ export default function Deals() {
         </button>
         Page {state.page + 1}/{state.maxPages + 1}
       </h5>
-    </div>
+    </MainAllDealsStyled>
   );
 }
