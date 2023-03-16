@@ -14,6 +14,9 @@ export const ArticleWithProximityEffect = styled("article")<{
   flex-wrap: wrap;
   justify-content: center;
   width: ${100 / 3}%;
+  margin-bottom: 2rem;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
   &:hover {
     cursor: pointer;
   }

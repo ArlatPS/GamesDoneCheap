@@ -10,15 +10,20 @@ import getStores from "@/lib/getStores";
 const FreeGamesAny = FreeGames as any;
 
 const fetchBestDeals = async (length: number) => {
+  // fetch two pages to guarantee at least 15 good results
   // revalidate best deals every 10 minutes
-  const response = await fetch(
-    "https://www.cheapshark.com/api/1.0/deals?pageSize=60",
-    { next: { revalidate: 10 * 60 } }
-  );
   try {
-    const responseJSON = (await response.json()) as DealsListGame[];
+    let results: DealsListGame[] = [];
+    for (let i = 0; i < 2; i++) {
+      const response = await fetch(
+        `https://www.cheapshark.com/api/1.0/deals?pageSize=60&pageNumber=${i}`,
+        { next: { revalidate: 10 * 60 } }
+      );
+      const responseJSON = (await response.json()) as DealsListGame[];
+      results = [...results, ...responseJSON];
+    }
     // filtering
-    const [filteredDeals, freeGames] = filterDeals(responseJSON);
+    const [filteredDeals, freeGames] = filterDeals(results);
     return { deals: filteredDeals.slice(0, length), freeGames };
   } catch {
     console.error("CHEAP SHARK API UNAVAILABLE");
