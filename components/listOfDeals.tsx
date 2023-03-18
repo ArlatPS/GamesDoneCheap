@@ -70,7 +70,11 @@ export default function ListOfDeals({
                       {deal.title}
                     </Link>
                   </td>
-                  <td>{deal.salePrice} $</td>
+                  {+deal.savings >= 90 ? (
+                    <td className="lowPrice">{deal.salePrice}$</td>
+                  ) : (
+                    <td>{deal.salePrice}$</td>
+                  )}
                   <td>{Math.floor(+deal.savings)}%</td>
                   <td>
                     {format(new Date(deal.lastChange * 1000), "dd/LL/yyyy")}

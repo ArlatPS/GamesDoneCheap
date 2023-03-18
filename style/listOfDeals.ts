@@ -46,7 +46,7 @@ export const ListOfDealsTableStyled = styled.table`
       /* font-size: 16px; */
       transition: 250ms ease-in;
       &:hover {
-        color: ${theme.colors.blue};
+        color: ${theme.colors.red};
       }
     }
   }
@@ -73,5 +73,9 @@ export const ListOfDealsTableStyled = styled.table`
     height: 70px;
     // aspect ratio 16:23
     width: ${(70 / 23) * 16}px;
+  }
+  //for prices >90 savings blue color
+  .lowPrice {
+    color: ${theme.colors.blue};
   }
 `;

@@ -43,10 +43,14 @@ export default async function ListOfDeals({ deals }: { deals: DealsList }) {
                     />
                   </td>
                   <td>{store.storeName}</td>
-                  <td>{deal.price}$</td>
+                  {+deal.savings >= 90 ? (
+                    <td className="lowPrice">{deal.price}$</td>
+                  ) : (
+                    <td>{deal.price}$</td>
+                  )}
                   <td>{deal.retailPrice}$</td>
                   {/* show savings in % with one space after coma*/}
-                  <td>{Math.floor(+deal.savings * 10) / 10}%</td>
+                  <td>{Math.floor(+deal.savings)}%</td>
                   <td>
                     <Link
                       href={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}

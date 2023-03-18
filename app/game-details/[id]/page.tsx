@@ -29,21 +29,24 @@ export default async function GameDetails({
     <MainGameDetailsStyled>
       <h1>{gameFromShark.info.title}</h1>
       {gameFromShark.info.steamAppID === null ? (
-        <div>
+        <section className="sectionWithoutSteam">
           <Image
             src={gameFromShark.info.thumb}
             width={300}
             height={400}
             alt={gameFromShark.info.title}
           />
-          <h3>Steam Page Unavailable</h3>
-        </div>
+          <div>
+            <LowestPrice game={gameFromShark} />
+            <h5>Steam Page Unavailable</h5>
+          </div>
+        </section>
       ) : (
         <Suspense fallback={<GeneralLoader />}>
           <SteamSectionAsync steamID={gameFromShark.info.steamAppID} />
+          <LowestPrice game={gameFromShark} />
         </Suspense>
       )}
-      <LowestPrice game={gameFromShark} />
       <Suspense fallback={<GeneralLoader />}>
         <ListOfDealsAsync deals={gameFromShark.deals} />
       </Suspense>
