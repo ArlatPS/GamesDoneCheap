@@ -6,6 +6,7 @@ import fetchSteam from "@/lib/fetchSteam";
 import ScreenshotGallery from "./screenshotGallery";
 import SectionDLC from "./sectionDLC";
 import Link from "next/link";
+import GeneralLoader from "@/components/loaders/generalLoader";
 const SectionDLCAsync = SectionDLC as any;
 
 export default async function SteamSection({ steamID }: { steamID: string }) {
@@ -14,14 +15,13 @@ export default async function SteamSection({ steamID }: { steamID: string }) {
 
   // earlier returns
   if (steamInfo == undefined) {
-    return <h2>Loading...</h2>;
+    return <GeneralLoader />;
   }
   if (!steamInfo.success) {
     return <h3>Steam Page Unavailable</h3>;
   }
   return (
     <div>
-      {/* these dimension are original */}
       <Image
         src={steamInfo.data.header_image}
         alt={`Photo of a game with id ${steamID}`}

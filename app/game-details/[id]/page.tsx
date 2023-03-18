@@ -1,11 +1,13 @@
 import { Suspense } from "react";
 
 import { GameFromShark } from "@/globalTypes";
-import ListOfDeals from "./listOfDeal";
+import ListOfDeals from "./listOfDeals";
 const ListOfDealsAsync = ListOfDeals as any;
 import SteamSection from "./steamSection";
 import LowestPrice from "./lowestPrice";
 import Image from "next/image";
+import GeneralLoader from "@/components/loaders/generalLoader";
+import { MainGameDetailsStyled } from "@/style/gameDetails/mainStyled";
 const SteamSectionAsync = SteamSection as any;
 
 async function fetchDataFromShark(id: string) {
@@ -24,29 +26,27 @@ export default async function GameDetails({
   const gameFromShark = (await fetchDataFromShark(params.id)) as GameFromShark;
   // it doesn't need earlier return for loading - loading.tsx provides loading pane
   return (
-    <main>
-      <div>
-        <h1>{gameFromShark.info.title}</h1>
-        {gameFromShark.info.steamAppID === null ? (
-          <div>
-            <Image
-              src={gameFromShark.info.thumb}
-              width={300}
-              height={400}
-              alt={gameFromShark.info.title}
-            />
-            <h3>Steam Page Unavailable</h3>
-          </div>
-        ) : (
-          <Suspense fallback={<h3>I am loading Steam Page</h3>}>
-            <SteamSectionAsync steamID={gameFromShark.info.steamAppID} />
-          </Suspense>
-        )}
-        <LowestPrice game={gameFromShark} />
-      </div>
-      <Suspense fallback={<h3>I am loading List of Deals</h3>}>
+    <MainGameDetailsStyled>
+      <h1>{gameFromShark.info.title}</h1>
+      {gameFromShark.info.steamAppID === null ? (
+        <div>
+          <Image
+            src={gameFromShark.info.thumb}
+            width={300}
+            height={400}
+            alt={gameFromShark.info.title}
+          />
+          <h3>Steam Page Unavailable</h3>
+        </div>
+      ) : (
+        <Suspense fallback={<GeneralLoader />}>
+          <SteamSectionAsync steamID={gameFromShark.info.steamAppID} />
+        </Suspense>
+      )}
+      <LowestPrice game={gameFromShark} />
+      <Suspense fallback={<GeneralLoader />}>
         <ListOfDealsAsync deals={gameFromShark.deals} />
       </Suspense>
-    </main>
+    </MainGameDetailsStyled>
   );
 }

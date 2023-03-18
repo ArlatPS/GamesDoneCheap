@@ -1,9 +1,9 @@
-import { LoaderStyled, MainAroundLoader } from "@/style/loaderStyled";
+import { LoaderStyled, DivAroundLoader } from "@/style/loaderStyled";
 
 export default function GeneralLoader() {
   return (
-    <MainAroundLoader>
+    <DivAroundLoader>
       <LoaderStyled src="https://embed.lottiefiles.com/animation/78811" />
-    </MainAroundLoader>
+    </DivAroundLoader>
   );
 }

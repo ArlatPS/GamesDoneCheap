@@ -7,7 +7,7 @@ export const LoaderStyled = styled.iframe`
   margin: 2rem 0;
 `;
 
-export const MainAroundLoader = styled.main`
+export const DivAroundLoader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
