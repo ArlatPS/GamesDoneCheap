@@ -47,7 +47,7 @@ export default function ScreenshotGallery({
   }
 
   return (
-    <div>
+    <div className="screenshotGallery">
       <Image
         src={screenshots[currScreenshot].path_full}
         alt={"Screenshot from a game"}

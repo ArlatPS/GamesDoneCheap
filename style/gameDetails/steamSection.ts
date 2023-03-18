@@ -19,4 +19,55 @@ export const SteamSectionStyled = styled.section`
       }
     }
   }
+  .secondRow {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--prompt);
+
+    .screenshotGallery {
+      width: 50%;
+      img {
+        width: 100%;
+        height: ${100 * 0.8 * 0.5 * 0.56}vw;
+      }
+    }
+  }
+`;
+
+export const RequirementsStyled = styled.div`
+  @keyframes animate-dropdown {
+    0% {
+      transform: rotateX(-90deg);
+      transform: scale(0);
+    }
+    100% {
+      transform: rotateX(0deg);
+      transform: scale(1);
+    }
+  }
+  .absoluteDiv {
+    animation: animate-dropdown 400ms ease-in-out forwards;
+    transform-origin: top left;
+    width: 80vw;
+    position: absolute;
+    background-color: ${theme.colors.night};
+    border: 1px solid ${theme.colors.red};
+    box-shadow: 0px 0px 8px 1px ${theme.colors.red};
+    border-radius: 12px;
+    display: flex;
+    div {
+      width: 50%;
+      padding: 1rem;
+    }
+  }
+  h4 {
+    &:hover {
+      cursor: pointer;
+    }
+    svg {
+      height: 20px;
+      fill: ${theme.colors.white};
+    }
+  }
 `;

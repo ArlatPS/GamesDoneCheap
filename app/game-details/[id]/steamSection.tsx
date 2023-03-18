@@ -1,4 +1,3 @@
-import parse from "html-react-parser";
 import Image from "next/image";
 
 import fetchSteam from "@/lib/fetchSteam";
@@ -10,6 +9,7 @@ import GeneralLoader from "@/components/loaders/generalLoader";
 import LowestPrice from "./lowestPrice";
 import { GameFromShark } from "@/globalTypes";
 import { SteamSectionStyled } from "@/style/gameDetails/steamSection";
+import Requirements from "./requirements";
 const SectionDLCAsync = SectionDLC as any;
 
 export default async function SteamSection({
@@ -60,10 +60,10 @@ export default async function SteamSection({
           <h4>Windows: {steamInfo.data.platforms.windows ? "🟢" : "❌"}</h4>
           <h4>Mac: {steamInfo.data.platforms.mac ? "🟢" : "❌"}</h4>
           <h4>Linux: {steamInfo.data.platforms.linux ? "🟢" : "❌"}</h4>
+          <Requirements requirements={steamInfo.data.pc_requirements} />
         </div>
         <ScreenshotGallery screenshots={steamInfo.data.screenshots} />
       </div>
-      <h5>{parse(steamInfo.data.pc_requirements.minimum)}</h5>
       <div>
         <h4>Genres</h4>
         {steamInfo.data.genres.map((genre) => (
