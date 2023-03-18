@@ -101,13 +101,13 @@ export const DropdownSectionWithDivs = styled.section`
     flex-wrap: wrap;
     position: absolute;
     right: -30px;
-    top: 40px;
+    top: 45px;
     background-color: ${theme.colors.red};
     font-size: 16px;
     width: 7em;
     border-radius: 10px;
     div {
-      padding: 0.25em;
+      padding: 0.5em 0.25em;
       a {
         font-family: var(--prompt);
         margin: 0;

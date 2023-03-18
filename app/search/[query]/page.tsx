@@ -1,3 +1,4 @@
+import { MainSearchStyled } from "@/style/search/mainStyled";
 import SearchResults from "./searchResults";
 
 export type SharkListOfSearchedTitles = {
@@ -14,15 +15,18 @@ export default async function SearchResultsPage({
   params: { query: string };
 }) {
   const searchRes = await fetch(
-    `https://www.cheapshark.com/api/1.0/games?title==${params.query}`
+    `https://www.cheapshark.com/api/1.0/games?title==${params.query}`,
+    { next: { revalidate: 24 * 60 * 60 } }
   );
 
   const searchResults = (await searchRes.json()) as SharkListOfSearchedTitles;
 
   return (
-    <div>
-      <h1>Search results for {params.query}</h1>
+    <MainSearchStyled>
+      <h1>
+        Search results for: <span>{params.query}</span>
+      </h1>
       <SearchResults results={searchResults} />
-    </div>
+    </MainSearchStyled>
   );
 }
