@@ -7,9 +7,18 @@ import ScreenshotGallery from "./screenshotGallery";
 import SectionDLC from "./sectionDLC";
 import Link from "next/link";
 import GeneralLoader from "@/components/loaders/generalLoader";
+import LowestPrice from "./lowestPrice";
+import { GameFromShark } from "@/globalTypes";
+import { SteamSectionStyled } from "@/style/gameDetails/steamSection";
 const SectionDLCAsync = SectionDLC as any;
 
-export default async function SteamSection({ steamID }: { steamID: string }) {
+export default async function SteamSection({
+  steamID,
+  game,
+}: {
+  steamID: string;
+  game: GameFromShark;
+}) {
   // async fetch
   const steamInfo = await fetchSteam(steamID);
 
@@ -21,31 +30,40 @@ export default async function SteamSection({ steamID }: { steamID: string }) {
     return <h3>Steam Page Unavailable</h3>;
   }
   return (
-    <div>
-      <Image
-        src={steamInfo.data.header_image}
-        alt={`Photo of a game with id ${steamID}`}
-        width={460}
-        height={215}
-      />
-      {steamInfo.data.metacritic ? (
-        <Link
-          href={steamInfo.data.metacritic.url}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <h2>Metacritic: {steamInfo.data.metacritic.score}</h2>
-        </Link>
-      ) : null}
-      <h2>Release Date: {steamInfo.data.release_date.date}</h2>
-      <h2>{steamInfo.data.short_description}</h2>
-      <h3>Developer: {steamInfo.data.developers[0]}</h3>
-      <h3>Publisher: {steamInfo.data.publishers[0]}</h3>
-      <h4>Windows: {steamInfo.data.platforms.windows ? "🟢" : "❌"}</h4>
-      <h4>Mac: {steamInfo.data.platforms.mac ? "🟢" : "❌"}</h4>
-      <h4>Linux: {steamInfo.data.platforms.linux ? "🟢" : "❌"}</h4>
+    <SteamSectionStyled>
+      <div className="firstRow">
+        <Image
+          src={steamInfo.data.header_image}
+          alt={`Photo of a game with id ${steamID}`}
+          width={460}
+          height={215}
+        />
+        <div>
+          <h3>{steamInfo.data.short_description}</h3>
+          <h3>Release Date: {steamInfo.data.release_date.date}</h3>
+          {steamInfo.data.metacritic ? (
+            <Link
+              href={steamInfo.data.metacritic.url}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Metacritic: {steamInfo.data.metacritic.score}
+            </Link>
+          ) : null}
+        </div>
+      </div>
+
+      <div className="secondRow">
+        <div>
+          <h4>Developer: {steamInfo.data.developers[0]}</h4>
+          <h4>Publisher: {steamInfo.data.publishers[0]}</h4>
+          <h4>Windows: {steamInfo.data.platforms.windows ? "🟢" : "❌"}</h4>
+          <h4>Mac: {steamInfo.data.platforms.mac ? "🟢" : "❌"}</h4>
+          <h4>Linux: {steamInfo.data.platforms.linux ? "🟢" : "❌"}</h4>
+        </div>
+        <ScreenshotGallery screenshots={steamInfo.data.screenshots} />
+      </div>
       <h5>{parse(steamInfo.data.pc_requirements.minimum)}</h5>
-      <ScreenshotGallery screenshots={steamInfo.data.screenshots} />
       <div>
         <h4>Genres</h4>
         {steamInfo.data.genres.map((genre) => (
@@ -57,6 +75,7 @@ export default async function SteamSection({ steamID }: { steamID: string }) {
       {steamInfo.data.dlc ? (
         <SectionDLCAsync ids={steamInfo.data.dlc.slice(0, 10)} />
       ) : null}
-    </div>
+      <LowestPrice game={game} />
+    </SteamSectionStyled>
   );
 }

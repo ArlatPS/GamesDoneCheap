@@ -43,8 +43,10 @@ export default async function GameDetails({
         </section>
       ) : (
         <Suspense fallback={<GeneralLoader />}>
-          <SteamSectionAsync steamID={gameFromShark.info.steamAppID} />
-          <LowestPrice game={gameFromShark} />
+          <SteamSectionAsync
+            steamID={gameFromShark.info.steamAppID}
+            game={gameFromShark}
+          />
         </Suspense>
       )}
       <Suspense fallback={<GeneralLoader />}>
