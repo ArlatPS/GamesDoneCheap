@@ -7,7 +7,7 @@ import SearchBar from "./searchBar";
 export default function Nav() {
   return (
     <NavStyled>
-      <section>
+      <section className="leftSection">
         <Link href={"/"}>Home</Link>
         <Link href={"/deals"}>All Deals</Link>
         <DropDownStores />
