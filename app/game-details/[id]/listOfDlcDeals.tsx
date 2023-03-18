@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { DealsList, StoreFromShark } from "@/globalTypes";
 import Image from "next/image";
 import Link from "next/link";
+import { ListOfDealsTableStyled } from "@/style/listOfDeals";
 
 // component with lists of deals, it needs stores list
 export default function ListOfDlcDeals({ deals }: { deals: DealsList }) {
@@ -27,41 +28,48 @@ export default function ListOfDlcDeals({ deals }: { deals: DealsList }) {
   }
 
   return (
-    <div>
-      {deals.map((deal) => {
-        const store = stores.filter(
-          (store) => store.storeID === deal.storeID
-        )[0];
-        // if store is not active don't show the offer
-        if (store.isActive == 0) {
-          return null;
-        }
-        // deal description with link outside
-        return (
-          <div key={deal.dealID}>
-            <Image
-              src={`https://www.cheapshark.com/${store.images.logo}`}
-              width={25}
-              height={25}
-              alt="store logo"
-            />
-            <h4>{store.storeName}</h4>
-            {/* show savings in % with one space after coma*/}
-            <h5>Savings: {Math.floor(+deal.savings * 10) / 10}%</h5>
-            <Link
-              href={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Check out
-            </Link>
-            <h5>
-              offered: {deal.price} USD / retail: {deal.retailPrice} USD
-            </h5>
-            <hr />
-          </div>
-        );
-      })}
-    </div>
+    <ListOfDealsTableStyled className="tableForDlcDeals">
+      <tbody>
+        <tr>
+          <th>Cover</th>
+          <th>Title</th>
+          <th>Price</th>
+        </tr>
+        {deals.map((deal) => {
+          const store = stores.filter(
+            (store) => store.storeID === deal.storeID
+          )[0];
+          // if store is not active don't show the offer
+          if (store.isActive == 0) {
+            return null;
+          }
+          // deal description with link outside
+          return (
+            <div key={deal.dealID}>
+              <Image
+                src={`https://www.cheapshark.com/${store.images.logo}`}
+                width={25}
+                height={25}
+                alt="store logo"
+              />
+              <h4>{store.storeName}</h4>
+              {/* show savings in % with one space after coma*/}
+              <h5>Savings: {Math.floor(+deal.savings * 10) / 10}%</h5>
+              <Link
+                href={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Check out
+              </Link>
+              <h5>
+                offered: {deal.price} USD / retail: {deal.retailPrice} USD
+              </h5>
+              <hr />
+            </div>
+          );
+        })}
+      </tbody>
+    </ListOfDealsTableStyled>
   );
 }

@@ -8,6 +8,7 @@ import ListOfDlcDeals from "./listOfDlcDeals";
 
 export default function DLC({ idShark }: { idShark: string }) {
   const [dlc, setDlc] = useState<"loading" | GameFromShark>("loading");
+  const [opened, setOpened] = useState(false);
   useEffect(() => {
     async function fetchDataFromShark() {
       const response = await fetch(
@@ -33,10 +34,11 @@ export default function DLC({ idShark }: { idShark: string }) {
         />
       </td>
       <td>{dlc.info.title}</td>
-      <td className="tdWithSvg">
+      <td className="tdWithSvg" onClick={() => setOpened((n) => !n)}>
         <AngleDownSVG />
       </td>
-      {/* <ListOfDlcDeals deals={dlc.deals} /> */}
+      <br />
+      {opened ? <ListOfDlcDeals deals={dlc.deals} /> : null}
     </tr>
   );
 }

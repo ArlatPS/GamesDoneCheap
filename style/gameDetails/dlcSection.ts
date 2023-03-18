@@ -10,7 +10,7 @@ export const DLCSectionStyled = styled.section`
     margin-top: 0;
     .tdWithSvg {
       cursor: pointer;
-      width: 75px;
+      width: 80px;
       svg {
         height: 25px;
         display: inline;
@@ -21,5 +21,8 @@ export const DLCSectionStyled = styled.section`
       border-top-right-radius: 1rem;
       border-bottom-right-radius: 1rem;
     }
+  }
+  .tableForDlcDeals {
+    /* position: absolute; */
   }
 `;
