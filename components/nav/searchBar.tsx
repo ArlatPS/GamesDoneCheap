@@ -43,6 +43,7 @@ export default function SearchBar() {
         e.preventDefault();
         router.push(`/search/${query}`);
         setQuery("");
+        setCompletes([]);
       }}
     >
       <label htmlFor="search">Search</label>
