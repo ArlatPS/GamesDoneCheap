@@ -44,10 +44,11 @@ export default async function StorePage({
   return (
     <MainStoreStyled>
       <Image
-        src={"/store-banners/steam-banner.jpg"}
-        height={400}
-        width={1200}
-        alt={"aaa"}
+        src={found.banner.file}
+        height={found.banner.height}
+        width={found.banner.width}
+        alt={`Banner for ${found.storeNameDisplay}`}
+        className="storeBanner"
       />
       <h1>Best Deals on {found.storeNameDisplay}</h1>
       <AllDealsList deals={deals} hasUpdated={true} stores={stores} />

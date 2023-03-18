@@ -4,6 +4,7 @@ import { theme } from "@/theme";
 
 export const NavStyled = styled.nav`
   position: sticky;
+  z-index: 1;
   top: 0;
   font-family: var(--orienta);
   background-color: ${theme.colors.red};
