@@ -133,19 +133,8 @@ export const StorePickerStyled = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
-
-  /* .checkbox:after {
-    left: 8px;
-    bottom: 5px;
-    width: 6px;
-    height: 12px;
-    border: solid white;
-    border-width: 0 4px 4px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  } */
   div {
+    margin-bottom: 0.25em;
     label {
       padding-left: 10px;
       position: relative;

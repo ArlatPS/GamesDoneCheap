@@ -29,6 +29,7 @@ export const NavStyled = styled.nav`
       margin-right: 1em;
       padding: 1rem 0.25rem;
       color: ${theme.colors.white};
+      text-decoration: none;
     }
   }
 
@@ -74,21 +75,40 @@ export const DropdownSectionWithDivs = styled.section`
   position: relative;
   padding: 1rem 0.25rem;
   // Stores
-  span {
+  span:hover {
+    cursor: pointer;
+  }
+  // animation for dropdown
+  @keyframes animate-dropdown {
+    0% {
+      transform: rotateX(-90deg);
+      transform: scale(0);
+    }
+    70% {
+      transform: rotateX(20deg);
+      transform: scale(1.2);
+    }
+    100% {
+      transform: rotateX(0deg);
+      transform: scale(1);
+    }
   }
   // dropdown div
   .divAround {
+    transform-origin: top center;
+    animation: animate-dropdown 300ms ease-in forwards;
     flex-wrap: wrap;
     position: absolute;
-    right: 0px;
+    right: -30px;
     top: 40px;
     background-color: ${theme.colors.red};
-    width: 120px;
+    font-size: 16px;
+    width: 7em;
+    border-radius: 10px;
     div {
+      padding: 0.25em;
       a {
         font-family: var(--prompt);
-        font-size: 16px;
-        padding: 0.5em;
         margin: 0;
       }
     }

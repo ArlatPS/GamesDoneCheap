@@ -28,6 +28,6 @@ export const storesOfInterest: StoreOfInterest[] = [
   {
     storeID: "25",
     storeName: "epic-games",
-    storeNameDisplay: "Epic Games Store",
+    storeNameDisplay: "Epic Games",
   },
 ];

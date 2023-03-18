@@ -7,7 +7,7 @@ import { useState } from "react";
 import AngleDownSVG from "../svg/angleDown";
 
 export default function DropDownStores() {
-  const [opened, setOpened] = useState(true);
+  const [opened, setOpened] = useState(false);
   return (
     <DropdownSectionWithDivs
       onMouseEnter={() => setOpened(true)}
@@ -16,17 +16,17 @@ export default function DropDownStores() {
       <span>
         Stores <AngleDownSVG />
       </span>
-      <div className="divAround">
-        {opened
-          ? storesOfInterest.map((store) => (
-              <div key={store.storeID}>
-                <Link href={`/store/${store.storeName}`}>
-                  {store.storeNameDisplay}
-                </Link>
-              </div>
-            ))
-          : null}
-      </div>
+      {opened ? (
+        <div className="divAround">
+          {storesOfInterest.map((store) => (
+            <div key={store.storeID}>
+              <Link href={`/store/${store.storeName}`}>
+                {store.storeNameDisplay}
+              </Link>
+            </div>
+          ))}
+        </div>
+      ) : null}
     </DropdownSectionWithDivs>
   );
 }
