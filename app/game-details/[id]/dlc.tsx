@@ -34,7 +34,7 @@ export default function DLC({ idShark }: { idShark: string }) {
         alt={"DLC Cover Photo"}
       />
       <h5>{dlc.info.title}</h5>
-      <ListOfDlcDeals deals={dlc.deals} />
+      {/* <ListOfDlcDeals deals={dlc.deals} /> */}
     </div>
   );
 }

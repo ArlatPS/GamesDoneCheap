@@ -15,14 +15,18 @@ export async function GET(request: Request) {
   const gameIDs: string[] = [];
   // conversion to array of ids
   const ids = idsParams.slice(1, idsParams.length - 2).split(",");
-  for (let i = 0; i < ids.length; i++) {
+  // maximum 10 dlc - gameshark api is prone to 429
+  for (let i = 0; i < 10; i++) {
     // find name on steam API
-    const res = await fetch(`http://localhost:3000/api/steam?id=${ids[i]}`);
+    const res = await fetch(`http://localhost:3000/api/steam?id=${ids[i]}`, {
+      next: { revalidate: 12 * 60 * 60 },
+    });
     const resAfterJSON = await res.json();
     if (resAfterJSON.success) {
       names.push(resAfterJSON.data.name);
       const res = await fetch(
-        `https://www.cheapshark.com/api/1.0/games?title=${resAfterJSON.data.name}&limit=5`
+        `https://www.cheapshark.com/api/1.0/games?title=${resAfterJSON.data.name}&limit=5`,
+        { next: { revalidate: 12 * 60 * 60 } }
       );
       // add first result to gameIDs
       const resAfterJ = await res.json();

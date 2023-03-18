@@ -19,7 +19,6 @@ export default async function SteamSection({ steamID }: { steamID: string }) {
   if (!steamInfo.success) {
     return <h3>Steam Page Unavailable</h3>;
   }
-
   return (
     <div>
       {/* these dimension are original */}
@@ -53,7 +52,11 @@ export default async function SteamSection({ steamID }: { steamID: string }) {
           <h5 key={genre.id}>{genre.description}</h5>
         ))}
       </div>
-      {steamInfo.data.dlc ? <SectionDLCAsync ids={steamInfo.data.dlc} /> : null}
+      {/* maximum 10 dlc - gameshark api is prone to 429 */}
+
+      {steamInfo.data.dlc ? (
+        <SectionDLCAsync ids={steamInfo.data.dlc.slice(0, 10)} />
+      ) : null}
     </div>
   );
 }

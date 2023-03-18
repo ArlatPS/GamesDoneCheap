@@ -27,7 +27,6 @@ export default async function GameDetails({
     <main>
       <div>
         <h1>{gameFromShark.info.title}</h1>
-        {/* lowest price with date formatting */}
         {gameFromShark.info.steamAppID === null ? (
           <div>
             <Image
