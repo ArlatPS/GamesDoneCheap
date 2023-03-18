@@ -38,6 +38,10 @@ export default async function SteamSection({
           width={460}
           height={215}
         />
+        <LowestPrice game={game} />
+      </div>
+
+      <div className="secondRow">
         <div>
           <h3>{steamInfo.data.short_description}</h3>
           <h3>Release Date: {steamInfo.data.release_date.date}</h3>
@@ -51,10 +55,15 @@ export default async function SteamSection({
             </Link>
           ) : null}
         </div>
+        <ScreenshotGallery screenshots={steamInfo.data.screenshots} />
       </div>
 
-      <div className="secondRow">
+      <div className="thirdRow">
         <div>
+          <h4>
+            Genres:{" "}
+            {steamInfo.data.genres.map((genre) => genre.description + " ")}
+          </h4>
           <h4>Developer: {steamInfo.data.developers[0]}</h4>
           <h4>Publisher: {steamInfo.data.publishers[0]}</h4>
           <h4>Windows: {steamInfo.data.platforms.windows ? "🟢" : "❌"}</h4>
@@ -62,20 +71,11 @@ export default async function SteamSection({
           <h4>Linux: {steamInfo.data.platforms.linux ? "🟢" : "❌"}</h4>
           <Requirements requirements={steamInfo.data.pc_requirements} />
         </div>
-        <ScreenshotGallery screenshots={steamInfo.data.screenshots} />
+        {/* maximum 10 dlc - gameshark api is prone to 429 */}
+        {steamInfo.data.dlc ? (
+          <SectionDLCAsync ids={steamInfo.data.dlc.slice(0, 10)} />
+        ) : null}
       </div>
-      <div>
-        <h4>Genres</h4>
-        {steamInfo.data.genres.map((genre) => (
-          <h5 key={genre.id}>{genre.description}</h5>
-        ))}
-      </div>
-      {/* maximum 10 dlc - gameshark api is prone to 429 */}
-
-      {steamInfo.data.dlc ? (
-        <SectionDLCAsync ids={steamInfo.data.dlc.slice(0, 10)} />
-      ) : null}
-      <LowestPrice game={game} />
     </SteamSectionStyled>
   );
 }

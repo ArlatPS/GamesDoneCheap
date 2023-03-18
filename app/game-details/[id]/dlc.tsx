@@ -1,5 +1,6 @@
 "use client";
 
+import AngleDownSVG from "@/components/svg/angleDown";
 import { GameFromShark } from "@/globalTypes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -19,22 +20,23 @@ export default function DLC({ idShark }: { idShark: string }) {
   }, [idShark]);
 
   if (dlc == "loading") {
-    return (
-      <div>
-        <p>Loading...</p>
-      </div>
-    );
+    return <tr>Loading</tr>;
   }
   return (
-    <div>
-      <Image
-        width={80}
-        height={60}
-        src={dlc.info.thumb}
-        alt={"DLC Cover Photo"}
-      />
-      <h5>{dlc.info.title}</h5>
+    <tr>
+      <td>
+        <Image
+          width={80}
+          height={60}
+          src={dlc.info.thumb}
+          alt={"DLC Cover Photo"}
+        />
+      </td>
+      <td>{dlc.info.title}</td>
+      <td className="tdWithSvg">
+        <AngleDownSVG />
+      </td>
       {/* <ListOfDlcDeals deals={dlc.deals} /> */}
-    </div>
+    </tr>
   );
 }

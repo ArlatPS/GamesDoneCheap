@@ -1,3 +1,5 @@
+import { DLCSectionStyled } from "@/style/gameDetails/dlcSection";
+import { ListOfDealsTableStyled } from "@/style/listOfDeals";
 import DLC from "./dlc";
 
 async function fetchDlc(ids: number[]) {
@@ -12,13 +14,23 @@ export default async function SectionDlc({ ids }: { ids: number[] }) {
   const DLCs = await fetchDlc(ids);
 
   if (DLCs.length == 0) {
-    return <h5>No DLCs found</h5>;
+    return null;
   }
   return (
-    <div>
-      {DLCs.map((id) => (
-        <DLC key={id} idShark={id} />
-      ))}
-    </div>
+    <DLCSectionStyled>
+      <h2>DLC</h2>
+      <ListOfDealsTableStyled className="tableForDLCs">
+        <tbody>
+          <tr>
+            <th>Cover</th>
+            <th>Title</th>
+            <th>Deals</th>
+          </tr>
+          {DLCs.map((id) => (
+            <DLC key={id} idShark={id} />
+          ))}
+        </tbody>
+      </ListOfDealsTableStyled>
+    </DLCSectionStyled>
   );
 }

@@ -12,7 +12,7 @@ export default function Requirements({
     recommended: string;
   };
 }) {
-  const [opened, setOpened] = useState(true);
+  const [opened, setOpened] = useState(false);
   return (
     <RequirementsStyled>
       <h4 onClick={() => setOpened((n) => !n)}>

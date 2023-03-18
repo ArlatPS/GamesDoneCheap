@@ -9,7 +9,13 @@ export const SteamSectionStyled = styled.section`
     img {
       margin-right: 2rem;
     }
-    div {
+    text-align: center;
+    font-family: var(--orienta);
+  }
+  .secondRow {
+    div:first-of-type {
+      width: 50%;
+      margin-right: 2rem;
       font-family: var(--orienta);
       text-align: center;
       a {
@@ -18,11 +24,8 @@ export const SteamSectionStyled = styled.section`
         font-size: 20px;
       }
     }
-  }
-  .secondRow {
     margin-top: 2rem;
     display: flex;
-    justify-content: space-between;
     font-family: var(--prompt);
 
     .screenshotGallery {
@@ -33,10 +36,18 @@ export const SteamSectionStyled = styled.section`
       }
     }
   }
+  .thirdRow {
+    margin-top: 2rem;
+    display: flex;
+    font-family: var(--prompt);
+    div {
+      margin-right: 2rem;
+    }
+  }
 `;
 
 export const RequirementsStyled = styled.div`
-  @keyframes animate-dropdown {
+  @keyframes animate-requirements {
     0% {
       transform: rotateX(-90deg);
       transform: scale(0);
@@ -47,7 +58,7 @@ export const RequirementsStyled = styled.div`
     }
   }
   .absoluteDiv {
-    animation: animate-dropdown 400ms ease-in-out forwards;
+    animation: animate-requirements 400ms ease-in-out forwards;
     transform-origin: top left;
     width: 80vw;
     position: absolute;
