@@ -20,8 +20,12 @@ export default function Requirements({
       </h4>
       {opened ? (
         <div className="absoluteDiv">
-          <div>{parse(requirements.minimum)}</div>
-          <div>{parse(requirements.recommended)}</div>
+          {requirements.minimum !== undefined ? (
+            <div>{parse(requirements.minimum)}</div>
+          ) : null}
+          {requirements.recommended !== undefined ? (
+            <div>{parse(requirements.recommended)}</div>
+          ) : null}
         </div>
       ) : null}
     </RequirementsStyled>
