@@ -3,14 +3,6 @@ import { DLCSectionStyled } from "@/style/gameDetails/dlcSection";
 import { ListOfDealsTableStyled } from "@/style/listOfDeals";
 import DLC from "./dlc";
 
-async function fetchDlc(ids: number[]) {
-  const response = await fetch(
-    `http://localhost:3000/api/steamIdToGameId?ids=${ids}`
-  );
-  const res = await response.json();
-  return res.ids as string[];
-}
-
 async function fetchDlcNew(ids: number[]) {
   const response = await steamIdToGameId(ids);
   return response as string[];

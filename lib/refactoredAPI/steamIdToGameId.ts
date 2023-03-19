@@ -20,13 +20,10 @@ export async function steamIdToGameId(ids: number[]) {
         // add first result to gameIDs
         const resAfterJ = await res.json();
         if (resAfterJ[0]) {
-          console.log(resAfterJ[0].gameID);
           gameIDs.push(resAfterJ[0].gameID);
         }
       }
-    } catch (e) {
-      throw new Error();
-    }
+    } catch {}
   }
   return gameIDs;
 }
