@@ -22,9 +22,9 @@ export default async function SectionDlc({ ids }: { ids: number[] }) {
       <ListOfDealsTableStyled className="tableForDLCs">
         <tbody>
           <tr>
-            <th>Cover</th>
-            <th>Title</th>
-            <th>Deals</th>
+            <th colSpan={2}>Cover</th>
+            <th colSpan={2}>Title</th>
+            <th colSpan={2}>Deals</th>
           </tr>
           {DLCs.map((id) => (
             <DLC key={id} idShark={id} />

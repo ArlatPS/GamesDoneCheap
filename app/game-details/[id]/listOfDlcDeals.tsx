@@ -21,40 +21,37 @@ export default function ListOfDlcDeals({ deals }: { deals: DealsList }) {
   // if not fetched yet loading pane
   if (stores.length == 0) {
     return (
-      <div>
-        <p>Loading...</p>
-      </div>
+      <tr>
+        <td colSpan={3}>Loading...</td>
+      </tr>
     );
   }
 
   return (
-    <ListOfDealsTableStyled className="tableForDlcDeals">
-      <tbody>
-        <tr>
-          <th>Cover</th>
-          <th>Title</th>
-          <th>Price</th>
-        </tr>
-        {deals.map((deal) => {
-          const store = stores.filter(
-            (store) => store.storeID === deal.storeID
-          )[0];
-          // if store is not active don't show the offer
-          if (store.isActive == 0) {
-            return null;
-          }
-          // deal description with link outside
-          return (
-            <div key={deal.dealID}>
+    <>
+      {deals.map((deal) => {
+        const store = stores.filter(
+          (store) => store.storeID === deal.storeID
+        )[0];
+        // if store is not active don't show the offer
+        if (store.isActive == 0) {
+          return null;
+        }
+        // deal description with link outside
+        return (
+          <tr key={deal.dealID}>
+            <td>
               <Image
                 src={`https://www.cheapshark.com/${store.images.logo}`}
                 width={25}
                 height={25}
                 alt="store logo"
               />
-              <h4>{store.storeName}</h4>
-              {/* show savings in % with one space after coma*/}
-              <h5>Savings: {Math.floor(+deal.savings * 10) / 10}%</h5>
+            </td>
+            <td>{store.storeName}</td>
+            {/* show savings in % with one space after coma*/}
+            <td>Savings: {Math.floor(+deal.savings * 10) / 10}%</td>
+            <td>
               <Link
                 href={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}
                 rel="noopener noreferrer"
@@ -62,14 +59,13 @@ export default function ListOfDlcDeals({ deals }: { deals: DealsList }) {
               >
                 Check out
               </Link>
-              <h5>
-                offered: {deal.price} USD / retail: {deal.retailPrice} USD
-              </h5>
-              <hr />
-            </div>
-          );
-        })}
-      </tbody>
-    </ListOfDealsTableStyled>
+            </td>
+            <td>
+              offered: {deal.price} USD / retail: {deal.retailPrice} USD
+            </td>
+          </tr>
+        );
+      })}
+    </>
   );
 }

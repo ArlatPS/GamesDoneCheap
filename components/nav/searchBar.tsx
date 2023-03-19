@@ -19,7 +19,7 @@ export default function SearchBar() {
     async function fetchAutoCompletes() {
       if (queryDeferred.length >= 3) {
         const response = await fetch(
-          `http://localhost:3000/api/autocomplete?query=${queryDeferred}`,
+          `/api/autocomplete?query=${queryDeferred}`,
           // { next: { revalidate: 60 } }
           { cache: "no-store" }
         );

@@ -21,24 +21,29 @@ export default function DLC({ idShark }: { idShark: string }) {
   }, [idShark]);
 
   if (dlc == "loading") {
-    return <tr>Loading</tr>;
+    return (
+      <tr>
+        <td>Loading</td>
+      </tr>
+    );
   }
   return (
-    <tr>
-      <td>
-        <Image
-          width={80}
-          height={60}
-          src={dlc.info.thumb}
-          alt={"DLC Cover Photo"}
-        />
-      </td>
-      <td>{dlc.info.title}</td>
-      <td className="tdWithSvg" onClick={() => setOpened((n) => !n)}>
-        <AngleDownSVG />
-      </td>
-      <br />
+    <>
+      <tr>
+        <td>
+          <Image
+            width={80}
+            height={60}
+            src={dlc.info.thumb}
+            alt={"DLC Cover Photo"}
+          />
+        </td>
+        <td colSpan={2}>{dlc.info.title}</td>
+        <td className="tdWithSvg" onClick={() => setOpened((n) => !n)}>
+          <AngleDownSVG />
+        </td>
+      </tr>
       {opened ? <ListOfDlcDeals deals={dlc.deals} /> : null}
-    </tr>
+    </>
   );
 }
