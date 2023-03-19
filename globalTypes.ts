@@ -60,6 +60,7 @@ type SteamFailure = {
 type SteamSuccess = {
   success: true;
   data: {
+    name: string;
     dlc: number[];
     genres: { id: string; description: string }[];
     header_image: string;
