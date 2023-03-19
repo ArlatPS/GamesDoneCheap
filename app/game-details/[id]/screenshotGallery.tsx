@@ -1,4 +1,5 @@
 "use client";
+import { ButtonStyled } from "@/style/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -54,8 +55,14 @@ export default function ScreenshotGallery({
         width={650}
         height={365}
       />
-      <button onClick={() => handleScreenshots("prev")}>prev</button>
-      <button onClick={() => handleScreenshots("next")}>next</button>
+      <div className="buttons">
+        <ButtonStyled onClick={() => handleScreenshots("prev")}>
+          prev
+        </ButtonStyled>
+        <ButtonStyled onClick={() => handleScreenshots("next")}>
+          next
+        </ButtonStyled>
+      </div>
     </div>
   );
 }

@@ -34,6 +34,12 @@ export const SteamSectionStyled = styled.section`
         width: 100%;
         height: ${100 * 0.8 * 0.5 * 0.56}vw;
       }
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 0.5rem;
+      }
     }
   }
   .thirdRow {
