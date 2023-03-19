@@ -24,7 +24,7 @@ export default async function SectionDlc({ ids }: { ids: number[] }) {
           <tr>
             <th colSpan={2}>Cover</th>
             <th colSpan={2}>Title</th>
-            <th colSpan={2}>Deals</th>
+            <th colSpan={1}>Deals</th>
           </tr>
           {DLCs.map((id) => (
             <DLC key={id} idShark={id} />

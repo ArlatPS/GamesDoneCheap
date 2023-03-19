@@ -22,7 +22,7 @@ export default function ListOfDlcDeals({ deals }: { deals: DealsList }) {
   if (stores.length == 0) {
     return (
       <tr>
-        <td colSpan={3}>Loading...</td>
+        <td colSpan={6}>Loading...</td>
       </tr>
     );
   }
@@ -39,7 +39,7 @@ export default function ListOfDlcDeals({ deals }: { deals: DealsList }) {
         }
         // deal description with link outside
         return (
-          <tr key={deal.dealID}>
+          <tr key={deal.dealID} className="rowOfDlcDeal">
             <td>
               <Image
                 src={`https://www.cheapshark.com/${store.images.logo}`}
@@ -50,7 +50,8 @@ export default function ListOfDlcDeals({ deals }: { deals: DealsList }) {
             </td>
             <td>{store.storeName}</td>
             {/* show savings in % with one space after coma*/}
-            <td>Savings: {Math.floor(+deal.savings * 10) / 10}%</td>
+            <td>{deal.price}$</td>
+            <td>Save: {Math.floor(+deal.savings * 10) / 10}%</td>
             <td>
               <Link
                 href={`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`}
@@ -59,9 +60,6 @@ export default function ListOfDlcDeals({ deals }: { deals: DealsList }) {
               >
                 Check out
               </Link>
-            </td>
-            <td>
-              offered: {deal.price} USD / retail: {deal.retailPrice} USD
             </td>
           </tr>
         );

@@ -22,7 +22,17 @@ export const DLCSectionStyled = styled.section`
       border-bottom-right-radius: 1rem;
     }
   }
-  .tableForDlcDeals {
-    /* position: absolute; */
+  .rowOfDlcDeal {
+    td:nth-of-type(3) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    td:nth-of-type(5) {
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+    }
+    // previously described animation
+    transform-origin: top center;
+    animation: animate-dropdown 300ms ease-in forwards;
   }
 `;

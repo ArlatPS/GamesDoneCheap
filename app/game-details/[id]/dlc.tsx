@@ -23,14 +23,14 @@ export default function DLC({ idShark }: { idShark: string }) {
   if (dlc == "loading") {
     return (
       <tr>
-        <td>Loading</td>
+        <td colSpan={6}>Loading</td>
       </tr>
     );
   }
   return (
     <>
       <tr>
-        <td>
+        <td colSpan={2}>
           <Image
             width={80}
             height={60}
@@ -39,7 +39,11 @@ export default function DLC({ idShark }: { idShark: string }) {
           />
         </td>
         <td colSpan={2}>{dlc.info.title}</td>
-        <td className="tdWithSvg" onClick={() => setOpened((n) => !n)}>
+        <td
+          colSpan={1}
+          className="tdWithSvg"
+          onClick={() => setOpened((n) => !n)}
+        >
           <AngleDownSVG />
         </td>
       </tr>

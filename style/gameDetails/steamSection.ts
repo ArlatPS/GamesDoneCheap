@@ -39,6 +39,7 @@ export const SteamSectionStyled = styled.section`
   .thirdRow {
     margin-top: 2rem;
     display: flex;
+    justify-content: space-between;
     font-family: var(--prompt);
     div {
       margin-right: 2rem;
