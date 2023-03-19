@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import createTrie, { Node } from "@/lib/tries";
 import { DealsListGame, GameForDB } from "@/globalTypes";
 import mongoose, { Schema } from "mongoose";
+import { getDataFromDB } from "@/lib/refactoredAPI/getDataFromDB";
 
 export async function GET(request: Request) {
   // get query
@@ -13,21 +14,10 @@ export async function GET(request: Request) {
   }
   try {
     // hit internal API and revalidate every 4h
-    const dataFromDB = await fetch(
-      "http://localhost:3000/api/get-data-from-db",
-      {
-        // next: { revalidate: 1 },
-        cache: "no-cache",
-      }
-    );
+    const dataFromDB = await getDataFromDB();
 
-    const dataFromDBAfterJSON = (await dataFromDB.json()) as {
-      success: boolean;
-      listOfGames: GameForDB[];
-    };
-
-    if (dataFromDBAfterJSON.success) {
-      const listOfGames = dataFromDBAfterJSON.listOfGames;
+    if (dataFromDB && dataFromDB.success === true) {
+      const listOfGames = dataFromDB.listOfGames;
       const namesToTrie = listOfGames.map((deal) => deal.name);
 
       // crate Trie and use it to find completions

@@ -1,9 +1,8 @@
-import { NextResponse } from "next/server";
 import mongoose, { Schema } from "mongoose";
 import { GameForDB } from "@/globalTypes";
 import { updateGamesOnDB } from "@/lib/refactoredAPI/updateDB";
 
-export async function GET(request: Request) {
+export async function getDataFromDB() {
   try {
     // updating db once a day
     const response = await updateGamesOnDB();
@@ -30,13 +29,13 @@ export async function GET(request: Request) {
         listFromDb[0].data
       ) as GameForDB[];
 
-      return NextResponse.json({
+      return {
         success: true,
         listOfGames: listOfAllGamesFromDB,
-      });
+      };
     }
   } catch (e) {
     console.error(e);
-    return NextResponse.json({ success: false, listOfDeals: [] });
+    return { success: false, listOfGames: [] };
   }
 }

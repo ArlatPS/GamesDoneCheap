@@ -62,6 +62,7 @@ export const NavStyled = styled.nav`
       right: -40px;
       top: 30px;
       div {
+        color: ${theme.colors.white};
         width: 100%;
         padding: 0.5em 0.25em;
         border-bottom: 1px solid ${theme.colors.night};

@@ -17,22 +17,24 @@ export default function SearchBar() {
 
   useEffect(() => {
     async function fetchAutoCompletes() {
-      if (queryDeferred.length >= 3) {
-        const response = await fetch(
-          `/api/autocomplete?query=${queryDeferred}`,
-          // { next: { revalidate: 60 } }
-          { cache: "no-store" }
-        );
-        const responseAfterJSON = (await response.json()) as {
-          success: boolean;
-          completionsWithData: GameForDB[];
-        };
-        if (responseAfterJSON.success) {
-          setCompletes(responseAfterJSON.completionsWithData);
+      try {
+        if (queryDeferred.length >= 3) {
+          const response = await fetch(
+            `/api/autocomplete?query=${queryDeferred}`,
+            // { next: { revalidate: 60 } }
+            { cache: "no-store" }
+          );
+          const responseAfterJSON = (await response.json()) as {
+            success: boolean;
+            completionsWithData: GameForDB[];
+          };
+          if (responseAfterJSON.success) {
+            setCompletes(responseAfterJSON.completionsWithData);
+          }
+        } else {
+          setCompletes([]);
         }
-      } else {
-        setCompletes([]);
-      }
+      } catch {}
     }
     fetchAutoCompletes();
   }, [queryDeferred]);
@@ -52,13 +54,17 @@ export default function SearchBar() {
         id="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        autoComplete="off"
       />
       <section>
         {completes.slice(0, 3).map((complete) => (
           <div key={complete.gameID}>
             <Link
               href={`/game-details/${complete.gameID}`}
-              onClick={() => setQuery("")}
+              onClick={() => {
+                setQuery("");
+                setCompletes([]);
+              }}
             >
               {complete.title}
             </Link>
