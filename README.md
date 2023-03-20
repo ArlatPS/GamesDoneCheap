@@ -30,8 +30,6 @@
 - search bar with autocomplete which is implemented with Trie data structure
 - hosted on Vercel
 
-## [Link to this website hosted on Vercel](https://gg-puce.vercel.app/)
-
 ## All Deals With Filters
 
 ![Filters](https://res.cloudinary.com/dtct3niec/image/upload/v1679344077/github/all_deals.png)
