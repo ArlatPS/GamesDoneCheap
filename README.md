@@ -1,6 +1,6 @@
 # [GAMES DONE CHEAP](https://gg-puce.vercel.app/)
 
-## Website to check out best video game deals and compare prices on different platforms
+## Website to check out best video game deals and compare prices on different platforms (🏗👷‍♂️ under construction)
 
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
