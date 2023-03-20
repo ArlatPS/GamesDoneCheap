@@ -43,9 +43,9 @@ export default function SearchBar() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        setCompletes([]);
         router.push(`/search/${query}`);
         setQuery("");
-        setCompletes([]);
       }}
     >
       <label htmlFor="search">Search</label>

@@ -69,6 +69,7 @@ export const RequirementsStyled = styled.div`
     transform-origin: top left;
     width: 80vw;
     position: absolute;
+    z-index: 2;
     background-color: ${theme.colors.night};
     border: 1px solid ${theme.colors.red};
     box-shadow: 0px 0px 8px 1px ${theme.colors.red};
