@@ -1,14 +1,12 @@
-import { formatDistanceToNow } from "date-fns";
-
 export type CalculateTimeLeftType = {
   format: "hours" | "days";
   value: number;
 };
 
 export default function calculateTimeLeft(
-  lastChange: number
+  lastChange: number,
+  now: number = Date.now()
 ): CalculateTimeLeftType {
-  const now = Date.now();
   const end = lastChange * 1000 + 7 * 24 * 60 * 60 * 1000;
   const hoursEnd = Math.floor((end - now) / 1000 / 3600);
 
