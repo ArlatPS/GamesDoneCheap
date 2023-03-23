@@ -1,4 +1,5 @@
 import Image from "next/image";
+import parse from "html-react-parser";
 
 import fetchSteam from "@/lib/fetchSteam";
 
@@ -44,8 +45,8 @@ export default async function SteamSection({
       </div>
 
       <div className="secondRow">
-        <div>
-          <h3>{steamInfo.data.short_description}</h3>
+        <div className="descDiv">
+          <h3>{parse(steamInfo.data.short_description)}</h3>
           <h3>Release Date: {steamInfo.data.release_date.date}</h3>
           {steamInfo.data.metacritic ? (
             <Link

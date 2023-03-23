@@ -6,19 +6,25 @@ export const SteamSectionStyled = styled.section`
   .firstRow {
     display: flex;
     justify-content: space-between;
-    img {
-      margin-right: 2rem;
-    }
     text-align: center;
     font-family: var(--orienta);
+    .divWithLowestPrice {
+      width: 50%;
+      padding-left: 1rem;
+    }
   }
   .secondRow {
-    div:first-of-type {
+    .descDiv {
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      flex-wrap: wrap;
       width: 50%;
       margin-right: 2rem;
       font-family: var(--orienta);
       text-align: center;
       a {
+        width: 100%;
         font-family: var(--prompt);
         color: ${theme.colors.blue};
         font-size: 20px;
