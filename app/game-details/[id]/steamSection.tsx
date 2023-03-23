@@ -38,7 +38,9 @@ export default async function SteamSection({
           width={460}
           height={215}
         />
-        <LowestPrice game={game} />
+        <div className="divWithLowestPrice">
+          <LowestPrice game={game} />
+        </div>
       </div>
 
       <div className="secondRow">

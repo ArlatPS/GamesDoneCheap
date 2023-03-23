@@ -36,7 +36,7 @@ export default async function GameDetails({
             height={400}
             alt={gameFromShark.info.title}
           />
-          <div>
+          <div className="divWithLowestPrice">
             <LowestPrice game={gameFromShark} />
             <h5>Steam Page Unavailable</h5>
           </div>

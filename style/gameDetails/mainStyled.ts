@@ -7,6 +7,7 @@ export const MainGameDetailsStyled = styled.main`
   margin: 0 10%;
   h1 {
     font-family: var(--orienta);
+    font-size: 40px;
   }
   h5 {
     font-family: var(--prompt);
@@ -17,6 +18,18 @@ export const MainGameDetailsStyled = styled.main`
     display: flex;
     justify-content: space-between;
     text-align: center;
+  }
+  @media (min-width: ${theme.xxl}) {
+    margin: 0 20%;
+  }
+  .divWithLowestPrice {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    div,
+    h5 {
+      width: 100%;
+    }
   }
 `;
 
@@ -37,7 +50,6 @@ export const DealsInDetailSectionStyled = styled.section`
 `;
 
 export const DivForLowestPiceStyled = styled.div`
-  width: 100%;
   h3 {
     span {
       color: ${theme.colors.blue};
