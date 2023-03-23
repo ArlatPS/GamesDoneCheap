@@ -19,6 +19,9 @@ export const MainPageWithSections = styled.main`
       letter-spacing: 1px;
       margin-bottom: 2rem;
     }
+    @media (min-width: ${theme.xxl}) {
+      margin: 2rem 20%;
+    }
   }
 `;
 
@@ -39,5 +42,8 @@ export const HeroSection = styled.section`
   svg {
     fill: white;
     height: 30vh;
+  }
+  @media (min-width: ${theme.xxl}) {
+    margin: 0 20%;
   }
 `;

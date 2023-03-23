@@ -6,6 +6,10 @@ export const DLCSectionStyled = styled.section`
   h2 {
     font-family: var(--orienta);
   }
+  #dlcCoverImg {
+    height: 69px;
+    width: 48px;
+  }
   .tableForDLCs {
     margin-top: 0;
     .tdWithSvg {

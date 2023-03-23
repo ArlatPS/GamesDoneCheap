@@ -27,15 +27,17 @@ export default function DLC({ idShark }: { idShark: string }) {
       </tr>
     );
   }
+
   return (
     <>
       <tr>
         <td colSpan={2}>
           <Image
-            width={80}
-            height={60}
+            width={96}
+            height={138}
             src={dlc.info.thumb}
             alt={"DLC Cover Photo"}
+            id="dlcCoverImg"
           />
         </td>
         <td colSpan={2}>{dlc.info.title}</td>

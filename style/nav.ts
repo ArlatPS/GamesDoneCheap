@@ -32,6 +32,9 @@ export const NavStyled = styled.nav`
       color: ${theme.colors.white};
       text-decoration: none;
     }
+    @media (min-width: ${theme.xxl}) {
+      margin-left: 20%;
+    }
   }
 
   // middle section with logo
@@ -62,11 +65,16 @@ export const NavStyled = styled.nav`
       right: -40px;
       top: 30px;
       div {
-        color: ${theme.colors.white};
         width: 100%;
         padding: 0.5em 0.25em;
         border-bottom: 1px solid ${theme.colors.night};
+        a {
+          color: ${theme.colors.white};
+        }
       }
+    }
+    @media (min-width: ${theme.xxl}) {
+      margin-right: 20%;
     }
   }
 `;

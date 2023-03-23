@@ -6,6 +6,7 @@ export const theme = {
     blue: "#279AF1",
     white: "#F7F7FF",
   },
+  xxl: "1900px",
   xl: "1200px",
   md: "768px",
 };

@@ -4,14 +4,14 @@ import { theme } from "@/theme";
 
 export const MainAllDealsStyled = styled.main`
   color: ${theme.colors.white};
+  margin: 0 10%;
   h1 {
-    margin-left: 10%;
     font-family: var(--orienta);
     font-size: 36px;
     margin-top: 2rem;
   }
   .dealsPerPage {
-    margin: 2rem 10%;
+    margin: 2rem 0;
     display: flex;
     justify-content: flex-end;
     label {
@@ -26,10 +26,12 @@ export const MainAllDealsStyled = styled.main`
       font-size: 18px;
     }
   }
+  @media (min-width: ${theme.xxl}) {
+    margin: 0 20%;
+  }
 `;
 
 export const SearchControlsStyled = styled.section`
-  margin-left: 10%;
   font-family: var(--prompt);
   position: relative;
   transition: 250ms ease-in;
@@ -167,11 +169,9 @@ export const StorePickerStyled = styled.div`
 `;
 
 export const PageControl = styled.div`
-  margin: 0 10%;
   display: flex;
   justify-content: center;
   div {
-    width: 15%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -194,6 +194,6 @@ export const PageControl = styled.div`
 `;
 
 export const SectionAroundAllDealsResult = styled.section`
-  margin: 2rem 10%;
+  margin: 2rem 0;
   min-height: 70vh;
 `;
