@@ -68,6 +68,7 @@ export default function useProximityEffect(
 
   const globalPositionDeferred = useDeferredValue(globalMousePosition);
 
+  // handle mouse movement
   useEffect(() => {
     const handleMouseMove = (event: any) => {
       setGlobalMousePosition({
@@ -82,21 +83,23 @@ export default function useProximityEffect(
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [threshold]);
+
   const [distance, setDistance] = useState(threshold + 1);
 
+  // getBoundingClientRect() provides real position in viewport
   useEffect(() => {
     if (
-      proximityRef.current?.offsetTop &&
-      proximityRef.current?.offsetLeft &&
-      proximityRef.current?.offsetHeight &&
-      proximityRef.current?.offsetWidth
+      proximityRef.current?.getBoundingClientRect().top &&
+      proximityRef.current?.getBoundingClientRect().left &&
+      proximityRef.current?.getBoundingClientRect().height &&
+      proximityRef.current?.getBoundingClientRect().width
     ) {
       setDistance(
         calculateDistanceFromElement(
-          proximityRef.current.offsetTop,
-          proximityRef.current.offsetLeft,
-          proximityRef.current.offsetHeight,
-          proximityRef.current.offsetWidth,
+          proximityRef.current?.getBoundingClientRect().top,
+          proximityRef.current?.getBoundingClientRect().left,
+          proximityRef.current?.getBoundingClientRect().height,
+          proximityRef.current?.getBoundingClientRect().width,
           globalPositionDeferred.x,
           globalPositionDeferred.y
         )
