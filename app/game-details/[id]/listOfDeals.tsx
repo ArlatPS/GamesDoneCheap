@@ -57,7 +57,7 @@ export default async function ListOfDeals({ deals }: { deals: DealsList }) {
                       rel="noopener noreferrer"
                       target="_blank"
                     >
-                      Check out
+                      Check out!
                     </Link>
                   </td>
                 </tr>
