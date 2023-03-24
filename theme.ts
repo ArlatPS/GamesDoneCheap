@@ -7,6 +7,6 @@ export const theme = {
     white: "#F7F7FF",
   },
   xxl: "1900px",
-  xl: "1200px",
-  md: "768px",
+  md: "1200px",
+  sm: "768px",
 };

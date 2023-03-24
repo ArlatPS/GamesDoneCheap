@@ -35,6 +35,10 @@ export const NavStyled = styled.nav`
     @media (min-width: ${theme.xxl}) {
       margin-left: 20%;
     }
+    @media (max-width: ${theme.md}) {
+      margin-left: 5%;
+      font-size: 14px;
+    }
   }
 
   // middle section with logo
@@ -48,13 +52,16 @@ export const NavStyled = styled.nav`
     font-family: var(--space-mono);
     font-size: 20px;
     color: ${theme.colors.white};
+    @media (max-width: ${theme.md}) {
+      font-size: 18px;
+    }
   }
 
   form {
     margin-right: 10%;
     position: relative;
     label {
-      margin-right: 0.5rem;
+      margin-right: 0.5em;
     }
     section {
       position: absolute;
@@ -75,6 +82,13 @@ export const NavStyled = styled.nav`
     }
     @media (min-width: ${theme.xxl}) {
       margin-right: 20%;
+    }
+    @media (max-width: ${theme.md}) {
+      margin-right: 5%;
+      font-size: 14px;
+      #search {
+        width: 130px;
+      }
     }
   }
 `;
