@@ -6,6 +6,7 @@ import Nav from "@/components/nav/nav";
 
 // fonts
 import { Space_Mono, Orienta, Prompt } from "next/font/google";
+import Footer from "@/components/footer";
 
 const space_mono = Space_Mono({
   subsets: ["latin"],
@@ -49,6 +50,7 @@ export default function RootLayout({
       <body>
         <Nav />
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <Footer />
       </body>
     </html>
   );

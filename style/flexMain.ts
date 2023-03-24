@@ -36,7 +36,7 @@ export const H1WithHoverEffect = styled.h1`
   font-size: 52px;
   height: 1em;
   @media (max-width: ${theme.md}) {
-    font-size: 40px;
+    font-size: 38px;
   }
 `;
 
