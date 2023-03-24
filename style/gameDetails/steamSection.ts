@@ -85,6 +85,9 @@ export const RequirementsStyled = styled.div`
       width: 50%;
       padding: 1rem;
     }
+    @media (min-width: ${theme.xxl}) {
+      width: 60vw;
+    }
   }
   h4 {
     &:hover {
