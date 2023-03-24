@@ -136,5 +136,8 @@ export const DropdownSectionWithDivs = styled.section`
         margin: 0;
       }
     }
+    @media (max-width: ${theme.md}) {
+      font-size: 14px;
+    }
   }
 `;

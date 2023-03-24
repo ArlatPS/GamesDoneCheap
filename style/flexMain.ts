@@ -22,13 +22,22 @@ export const MainPageWithSections = styled.main`
     @media (min-width: ${theme.xxl}) {
       margin: 2rem 20%;
     }
+    @media (max-width: ${theme.md}) {
+      margin: 1rem 5%;
+      h2 {
+        font-size: 26px;
+      }
+    }
   }
 `;
 
 export const H1WithHoverEffect = styled.h1`
   font-family: var(--space-mono);
   font-size: 52px;
-  /* width: 30%; */
+  height: 1em;
+  @media (max-width: ${theme.md}) {
+    font-size: 40px;
+  }
 `;
 
 export const HeroSection = styled.section`
@@ -45,5 +54,8 @@ export const HeroSection = styled.section`
   }
   @media (min-width: ${theme.xxl}) {
     margin: 0 20%;
+  }
+  @media (max-width: ${theme.md}) {
+    margin: 0 5%;
   }
 `;

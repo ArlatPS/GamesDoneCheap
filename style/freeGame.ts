@@ -9,6 +9,20 @@ export const FreeGameDiv = styled.div`
   justify-content: center;
   font-family: var(--prompt), sans-serif;
   color: ${theme.colors.white};
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+  h3 {
+    font-size: 30px;
+    text-align: center;
+    margin: 0.5em;
+  }
+  @media (max-width: ${theme.md}) {
+    h3 {
+      font-size: 26px;
+    }
+  }
   .storeDiv {
     margin-top: 0.5rem;
     display: flex;
@@ -21,15 +35,9 @@ export const FreeGameDiv = styled.div`
       width: 2.5em;
       margin-right: 1em;
     }
-  }
-  img {
-    width: 100%;
-    object-fit: contain;
-  }
-  h3 {
-    font-size: 30px;
-    text-align: center;
-    margin: 0.5em;
+    @media (max-width: ${theme.md}) {
+      font-size: 17px;
+    }
   }
   .daysLeft,
   .hoursLeft {

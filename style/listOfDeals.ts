@@ -78,4 +78,8 @@ export const ListOfDealsTableStyled = styled.table`
   .lowPrice {
     color: ${theme.colors.blue};
   }
+  @media (max-width: ${theme.md}) {
+    margin: 0 5%;
+    font-size: 14px;
+  }
 `;

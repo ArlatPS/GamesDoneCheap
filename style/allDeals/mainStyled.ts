@@ -24,10 +24,24 @@ export const MainAllDealsStyled = styled.main`
       color: ${theme.colors.white};
       border: none;
       font-size: 18px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    @media (max-width: ${theme.md}) {
+      label {
+        font-size: 16px;
+      }
     }
   }
   @media (min-width: ${theme.xxl}) {
     margin: 0 20%;
+  }
+  @media (max-width: ${theme.md}) {
+    h1 {
+      font-size: 30px;
+    }
+    margin: 0 5%;
   }
 `;
 
@@ -53,11 +67,18 @@ export const SearchControlsStyled = styled.section`
     &:hover {
       cursor: pointer;
     }
+    margin-top: 1rem;
+    @media (max-width: ${theme.md}) {
+      font-size: 20px;
+    }
   }
   .steamRating {
     margin-top: 1rem;
     span {
       margin-left: 0.5rem;
+    }
+    input {
+      accent-color: ${theme.colors.red};
     }
   }
 `;
@@ -113,6 +134,16 @@ export const DivDropdownAbsolute = styled.div`
     margin-top: 1em;
     font-size: 24px;
   }
+  @media (max-width: ${theme.md}) {
+    width: 500px;
+    font-size: 16px;
+    h4 {
+      font-size: 16px;
+    }
+    .submitButton {
+      font-size: 20px;
+    }
+  }
 `;
 
 export const StorePickerStyled = styled.div`
@@ -164,6 +195,11 @@ export const StorePickerStyled = styled.div`
       input:hover ~ .checkbox {
         cursor: pointer;
       }
+    }
+  }
+  @media (max-width: ${theme.md}) {
+    label {
+      font-size: 18px;
     }
   }
 `;
