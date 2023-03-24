@@ -13,6 +13,7 @@ export const ListOfDealsSectionStyled = styled.section`
   flex-wrap: wrap;
   justify-content: center;
   min-height: 70vh;
+  padding: 0 5%;
 `;
 
 export const ListOfDealsTableStyled = styled.table`
@@ -79,7 +80,6 @@ export const ListOfDealsTableStyled = styled.table`
     color: ${theme.colors.blue};
   }
   @media (max-width: ${theme.md}) {
-    margin: 0 5%;
     font-size: 14px;
   }
 `;

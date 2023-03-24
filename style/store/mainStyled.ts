@@ -16,4 +16,7 @@ export const MainStoreStyled = styled.main`
   @media (min-width: ${theme.xxl}) {
     margin: 0 20%;
   }
+  @media (max-width: ${theme.md}) {
+    margin: 0 5%;
+  }
 `;

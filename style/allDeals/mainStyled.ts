@@ -227,6 +227,16 @@ export const PageControl = styled.div`
     }
     margin-bottom: 2em;
   }
+  @media (max-width: ${theme.md}) {
+    h4 {
+      font-size: 16px;
+    }
+    div {
+      button {
+        font-size: 20px;
+      }
+    }
+  }
 `;
 
 export const SectionAroundAllDealsResult = styled.section`

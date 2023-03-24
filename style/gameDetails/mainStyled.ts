@@ -13,14 +13,17 @@ export const MainGameDetailsStyled = styled.main`
     font-family: var(--prompt);
     font-weight: 400;
   }
+  @media (min-width: ${theme.xxl}) {
+    margin: 0 20%;
+  }
+  @media (max-width: ${theme.md}) {
+    margin: 0 5%;
+  }
   .sectionWithoutSteam {
     font-family: var(--prompt);
     display: flex;
     justify-content: space-between;
     text-align: center;
-  }
-  @media (min-width: ${theme.xxl}) {
-    margin: 0 20%;
   }
   .divWithLowestPrice {
     display: flex;

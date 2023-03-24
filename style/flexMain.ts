@@ -57,5 +57,8 @@ export const HeroSection = styled.section`
   }
   @media (max-width: ${theme.md}) {
     margin: 0 5%;
+    iframe {
+      height: 250px;
+    }
   }
 `;
