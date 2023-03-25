@@ -1,8 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
 import { DealsListGame } from "@/globalTypes";
 import FreeGames from "@/components/root/freeGames";
-import { format } from "date-fns"; //date formatting
 import getStores from "@/lib/getStores";
 import ListOfDeals from "@/components/listOfDeals";
 
@@ -14,7 +11,7 @@ const fetchBestDeals = async (length: number) => {
   // revalidate best deals every 10 minutes
   try {
     let results: DealsListGame[] = [];
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
       const response = await fetch(
         `https://www.cheapshark.com/api/1.0/deals?pageSize=60&pageNumber=${i}`,
         { next: { revalidate: 10 * 60 } }
@@ -23,8 +20,8 @@ const fetchBestDeals = async (length: number) => {
       results = [...results, ...responseJSON];
     }
     // filtering
-    const [filteredDeals, freeGames] = filterDeals(results);
-    return { deals: filteredDeals.slice(0, length), freeGames };
+    const filteredDeals = filterDeals(results);
+    return filteredDeals.slice(0, length);
   } catch {
     console.error("CHEAP SHARK API UNAVAILABLE");
   }
@@ -56,16 +53,13 @@ const freeGameForProd: DealsListGame = {
 
 // filter out deals that don't have steamAppID and are not free
 // and prevent repetitions of games (common with this API)
-// also return free games (which can be repeated - offers from different stores)
 function filterDeals(deals: DealsListGame[]) {
   const filtered: DealsListGame[] = [];
-  const free: DealsListGame[] = [freeGameForProd];
   deals.forEach((deal) => {
+    console.log(deal.salePrice);
     if (deal.steamAppID != null) {
       if (Number(deal.salePrice) > 0) {
         filtered.push(deal);
-      } else {
-        free.push(deal);
       }
     }
   });
@@ -78,25 +72,37 @@ function filterDeals(deals: DealsListGame[]) {
       readyToBeDisplayed.push(filtered[i]);
     }
   }
-  return [readyToBeDisplayed, free];
+  return readyToBeDisplayed;
+}
+
+// also fetch return free games (which can be repeated - offers from different stores)
+async function fetchFreeGames() {
+  try {
+    const response = await fetch(
+      `https://www.cheapshark.com/api/1.0/deals?pageSize=20&upperPrice=0`,
+      { next: { revalidate: 10 * 60 } }
+    );
+    const responseJSON = (await response.json()) as DealsListGame[];
+    return responseJSON;
+  } catch {
+    console.error("CHEAP SHARK API UNAVAILABLE");
+  }
 }
 
 export default async function BestDeals() {
-  const response = await fetchBestDeals(15);
+  const bestDeals = await fetchBestDeals(15);
+  const free = await fetchFreeGames();
   // get stores
   const stores = await getStores();
-  if (response) {
-    const { deals, freeGames } = response;
-    if (deals && deals?.length) {
-      return (
-        <section className="sectionToOmit">
-          <FreeGamesAny freeGames={freeGames} />
-          <section className="mainPageSection">
-            <h2>Best Deals</h2>
-            <ListOfDeals deals={deals} stores={stores} />
-          </section>
+  if (bestDeals != undefined && free != undefined) {
+    return (
+      <section className="sectionToOmit">
+        <FreeGamesAny freeGames={free} />
+        <section className="mainPageSection">
+          <h2>Best Deals</h2>
+          <ListOfDeals deals={bestDeals} stores={stores} />
         </section>
-      );
-    }
+      </section>
+    );
   }
 }
