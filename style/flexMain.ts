@@ -59,8 +59,20 @@ export const HeroSection = styled.section`
     height: 450px;
   }
   svg {
+    position: absolute;
     fill: white;
-    height: 30vh;
+    opacity: 0.5;
+    z-index: -1;
+    height: 60vw;
+    max-height: 880px;
+    right: 20px;
+    top: 100px;
+    @media (min-width: ${theme.xxl}) {
+      right: 240px;
+    }
+    @media (max-width: ${theme.sm}) {
+      top: 240px;
+    }
   }
   @media (min-width: ${theme.xxl}) {
     margin: 0 20%;

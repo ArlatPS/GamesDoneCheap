@@ -3,7 +3,7 @@ export default function GDCLogo() {
     <svg
       className="logo"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 700 560"
+      viewBox="0 0 630 560"
     >
       <defs>
         <symbol id="a" overflow="visible">

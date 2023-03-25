@@ -12,8 +12,8 @@ export default function Home() {
       <HeroSection>
         <HeaderWithEffect text="Games Done Cheap" />
         {/* <iframe src="https://embed.lottiefiles.com/animation/78811"></iframe> */}
-        {/* <GDCLogo /> */}
-        <iframe src="https://embed.lottiefiles.com/animation/78335"></iframe>
+        <GDCLogo />
+        {/* <iframe src="https://embed.lottiefiles.com/animation/78335"></iframe> */}
       </HeroSection>
       <BestDealsAny />
     </MainPageWithSections>

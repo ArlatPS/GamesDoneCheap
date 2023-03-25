@@ -17,6 +17,8 @@ export const ArticleWithProximityEffect = styled("article")<{
   margin-bottom: 2rem;
   margin-left: 2.5%;
   margin-right: 2.5%;
+  background-color: ${theme.colors.night};
+
   &:hover {
     cursor: pointer;
   }
