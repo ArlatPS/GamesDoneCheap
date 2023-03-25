@@ -14,6 +14,12 @@ export const ListOfDealsSectionStyled = styled.section`
   justify-content: center;
   min-height: 70vh;
   padding: 0 5%;
+  @media (max-width: ${theme.sm}) {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    max-width: 100vw;
+  }
 `;
 
 export const ListOfDealsTableStyled = styled.table`
@@ -69,11 +75,19 @@ export const ListOfDealsTableStyled = styled.table`
   // for normal img add margins to center and make row the same height as high img
   .normalImg {
     margin: 20px 0 10px 0;
+    @media (max-width: ${theme.sm}) {
+      height: 22px;
+      width: 60px;
+    }
   }
   .higherImg {
     height: 70px;
     // aspect ratio 16:23
     width: ${(70 / 23) * 16}px;
+    @media (max-width: ${theme.sm}) {
+      height: 35px;
+      width: ${(35 / 23) * 16}px;
+    }
   }
   //for prices >90 savings blue color
   .lowPrice {
@@ -81,5 +95,20 @@ export const ListOfDealsTableStyled = styled.table`
   }
   @media (max-width: ${theme.md}) {
     font-size: 14px;
+  }
+  @media (max-width: ${theme.sm}) {
+    font-size: 10px;
+    max-width: 100%;
+    // cell with store logo
+    td:nth-of-type(1) {
+      img {
+        height: 24px;
+        width: 24px;
+      }
+    }
+    // hide cell on small screen
+    .hideOnSm {
+      display: none;
+    }
   }
 `;

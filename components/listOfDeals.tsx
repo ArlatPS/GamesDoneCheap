@@ -24,7 +24,7 @@ export default function ListOfDeals({
             <th>Title</th>
             <th>Price</th>
             <th>Savings</th>
-            <th>Deal since</th>
+            <th className="hideOnSm">Deal since</th>
             <th>Deal</th>
           </tr>
           {deals.length > 0
@@ -76,7 +76,7 @@ export default function ListOfDeals({
                     <td>{deal.salePrice}$</td>
                   )}
                   <td>{Math.floor(+deal.savings)}%</td>
-                  <td>
+                  <td className="hideOnSm">
                     {format(new Date(deal.lastChange * 1000), "dd/LL/yyyy")}
                   </td>
                   <td>
