@@ -14,6 +14,11 @@ export const NavStyled = styled.nav`
   justify-content: space-between;
   align-items: center;
   color: ${theme.colors.white};
+  // for small elements should span full width
+  @media (max-width: ${theme.sm}) {
+    flex-wrap: wrap;
+    padding: 0.25rem 0;
+  }
   .arrow {
     height: 10px;
     fill: ${theme.colors.white};
@@ -39,6 +44,19 @@ export const NavStyled = styled.nav`
       margin-left: 5%;
       font-size: 14px;
     }
+    @media (max-width: ${theme.sm}) {
+      margin-left: 0;
+      font-size: 12px;
+      flex-wrap: wrap;
+      order: 1;
+      a {
+        font-size: 14px;
+        padding: 0.5rem 0;
+        width: 100vw;
+        text-align: center;
+        border-top: 2px solid ${theme.colors.night};
+      }
+    }
   }
 
   // middle section with logo
@@ -54,6 +72,15 @@ export const NavStyled = styled.nav`
     color: ${theme.colors.white};
     @media (max-width: ${theme.md}) {
       font-size: 18px;
+    }
+    @media (max-width: ${theme.sm}) {
+      order: 0;
+      margin: 0 auto;
+      font-size: 16px;
+      padding: 0.5rem 0;
+      svg {
+        height: 32px;
+      }
     }
   }
 
@@ -79,6 +106,10 @@ export const NavStyled = styled.nav`
           color: ${theme.colors.white};
         }
       }
+      @media (max-width: ${theme.sm}) {
+        right: -45px;
+        left: 50px;
+      }
     }
     @media (min-width: ${theme.xxl}) {
       margin-right: 20%;
@@ -89,6 +120,11 @@ export const NavStyled = styled.nav`
       #search {
         width: 130px;
       }
+    }
+    @media (max-width: ${theme.sm}) {
+      order: 2;
+      margin: 0 auto;
+      padding: 0.5rem 0;
     }
   }
 `;
@@ -117,6 +153,18 @@ export const DropdownSectionWithDivs = styled.section`
       transform: scale(1);
     }
   }
+  @media (max-width: ${theme.sm}) {
+    width: 100%;
+    padding: 0.5rem 0;
+    border-top: 2px solid ${theme.colors.night};
+    border-bottom: 2px solid ${theme.colors.night};
+
+    span {
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+    }
+  }
   // dropdown div
   .divAround {
     transform-origin: top center;
@@ -138,6 +186,16 @@ export const DropdownSectionWithDivs = styled.section`
     }
     @media (max-width: ${theme.md}) {
       font-size: 14px;
+    }
+    @media (max-width: ${theme.sm}) {
+      right: 38vw;
+      top: 40px;
+      z-index: 1;
+      div {
+        a {
+          border: none;
+        }
+      }
     }
   }
 `;
