@@ -120,7 +120,7 @@ export const ListOfDealsTableStyled = styled.table`
       display: none;
     }
   }
-  @media (max-width: 290px) {
+  @media (max-width: 295px) {
     font-size: 8px;
     td:nth-of-type(1) {
       img {

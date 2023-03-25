@@ -65,7 +65,7 @@ export default async function SteamSection({
         <div>
           <h4>
             Genres:{" "}
-            {steamInfo.data.genres.map((genre) => genre.description + " ")}
+            {steamInfo.data.genres.map((genre) => genre.description + ", ")}
           </h4>
           <h4>Developer: {steamInfo.data.developers[0]}</h4>
           <h4>Publisher: {steamInfo.data.publishers[0]}</h4>

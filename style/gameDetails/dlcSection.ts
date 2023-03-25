@@ -3,8 +3,14 @@ import styled from "styled-components";
 import { theme } from "@/theme";
 
 export const DLCSectionStyled = styled.section`
+  display: flex;
+  width: 90%;
+  flex-wrap: wrap;
+  justify-content: center;
   h2 {
+    width: 100%;
     font-family: var(--orienta);
+    text-align: center;
   }
   #dlcCoverImg {
     height: 69px;
@@ -19,6 +25,11 @@ export const DLCSectionStyled = styled.section`
         height: 25px;
         display: inline;
         fill: ${theme.colors.white};
+      }
+      @media (max-width: ${theme.sm}) {
+        svg {
+          height: 15px;
+        }
       }
     }
     td:nth-of-type(3) {
@@ -38,5 +49,12 @@ export const DLCSectionStyled = styled.section`
     // previously described animation
     transform-origin: top center;
     animation: animate-dropdown 300ms ease-in forwards;
+  }
+  @media (max-width: ${theme.sm}) {
+    width: 100%;
+    #dlcCoverImg {
+      height: 35px;
+      width: 24px;
+    }
   }
 `;

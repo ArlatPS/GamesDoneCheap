@@ -31,7 +31,7 @@ export default function DLC({ idShark }: { idShark: string }) {
   return (
     <>
       <tr>
-        <td colSpan={2}>
+        <td colSpan={2} className="tdWithCover">
           <Image
             width={96}
             height={138}

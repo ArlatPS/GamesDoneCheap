@@ -12,6 +12,13 @@ export const SteamSectionStyled = styled.section`
       width: 50%;
       padding-left: 1rem;
     }
+    @media (max-width: ${theme.sm}) {
+      img {
+        width: 100%;
+      }
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
   .secondRow {
     .descDiv {
@@ -47,6 +54,27 @@ export const SteamSectionStyled = styled.section`
         margin-top: 0.5rem;
       }
     }
+    @media (max-width: ${theme.sm}) {
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0;
+      .descDiv {
+        width: 100%;
+        margin: 0;
+        font-size: 12px;
+      }
+      .screenshotGallery {
+        width: 100%;
+        img {
+          height: ${100 * 0.8 * 1 * 0.56}vw;
+        }
+        .buttons {
+          button {
+            font-size: 18px;
+          }
+        }
+      }
+    }
   }
   .thirdRow {
     margin-top: 2rem;
@@ -55,6 +83,15 @@ export const SteamSectionStyled = styled.section`
     font-family: var(--prompt);
     div {
       margin-right: 2rem;
+    }
+    @media (max-width: ${theme.sm}) {
+      flex-wrap: wrap;
+      h4 {
+        font-size: 14px;
+      }
+      div {
+        margin-right: 0;
+      }
     }
   }
 `;
@@ -87,6 +124,14 @@ export const RequirementsStyled = styled.div`
     }
     @media (min-width: ${theme.xxl}) {
       width: 60vw;
+    }
+    @media (max-width: ${theme.sm}) {
+      flex-wrap: wrap;
+      div {
+        width: 100%;
+      }
+      font-size: 12px;
+      width: 95vw;
     }
   }
   h4 {
