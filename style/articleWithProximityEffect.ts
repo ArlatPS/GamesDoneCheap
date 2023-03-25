@@ -20,4 +20,8 @@ export const ArticleWithProximityEffect = styled("article")<{
   &:hover {
     cursor: pointer;
   }
+  @media (max-width: ${theme.sm}) {
+    width: 50%;
+    min-width: 180px;
+  }
 `;

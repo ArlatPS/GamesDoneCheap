@@ -22,4 +22,9 @@ export const FooterStyled = styled.footer`
       font-size: 20px;
     }
   }
+  @media (max-width: ${theme.sm}) {
+    h3 {
+      font-size: 16px;
+    }
+  }
 `;

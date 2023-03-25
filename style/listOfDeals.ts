@@ -79,6 +79,10 @@ export const ListOfDealsTableStyled = styled.table`
       height: 22px;
       width: 60px;
     }
+    @media (max-width: 315px) {
+      height: 11px;
+      width: 30px;
+    }
   }
   .higherImg {
     height: 70px;
@@ -87,6 +91,10 @@ export const ListOfDealsTableStyled = styled.table`
     @media (max-width: ${theme.sm}) {
       height: 35px;
       width: ${(35 / 23) * 16}px;
+    }
+    @media (max-width: 320px) {
+      height: 17px;
+      width: ${(17 / 23) * 16}px;
     }
   }
   //for prices >90 savings blue color
@@ -99,6 +107,7 @@ export const ListOfDealsTableStyled = styled.table`
   @media (max-width: ${theme.sm}) {
     font-size: 10px;
     max-width: 100%;
+    margin: 0;
     // cell with store logo
     td:nth-of-type(1) {
       img {
@@ -109,6 +118,15 @@ export const ListOfDealsTableStyled = styled.table`
     // hide cell on small screen
     .hideOnSm {
       display: none;
+    }
+  }
+  @media (max-width: 290px) {
+    font-size: 8px;
+    td:nth-of-type(1) {
+      img {
+        height: 10px;
+        width: 10px;
+      }
     }
   }
 `;

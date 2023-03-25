@@ -23,6 +23,14 @@ export const FreeGameDiv = styled.div`
       font-size: 26px;
     }
   }
+  @media (max-width: ${theme.sm}) {
+    h3 {
+      font-size: 20px;
+    }
+    img {
+      height: 100px;
+    }
+  }
   .storeDiv {
     margin-top: 0.5rem;
     display: flex;
@@ -36,7 +44,15 @@ export const FreeGameDiv = styled.div`
       margin-right: 1em;
     }
     @media (max-width: ${theme.md}) {
-      font-size: 17px;
+      font-size: 18px;
+    }
+    @media (max-width: ${theme.sm}) {
+      img {
+        height: 35px;
+      }
+      align-items: center;
+      font-size: 14px;
+      text-align: center;
     }
   }
   .daysLeft,
@@ -52,6 +68,14 @@ export const FreeGameDiv = styled.div`
       font-size: 28px;
       margin-top: 0;
       margin-bottom: 1rem;
+    }
+    @media (max-width: ${theme.sm}) {
+      h3 {
+        font-size: 24px;
+      }
+      h4 {
+        font-size: 18px;
+      }
     }
   }
   .daysLeft {
