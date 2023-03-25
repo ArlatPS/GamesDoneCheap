@@ -20,4 +20,13 @@ export const MainSearchStyled = styled.main`
       border-bottom-right-radius: 1rem;
     }
   }
+  @media (max-width: ${theme.xxl}) {
+    margin: 0 20%;
+  }
+  @media (max-width: ${theme.md}) {
+    margin: 0 5%;
+  }
+  @media (max-width: ${theme.sm}) {
+    margin: 0 5px;
+  }
 `;

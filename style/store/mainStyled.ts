@@ -19,4 +19,13 @@ export const MainStoreStyled = styled.main`
   @media (max-width: ${theme.md}) {
     margin: 0 5%;
   }
+  @media (max-width: ${theme.sm}) {
+    margin: 0 1px;
+    .storeBanner {
+      height: 200px;
+    }
+    h1 {
+      font-size: 24px;
+    }
+  }
 `;
