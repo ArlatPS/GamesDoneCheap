@@ -33,6 +33,15 @@ export const MainAllDealsStyled = styled.main`
         font-size: 16px;
       }
     }
+    @media (max-width: ${theme.sm}) {
+      margin: 1rem 0;
+      label {
+        font-size: 14px;
+      }
+      select {
+        font-size: 16px;
+      }
+    }
   }
   @media (min-width: ${theme.xxl}) {
     margin: 0 20%;
@@ -42,6 +51,13 @@ export const MainAllDealsStyled = styled.main`
       font-size: 30px;
     }
     margin: 0 5%;
+  }
+  @media (max-width: ${theme.sm}) {
+    h1 {
+      font-size: 20px;
+      margin-top: 1rem;
+    }
+    margin: 0 5px;
   }
 `;
 
@@ -70,6 +86,12 @@ export const SearchControlsStyled = styled.section`
     margin-top: 1rem;
     @media (max-width: ${theme.md}) {
       font-size: 20px;
+    }
+    @media (max-width: ${theme.sm}) {
+      font-size: 14px;
+      svg {
+        height: 10px;
+      }
     }
   }
   .steamRating {
@@ -144,6 +166,20 @@ export const DivDropdownAbsolute = styled.div`
       font-size: 20px;
     }
   }
+  @media (max-width: ${theme.sm}) {
+    left: 30px;
+    padding: 0.5rem;
+    width: 270px;
+    font-size: 12px;
+    h4,
+    label,
+    select {
+      font-size: 12px;
+    }
+    .submitButton {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const StorePickerStyled = styled.div`
@@ -185,6 +221,10 @@ export const StorePickerStyled = styled.div`
         border: 1px solid ${theme.colors.red};
         box-shadow: 0px 0px 3px 1px ${theme.colors.red};
         border-radius: 5px;
+        @media (max-width: ${theme.sm}) {
+          height: 20px;
+          width: 20px;
+        }
       }
       input {
         visibility: hidden;
@@ -200,6 +240,22 @@ export const StorePickerStyled = styled.div`
   @media (max-width: ${theme.md}) {
     label {
       font-size: 18px;
+    }
+  }
+  @media (max-width: ${theme.sm}) {
+    ul {
+      grid-template-columns: 1fr;
+    }
+    div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5em;
+      label {
+        font-size: 14px;
+      }
+    }
+    button {
+      font-size: 14px;
     }
   }
 `;
@@ -228,12 +284,22 @@ export const PageControl = styled.div`
     margin-bottom: 2em;
   }
   @media (max-width: ${theme.md}) {
-    h4 {
-      font-size: 16px;
-    }
     div {
+      h4 {
+        font-size: 16px;
+      }
       button {
         font-size: 20px;
+      }
+    }
+  }
+  @media (max-width: ${theme.sm}) {
+    div {
+      h4 {
+        font-size: 14px;
+      }
+      button {
+        font-size: 16px;
       }
     }
   }
@@ -242,4 +308,7 @@ export const PageControl = styled.div`
 export const SectionAroundAllDealsResult = styled.section`
   margin: 2rem 0;
   min-height: 70vh;
+  @media (max-width: ${theme.sm}) {
+    margin: 1rem 0;
+  }
 `;

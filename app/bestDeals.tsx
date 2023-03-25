@@ -56,7 +56,6 @@ const freeGameForProd: DealsListGame = {
 function filterDeals(deals: DealsListGame[]) {
   const filtered: DealsListGame[] = [];
   deals.forEach((deal) => {
-    console.log(deal.salePrice);
     if (deal.steamAppID != null) {
       if (Number(deal.salePrice) > 0) {
         filtered.push(deal);

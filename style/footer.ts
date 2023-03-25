@@ -23,6 +23,7 @@ export const FooterStyled = styled.footer`
     }
   }
   @media (max-width: ${theme.sm}) {
+    margin-top: 1rem;
     h3 {
       font-size: 16px;
     }
