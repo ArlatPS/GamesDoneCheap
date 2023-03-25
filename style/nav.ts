@@ -18,6 +18,7 @@ export const NavStyled = styled.nav`
   @media (max-width: ${theme.sm}) {
     flex-wrap: wrap;
     padding: 0.25rem 0;
+    position: static;
   }
   .arrow {
     height: 10px;
@@ -49,10 +50,13 @@ export const NavStyled = styled.nav`
       font-size: 12px;
       flex-wrap: wrap;
       order: 1;
+      width: 100%;
       a {
+        margin-right: 0;
         font-size: 14px;
         padding: 0.5rem 0;
-        width: 100vw;
+        width: 100%;
+        display: block;
         text-align: center;
         border-top: 2px solid ${theme.colors.night};
       }
