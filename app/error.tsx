@@ -1,5 +1,6 @@
 "use client";
 
+import ErrorSVG from "@/components/svg/error";
 import { ButtonStyled } from "@/style/button";
 import { ErrorStyled } from "@/style/errorStyled";
 import { useEffect } from "react";
@@ -27,6 +28,7 @@ export default function Error({
       >
         Try again
       </ButtonStyled>
+      <ErrorSVG />
     </ErrorStyled>
   );
 }
