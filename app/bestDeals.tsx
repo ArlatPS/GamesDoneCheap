@@ -90,10 +90,12 @@ async function fetchFreeGames() {
 
 export default async function BestDeals() {
   const bestDeals = await fetchBestDeals(15);
-  const free = await fetchFreeGames();
+  let free = await fetchFreeGames();
   // get stores
   const stores = await getStores();
   if (bestDeals != undefined && free != undefined) {
+    // for production extra cards with free games
+    // free = [...free, freeGameForProd, freeGameForProd];
     return (
       <section className="sectionToOmit">
         <FreeGamesAny freeGames={free} />

@@ -13,7 +13,7 @@ export const ArticleWithProximityEffect = styled("article")<{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: ${100 / 3}%;
+  width: ${80 / 3}%;
   margin-bottom: 2rem;
   margin-left: 2.5%;
   margin-right: 2.5%;
