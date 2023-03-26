@@ -7,7 +7,6 @@ import { HeroSection, MainPageWithSections } from "@/style/flexMain";
 // it has to be casted as any to compile
 const BestDealsAny = BestDeals as any;
 export default function Home() {
-  throw new Error("prod err");
   return (
     <MainPageWithSections>
       <HeroSection>

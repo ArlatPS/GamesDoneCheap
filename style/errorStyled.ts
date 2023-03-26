@@ -12,6 +12,10 @@ export const ErrorStyled = styled.main`
   button {
     font-size: 30px;
   }
+  svg {
+    fill: ${theme.colors.white};
+    opacity: 0.5;
+  }
   @media (min-width: ${theme.xxl}) {
     margin: 0 20%;
   }
@@ -19,6 +23,17 @@ export const ErrorStyled = styled.main`
     margin: 0 5%;
   }
   @media (max-width: ${theme.sm}) {
+    h2 {
+      font-size: 40px;
+      text-align: center;
+      width: 100%;
+    }
+    button {
+      font-size: 24px;
+    }
     margin: 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 `;
