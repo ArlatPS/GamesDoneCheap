@@ -11,5 +11,5 @@ export const DivAroundLoader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  min-height: 90vh;
 `;
