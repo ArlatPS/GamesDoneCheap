@@ -11,6 +11,11 @@ export const DetailsMainStyled = styled.main`
     height: 50px;
     margin-right: 20px;
   }
+  h4 {
+    a {
+      color: ${theme.colors.blue};
+    }
+  }
   @media (min-width: ${theme.xxl}) {
     margin: 0 20%;
   }

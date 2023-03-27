@@ -38,13 +38,14 @@ export const FreeGameDiv = styled.div`
     width: 100%;
     height: 5rem;
     font-size: 24px;
+    padding: 10px;
     img {
       height: 100%;
       width: 2.5em;
       margin-right: 1em;
     }
     @media (max-width: ${theme.md}) {
-      font-size: 18px;
+      font-size: 16px;
     }
     @media (max-width: ${theme.sm}) {
       img {

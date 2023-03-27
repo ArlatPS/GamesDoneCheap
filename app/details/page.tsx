@@ -9,7 +9,8 @@ export default function DetailsPage() {
       <h1>Details</h1>
       <h4>
         Website to check out best video game deals and compare prices on
-        different platforms (created with Next JS 13)
+        different platforms created with Next JS 13 by Przemysław Sulich ({" "}
+        <a href="https://github.com/ArlatPS">Github</a> )
       </h4>
       <h4>Credit</h4>
       <h5>
