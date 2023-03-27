@@ -146,6 +146,9 @@ export const DivDropdownAbsolute = styled.div`
     color: ${theme.colors.white};
     border: none;
     font-size: 18px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   h4 {
     font-size: 18px;
