@@ -10,6 +10,7 @@ import { ClerkProvider } from "@clerk/nextjs/app-beta";
 // fonts
 import { Space_Mono, Orienta, Prompt } from "next/font/google";
 import Footer from "@/components/footer";
+import { theme } from "@/theme";
 
 const space_mono = Space_Mono({
   subsets: ["latin"],
@@ -47,17 +48,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html
-        lang="en"
-        className={`${space_mono.variable} ${orienta.variable} ${prompt.variable}`}
-      >
-        <body>
+    <html
+      lang="en"
+      className={`${space_mono.variable} ${orienta.variable} ${prompt.variable}`}
+    >
+      <body>
+        <ClerkProvider
+          appearance={{
+            variables: {
+              colorPrimary: theme.colors.red,
+              colorText: theme.colors.night,
+              fontFamily: "sans-serif",
+              colorSuccess: theme.colors.blue,
+              colorDanger: theme.colors.red,
+            },
+          }}
+        >
           <Nav />
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
           <Footer />
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }
