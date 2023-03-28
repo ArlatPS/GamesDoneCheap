@@ -56,21 +56,23 @@ export default function SearchBar() {
         onChange={(e) => setQuery(e.target.value)}
         autoComplete="off"
       />
-      <section>
-        {completes.slice(0, 3).map((complete) => (
-          <div key={complete.gameID}>
-            <Link
-              href={`/game-details/${complete.gameID}`}
-              onClick={() => {
-                setQuery("");
-                setCompletes([]);
-              }}
-            >
-              {complete.title}
-            </Link>
-          </div>
-        ))}
-      </section>
+      {query.length > 0 ? (
+        <section>
+          {completes.slice(0, 3).map((complete) => (
+            <div key={complete.gameID}>
+              <Link
+                href={`/game-details/${complete.gameID}`}
+                onClick={() => {
+                  setQuery("");
+                  setCompletes([]);
+                }}
+              >
+                {complete.title}
+              </Link>
+            </div>
+          ))}
+        </section>
+      ) : null}
     </form>
   );
 }

@@ -32,7 +32,12 @@ export const DLCSectionStyled = styled.section`
         }
       }
     }
+    td:nth-of-type(1) {
+      width: 80px;
+    }
+
     td:nth-of-type(3) {
+      width: 80px;
       border-top-right-radius: 1rem;
       border-bottom-right-radius: 1rem;
     }
@@ -55,6 +60,14 @@ export const DLCSectionStyled = styled.section`
     #dlcCoverImg {
       height: 35px;
       width: 24px;
+    }
+    .tableForDLCs {
+      td:nth-of-type(1) {
+        width: 50px;
+      }
+      td:nth-of-type(3) {
+        width: 50px;
+      }
     }
   }
 `;
