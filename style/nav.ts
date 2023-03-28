@@ -87,42 +87,54 @@ export const NavStyled = styled.nav`
       }
     }
   }
-
-  form {
+  .rightSection {
+    display: flex;
     margin-right: 10%;
-    position: relative;
-    label {
-      margin-right: 0.5em;
-    }
-    section {
-      position: absolute;
-      background-color: ${theme.colors.red};
+    form {
+      height: 30px;
       display: flex;
-      flex-wrap: wrap;
-      left: 40px;
-      right: -40px;
-      top: 30px;
-      div {
-        width: 100%;
-        padding: 0.5em 0.25em;
-        border-bottom: 1px solid ${theme.colors.night};
-        a {
-          color: ${theme.colors.white};
-        }
+      align-items: center;
+      margin-right: 20px;
+      position: relative;
+      label {
+        margin-right: 0.5em;
       }
-      @media (max-width: ${theme.sm}) {
-        right: -45px;
-        left: 50px;
+      section {
+        position: absolute;
+        background-color: ${theme.colors.red};
+        display: flex;
+        flex-wrap: wrap;
+        left: 40px;
+        right: -40px;
+        top: 30px;
+        div {
+          width: 100%;
+          padding: 0.5em 0.25em;
+          border-bottom: 1px solid ${theme.colors.night};
+          a {
+            color: ${theme.colors.white};
+          }
+        }
+        @media (max-width: ${theme.sm}) {
+          right: -45px;
+          left: 50px;
+        }
       }
     }
     @media (min-width: ${theme.xxl}) {
       margin-right: 20%;
+      form {
+        margin-right: 30px;
+      }
     }
     @media (max-width: ${theme.md}) {
       margin-right: 5%;
-      font-size: 14px;
-      #search {
-        width: 130px;
+      form {
+        margin-right: 10px;
+        font-size: 14px;
+        #search {
+          width: 130px;
+        }
       }
     }
     @media (max-width: ${theme.sm}) {

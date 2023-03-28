@@ -27,25 +27,27 @@ export default function Nav() {
         <GDCLogo />
         GAMES DONE CHEAP
       </div>
-      <SearchBar />
-      <div className="user">
-        <SignedIn>
-          <UserButton
-            userProfileMode="navigation"
-            userProfileUrl={"/profile"}
-            appearance={{
-              baseTheme: dark,
-              variables: {
-                colorBackground: theme.colors.night,
-                colorText: theme.colors.white,
-                colorTextSecondary: theme.colors.white,
-              },
-            }}
-          />
-        </SignedIn>
-        <SignedOut>
-          <SignInButtonClientComponent />
-        </SignedOut>
+      <div className="rightSection">
+        <SearchBar />
+        <div className="user">
+          <SignedIn>
+            <UserButton
+              userProfileMode="navigation"
+              userProfileUrl={"/profile"}
+              appearance={{
+                baseTheme: dark,
+                variables: {
+                  colorBackground: theme.colors.night,
+                  colorText: theme.colors.white,
+                  colorTextSecondary: theme.colors.white,
+                },
+              }}
+            />
+          </SignedIn>
+          <SignedOut>
+            <SignInButtonClientComponent />
+          </SignedOut>
+        </div>
       </div>
     </NavStyled>
   );
