@@ -90,6 +90,19 @@ export const NavStyled = styled.nav`
   .rightSection {
     display: flex;
     margin-right: 10%;
+    .user {
+      button {
+        border: none;
+        background-color: transparent;
+        &:hover {
+          cursor: pointer;
+        }
+        .loginSVG {
+          height: 30px;
+          fill: ${theme.colors.white};
+        }
+      }
+    }
     form {
       height: 30px;
       display: flex;

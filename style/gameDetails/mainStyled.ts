@@ -4,6 +4,7 @@ import { theme } from "@/theme";
 
 export const MainGameDetailsStyled = styled.main`
   color: ${theme.colors.white};
+  min-height: 95vh;
   margin: 0 10%;
   h1 {
     font-family: var(--orienta);
