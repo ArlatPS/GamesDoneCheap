@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 import StyledComponentsRegistry from "../lib/styledComponentsRegistry";
 import Nav from "@/components/nav/nav";
 
+// clerk authentication
+import { ClerkProvider } from "@clerk/nextjs/app-beta";
+
 // fonts
 import { Space_Mono, Orienta, Prompt } from "next/font/google";
 import Footer from "@/components/footer";
@@ -31,9 +34,10 @@ const prompt = Prompt({
 
 // metadata for the site
 export const metadata: Metadata = {
-  title: "GG",
+  title: "Games Done Cheap",
   description:
-    "Ongoing project of game prices comparison website using CheapShark API",
+    "Website to check out best video game deals and compare prices on \
+    different platforms created with Next JS 13 by Przemysław Sulich",
 };
 
 // layout for the root
@@ -43,15 +47,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${space_mono.variable} ${orienta.variable} ${prompt.variable}`}
-    >
-      <body>
-        <Nav />
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html
+        lang="en"
+        className={`${space_mono.variable} ${orienta.variable} ${prompt.variable}`}
+      >
+        <body>
+          <Nav />
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
