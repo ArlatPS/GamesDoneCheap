@@ -3,6 +3,7 @@ import {
   UserButton,
   SignedIn,
   SignedOut,
+  UserProfile,
 } from "@clerk/nextjs/app-beta";
 
 export default async function UserPage() {
@@ -11,7 +12,7 @@ export default async function UserPage() {
   return (
     <SignedIn>
       <h2>{user?.id}</h2>
-      <UserButton />
+      <UserProfile />
     </SignedIn>
   );
 }

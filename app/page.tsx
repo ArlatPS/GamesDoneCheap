@@ -8,24 +8,9 @@ import { HeroSection, MainPageWithSections } from "@/style/flexMain";
 // it has to be casted as any to compile
 const BestDealsAny = BestDeals as any;
 
-//clerk
-import {
-  currentUser,
-  UserButton,
-  SignedIn,
-  SignedOut,
-} from "@clerk/nextjs/app-beta";
-
 export default async function Home() {
-  const user = await currentUser();
   return (
     <MainPageWithSections>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-      <SignedOut>
-        <SignInButtonClientComponent />
-      </SignedOut>
       <HeroSection>
         <HeaderWithEffect text="Games Done Cheap" />
         {/* <iframe src="https://embed.lottiefiles.com/animation/78811"></iframe> */}
