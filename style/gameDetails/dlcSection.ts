@@ -7,6 +7,7 @@ export const DLCSectionStyled = styled.section`
   width: 90%;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: flex-start;
   h2 {
     width: 100%;
     font-family: var(--orienta);
@@ -17,6 +18,7 @@ export const DLCSectionStyled = styled.section`
     width: 48px;
   }
   .tableForDLCs {
+    min-width: 455px;
     margin-top: 0;
     .tdWithSvg {
       cursor: pointer;
@@ -62,6 +64,7 @@ export const DLCSectionStyled = styled.section`
       width: 24px;
     }
     .tableForDLCs {
+      min-width: 90%;
       td:nth-of-type(1) {
         width: 50px;
       }

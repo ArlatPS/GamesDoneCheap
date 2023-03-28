@@ -83,12 +83,13 @@ export default function FreeGame({
             timeLeft.format === "days" ? (
               <div className="daysLeft">
                 <h3>{timeLeft.value}</h3>
-                <h4>days left</h4>
+                {/* if one day then day otherwise days */}
+                <h4>{timeLeft.value == 1 ? "day" : "days"} left</h4>
               </div>
             ) : (
               <div className="hoursLeft">
                 <h3>{timeLeft.value}</h3>
-                <h4>hours left</h4>
+                <h4>{timeLeft.value == 1 ? "hour" : "hours"} left</h4>
               </div>
             )
           ) : null}

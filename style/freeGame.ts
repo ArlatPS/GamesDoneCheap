@@ -44,8 +44,14 @@ export const FreeGameDiv = styled.div`
       width: 2.5em;
       margin-right: 1em;
     }
+    h4 {
+      margin: 0.5em 0;
+    }
     @media (max-width: ${theme.md}) {
       font-size: 16px;
+      h4 {
+        margin: 16px 0;
+      }
     }
     @media (max-width: ${theme.sm}) {
       img {
