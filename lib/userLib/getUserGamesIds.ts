@@ -26,7 +26,7 @@ export async function getUserGamesIds(id: string) {
       const listOfAllGamesOfUserFromDB = userFromDb.games;
       console.log(listOfAllGamesOfUserFromDB);
       // production add
-      listOfAllGamesOfUserFromDB.push("128");
+      listOfAllGamesOfUserFromDB.push("128", "129", "130", "140");
       return listOfAllGamesOfUserFromDB;
     } else {
       const newUser = new User({ id: id, games: [] });
