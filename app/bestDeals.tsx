@@ -2,7 +2,7 @@ import { DealsListGame } from "@/globalTypes";
 import FreeGames from "@/components/root/freeGames";
 import getStores from "@/lib/getStores";
 import ListOfDeals from "@/components/listOfDeals";
-import UserDeals from "./userDeals";
+import UserDeals from "../components/auth/userDeals";
 
 // due to lack of support from TS to async server components
 const FreeGamesAny = FreeGames as any;
