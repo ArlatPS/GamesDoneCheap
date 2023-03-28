@@ -1,7 +1,6 @@
-import { DealsListGame, GameForDB } from "@/globalTypes";
 import mongoose, { Schema } from "mongoose";
 
-export async function getUserGamesIds(id: string) {
+export async function addGameForUser(gameID: string, userID: string) {
   try {
     // connect with Mondo DB Atlas
     mongoose.connect(process.env.DBUrl as string);
@@ -21,24 +20,20 @@ export async function getUserGamesIds(id: string) {
     const User = mongoose.models.User || mongoose.model("User", userSchema);
 
     // find by id and return games if user found otherwise create new on the DB
-    const userFromDb = await User.findOne({ id: id });
+    const userFromDb = await User.findOne({ id: userID });
     if (userFromDb) {
       const listOfAllGamesOfUserFromDB = userFromDb.games;
-      console.log(listOfAllGamesOfUserFromDB);
-      for (let i = 0; i < listOfAllGamesOfUserFromDB.length; i++) {
-        listOfAllGamesOfUserFromDB[i] = listOfAllGamesOfUserFromDB[i].id;
-      }
+      listOfAllGamesOfUserFromDB.push(gameID);
+      await User.findOneAndUpdate(
+        { id: userID },
+        { $set: { games: listOfAllGamesOfUserFromDB } }
+      );
       // production add
       // listOfAllGamesOfUserFromDB.push("128", "129", "130", "140");
-      return listOfAllGamesOfUserFromDB;
-    } else {
-      const newUser = new User({ id: id, games: [] });
-      await newUser.save();
-      console.log("new user saved");
-      return [];
+      return true;
     }
   } catch (e) {
     console.error(e);
-    return [];
+    return false;
   }
 }

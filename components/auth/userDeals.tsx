@@ -16,13 +16,14 @@ export default async function UserDeals() {
   const stores = await getStores();
   if (user !== null) {
     userGamesIds = await getUserGamesIds(user.id);
+    console.log(userGamesIds);
     // if userGameIds not empty then fetch first 25 (max for one fetch to this API) from Shark
     if (userGamesIds.length > 0) {
       const response = await fetch(
         `https://www.cheapshark.com/api/1.0/games?ids=${userGamesIds
           .slice(0, 25)
           .join(",")}`,
-        { next: { revalidate: 30 * 60 } }
+        { next: { revalidate: 0 } }
       );
       // sort
       games = sortUserGamesBySavings(

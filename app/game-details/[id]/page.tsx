@@ -8,6 +8,10 @@ import LowestPrice from "./lowestPrice";
 import Image from "next/image";
 import GeneralLoader from "@/components/loaders/generalLoader";
 import { MainGameDetailsStyled } from "@/style/gameDetails/mainStyled";
+import AddGame from "@/components/auth/addGame";
+
+const AddGameAsync = AddGame as any;
+
 const SteamSectionAsync = SteamSection as any;
 
 async function fetchDataFromShark(id: string) {
@@ -28,6 +32,7 @@ export default async function GameDetails({
   return (
     <MainGameDetailsStyled>
       <h1>{gameFromShark.info.title}</h1>
+      <AddGameAsync id={params.id} />
       {gameFromShark.info.steamAppID === null ? (
         <section className="sectionWithoutSteam">
           <Image
