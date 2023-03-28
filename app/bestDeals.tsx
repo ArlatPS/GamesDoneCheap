@@ -2,9 +2,11 @@ import { DealsListGame } from "@/globalTypes";
 import FreeGames from "@/components/root/freeGames";
 import getStores from "@/lib/getStores";
 import ListOfDeals from "@/components/listOfDeals";
+import UserDeals from "./userDeals";
 
 // due to lack of support from TS to async server components
 const FreeGamesAny = FreeGames as any;
+const UserDealsAny = UserDeals as any;
 
 const fetchBestDeals = async (length: number) => {
   // fetch two pages to guarantee at least 15 good results
@@ -100,6 +102,7 @@ export default async function BestDeals() {
       <section className="sectionToOmit">
         <FreeGamesAny freeGames={free} />
         <section className="mainPageSection">
+          <UserDealsAny />
           <h2>Best Deals</h2>
           <ListOfDeals deals={bestDeals} stores={stores} />
         </section>

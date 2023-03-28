@@ -21,7 +21,6 @@ export default async function Home() {
   return (
     <MainPageWithSections>
       <SignedIn>
-        <h2>{user?.id}</h2>
         <UserButton />
       </SignedIn>
       <SignedOut>
