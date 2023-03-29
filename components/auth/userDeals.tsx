@@ -5,6 +5,7 @@ import {
   GameFromSharkWithID,
   sortUserGamesBySavings,
 } from "@/lib/userLib/sortUserGamesBySavings";
+import { ListOfDealsSectionStyled } from "@/style/listOfDeals";
 import { currentUser, SignedIn } from "@clerk/nextjs/app-beta";
 import ListOfDeals from "../listOfDeals";
 
@@ -59,7 +60,16 @@ export default async function UserDeals() {
   return (
     <SignedIn>
       <h2>Deals for {user?.username}</h2>
-      <ListOfDeals deals={listToDisplay} stores={stores} />
+      {listToDisplay.length == 0 ? (
+        <ListOfDealsSectionStyled>
+          <div className="addGamesInfo">
+            <h3>Add some games to your wishlist </h3>{" "}
+            <h4>(best deals for them will be displayed here)</h4>
+          </div>
+        </ListOfDealsSectionStyled>
+      ) : (
+        <ListOfDeals deals={listToDisplay} stores={stores} />
+      )}
     </SignedIn>
   );
 }

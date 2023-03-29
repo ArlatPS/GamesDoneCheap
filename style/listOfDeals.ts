@@ -19,6 +19,32 @@ export const ListOfDealsSectionStyled = styled.section`
     padding: 0;
     max-width: 100vw;
   }
+  .addGamesInfo {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+    h3,
+    h4 {
+      width: 100%;
+      text-align: center;
+      font-family: var(--orienta);
+      color: ${theme.colors.blue};
+    }
+    h3 {
+      font-size: 22px;
+    }
+    h4 {
+      margin-top: 0;
+    }
+    @media (max-width: ${theme.sm}) {
+      h3 {
+        font-size: 15px;
+      }
+      h4 {
+        font-size: 12px;
+      }
+    }
+  }
 `;
 
 export const ListOfDealsTableStyled = styled.table`
