@@ -6,7 +6,6 @@ import calculateTimeLeft, {
 import useProximityEffect from "@/lib/hooks/useProximityEffect";
 import { ArticleWithProximityEffect } from "@/style/articleWithProximityEffect";
 import { FreeGameDiv } from "@/style/freeGame";
-import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useRef } from "react";
@@ -43,6 +42,8 @@ export default function FreeGame({
 
   return (
     <ArticleWithProximityEffect
+      // ignore here is necessary because it doesn't see styled.sth.attrs
+      // @ts-ignore
       widthOfEffect={distance < 200 ? (200 - distance) / 10 : 0}
     >
       <Link
