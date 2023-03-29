@@ -30,16 +30,23 @@ export async function GET(request: Request) {
     // create model
     const User = mongoose.models.User || mongoose.model("User", userSchema);
 
-    // find by id and return true or false whether user has this game added
+    // find by id and return true or false whether user has been added
     const userFromDb = await User.findOne({ id: userId });
     if (userFromDb) {
-      const listOfAllGamesOfUserFromDB = userFromDb.games;
+      let listOfAllGamesOfUserFromDB = userFromDb.games as string[];
       if (listOfAllGamesOfUserFromDB.includes(id)) {
+        listOfAllGamesOfUserFromDB = listOfAllGamesOfUserFromDB.filter(
+          (gameId) => gameId != id
+        );
+        await User.findOneAndUpdate(
+          { id: userId },
+          { $set: { games: listOfAllGamesOfUserFromDB } }
+        );
         return NextResponse.json({ success: true, data: true });
       }
       return NextResponse.json({ success: true, data: false });
     }
   } catch {
-    return NextResponse.json({ success: false, data: null });
+    return NextResponse.json({ success: false, data: false });
   }
 }

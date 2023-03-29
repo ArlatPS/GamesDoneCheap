@@ -17,18 +17,23 @@ async function checkIfGameAdded(
   }
 }
 
-async function addGameForUser(
+// adds or removes depending on the mode (different api request)
+async function changeGameForUser(
+  mode: "add" | "remove",
   id: string,
   userId: string,
   setState: Dispatch<SetStateAction<boolean | undefined>>
 ) {
   const response = await fetch(
-    `/api/add-game-for-user?id=${id}&userId=${userId}`,
+    `/api/${mode}-game-for-user?id=${id}&userId=${userId}`,
     { cache: "no-cache" }
   );
   const responseAfterJSON = await response.json();
-  if (responseAfterJSON.success) {
+  if (responseAfterJSON.success && mode == "add") {
     setState(true);
+  }
+  if (responseAfterJSON.success && mode == "remove") {
+    setState(false);
   }
 }
 
@@ -50,11 +55,17 @@ export default function AddGame({ gameId }: { gameId: string }) {
           hi {userId} game is {String(gameAdded)}
         </h2>
         {gameAdded ? (
-          <button>REMOVE</button>
+          <button
+            onClick={() => {
+              changeGameForUser("remove", gameId, userId, setGameAdded);
+            }}
+          >
+            REMOVE
+          </button>
         ) : (
           <button
             onClick={() => {
-              addGameForUser(gameId, userId, setGameAdded);
+              changeGameForUser("add", gameId, userId, setGameAdded);
             }}
           >
             ADD

@@ -34,7 +34,6 @@ export async function GET(request: Request) {
     const userFromDb = await User.findOne({ id: userId });
     if (userFromDb) {
       const listOfAllGamesOfUserFromDB = userFromDb.games;
-      console.log(id, listOfAllGamesOfUserFromDB);
       if (!listOfAllGamesOfUserFromDB.includes(id)) {
         listOfAllGamesOfUserFromDB.push(id);
         await User.findOneAndUpdate(
