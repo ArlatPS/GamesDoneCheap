@@ -24,10 +24,6 @@ export async function getUserGamesIds(id: string) {
     const userFromDb = await User.findOne({ id: id });
     if (userFromDb) {
       const listOfAllGamesOfUserFromDB = userFromDb.games;
-      console.log(listOfAllGamesOfUserFromDB);
-      for (let i = 0; i < listOfAllGamesOfUserFromDB.length; i++) {
-        listOfAllGamesOfUserFromDB[i] = listOfAllGamesOfUserFromDB[i].id;
-      }
       // production add
       // listOfAllGamesOfUserFromDB.push("128", "129", "130", "140");
       return listOfAllGamesOfUserFromDB;
