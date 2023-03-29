@@ -8,7 +8,7 @@ export async function updateGamesOnDB() {
     const db = mongoose.connection;
     db.on("error", () => console.log("error"));
     db.once("open", () => {
-      console.log("CONNECTED WITH DB");
+      console.log("updateGamesOnDB CONNECTED WITH DB");
     });
 
     // define schema

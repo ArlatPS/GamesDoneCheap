@@ -12,7 +12,7 @@ export async function getDataFromDB() {
       const db = mongoose.connection;
       db.on("error", () => console.log("error"));
       db.once("open", () => {
-        console.log("CONNECTED WITH DB");
+        console.log("getDataFromDB CONNECTED WITH DB");
       });
 
       const listOfAllDealsSchema = new Schema({

@@ -8,7 +8,7 @@ export async function getUserGamesIds(id: string) {
     const db = mongoose.connection;
     db.on("error", () => console.log("error"));
     db.once("open", () => {
-      console.log("CONNECTED WITH DB");
+      console.log("getUserGamesIds CONNECTED WITH DB");
     });
 
     // define schema for user

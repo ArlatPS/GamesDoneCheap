@@ -67,7 +67,7 @@ export async function GET(request: Request) {
     const db = mongoose.connection;
     db.on("error", () => console.log("error"));
     db.once("open", () => {
-      console.log("CONNECTED WITH DB");
+      console.log("save games on db CONNECTED WITH DB");
     });
 
     // save list of all deals

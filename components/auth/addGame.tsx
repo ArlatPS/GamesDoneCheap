@@ -1,6 +1,7 @@
 "use client";
 import { useAuth } from "@clerk/nextjs";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import Switch from "react-switch";
 
 async function checkIfGameAdded(
   id: string,
@@ -51,10 +52,18 @@ export default function AddGame({ gameId }: { gameId: string }) {
   if (isLoaded && userId && gameAdded !== undefined) {
     return (
       <div>
-        <h2>
-          hi {userId} game is {String(gameAdded)}
-        </h2>
-        {gameAdded ? (
+        <span>Wishlisted</span>
+        <Switch
+          checked={gameAdded}
+          onChange={(checked) => {
+            if (checked) {
+              changeGameForUser("add", gameId, userId, setGameAdded);
+            } else {
+              changeGameForUser("remove", gameId, userId, setGameAdded);
+            }
+          }}
+        />
+        {/* {gameAdded ? (
           <button
             onClick={() => {
               changeGameForUser("remove", gameId, userId, setGameAdded);
@@ -70,7 +79,7 @@ export default function AddGame({ gameId }: { gameId: string }) {
           >
             ADD
           </button>
-        )}
+        )} */}
       </div>
     );
   } else {

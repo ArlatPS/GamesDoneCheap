@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     const db = mongoose.connection;
     db.on("error", () => console.log("error"));
     db.once("open", () => {
-      console.log("CONNECTED WITH DB");
+      console.log("update games on db api CONNECTED WITH DB");
     });
 
     // define schema

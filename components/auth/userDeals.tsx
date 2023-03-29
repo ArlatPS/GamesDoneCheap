@@ -17,7 +17,6 @@ export default async function UserDeals() {
   const stores = await getStores();
   if (user !== null) {
     userGamesIds = await getUserGamesIds(user.id);
-    console.log(userGamesIds);
     // if userGameIds not empty then fetch first 25 (max for one fetch to this API) from Shark
     if (userGamesIds.length > 0) {
       const response = await fetch(
