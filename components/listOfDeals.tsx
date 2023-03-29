@@ -10,14 +10,16 @@ import Link from "next/link";
 export default function ListOfDeals({
   deals,
   stores,
+  optionalClassName,
 }: {
   deals: DealsListGame[];
   stores: StoreFromShark[];
+  optionalClassName?: string;
 }) {
   return (
     <ListOfDealsSectionStyled>
       <ListOfDealsTableStyled>
-        <tbody>
+        <tbody className={optionalClassName ? optionalClassName : ""}>
           <tr>
             <th>Store</th>
             <th>Cover</th>

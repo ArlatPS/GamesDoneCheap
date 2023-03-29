@@ -30,8 +30,10 @@ export default async function GameDetails({
   // it doesn't need earlier return for loading - loading.tsx provides loading pane
   return (
     <MainGameDetailsStyled>
-      <h1>{gameFromShark.info.title}</h1>
-      {params.id != null ? <AddGame gameId={id} /> : null}
+      <div className="titleAndAdd">
+        <h1>{gameFromShark.info.title}</h1>
+        {params.id != null ? <AddGame gameId={id} /> : null}
+      </div>
       {gameFromShark.info.steamAppID === null ? (
         <section className="sectionWithoutSteam">
           <Image
