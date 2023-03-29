@@ -10,8 +10,6 @@ import GeneralLoader from "@/components/loaders/generalLoader";
 import { MainGameDetailsStyled } from "@/style/gameDetails/mainStyled";
 import AddGame from "@/components/auth/addGame";
 
-const AddGameAsync = AddGame as any;
-
 const SteamSectionAsync = SteamSection as any;
 
 async function fetchDataFromShark(id: string) {
@@ -27,12 +25,13 @@ export default async function GameDetails({
 }: {
   params: { id: string };
 }) {
-  const gameFromShark = (await fetchDataFromShark(params.id)) as GameFromShark;
+  const id = params.id;
+  const gameFromShark = (await fetchDataFromShark(id)) as GameFromShark;
   // it doesn't need earlier return for loading - loading.tsx provides loading pane
   return (
     <MainGameDetailsStyled>
       <h1>{gameFromShark.info.title}</h1>
-      <AddGameAsync id={params.id} />
+      {params.id != null ? <AddGame gameId={id} /> : null}
       {gameFromShark.info.steamAppID === null ? (
         <section className="sectionWithoutSteam">
           <Image
