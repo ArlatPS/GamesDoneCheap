@@ -6,9 +6,34 @@ export const MainGameDetailsStyled = styled.main`
   color: ${theme.colors.white};
   min-height: 95vh;
   margin: 0 10%;
-  h1 {
+  .titleAndAdd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-family: var(--orienta);
-    font-size: 40px;
+    h1 {
+      font-size: 40px;
+    }
+    div {
+      display: flex;
+      align-items: center;
+      span {
+        font-size: 20px;
+        margin-right: 0.5em;
+      }
+    }
+    @media (max-width: ${theme.sm}) {
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+      h1 {
+        font-size: 26px;
+      }
+      div {
+        span {
+          font-size: 14px;
+        }
+      }
+    }
   }
   h5 {
     font-family: var(--prompt);
@@ -22,9 +47,6 @@ export const MainGameDetailsStyled = styled.main`
   }
   @media (max-width: ${theme.sm}) {
     margin: 0 5px;
-    h1 {
-      font-size: 26px;
-    }
   }
   .sectionWithoutSteam {
     font-family: var(--prompt);

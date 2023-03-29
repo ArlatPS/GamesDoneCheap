@@ -113,6 +113,7 @@ export const NavStyled = styled.nav`
         margin-right: 0.5em;
       }
       section {
+        z-index: 1;
         position: absolute;
         background-color: ${theme.colors.red};
         display: flex;
@@ -146,7 +147,7 @@ export const NavStyled = styled.nav`
         margin-right: 10px;
         font-size: 14px;
         #search {
-          width: 130px;
+          width: 100px;
         }
       }
     }
