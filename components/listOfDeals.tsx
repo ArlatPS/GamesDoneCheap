@@ -79,7 +79,9 @@ export default function ListOfDeals({
                   )}
                   <td>{Math.floor(+deal.savings)}%</td>
                   <td className="hideOnSm">
-                    {format(new Date(deal.lastChange * 1000), "dd/LL/yyyy")}
+                    {deal.lastChange != 0
+                      ? format(new Date(deal.lastChange * 1000), "dd/LL/yyyy")
+                      : "Unknown"}
                   </td>
                   <td>
                     <Link
