@@ -2,16 +2,19 @@
 
 import { DealsListGame, GameFromShark, StoreFromShark } from "@/globalTypes";
 import {
+  convertUserGamesWithoutSorting,
   GameFromSharkWithID,
   sortUserGamesBySavings,
 } from "@/lib/userLib/sortUserGamesBySavings";
+import { PageControlStyled } from "@/style/allDeals/mainStyled";
+import { ButtonStyled } from "@/style/button";
 import {
   ListOfDealsSectionStyled,
   ListOfDealsTableStyled,
 } from "@/style/listOfDeals";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function UserGames({
   userGamesIds,
@@ -24,11 +27,11 @@ export default function UserGames({
     async function getPage(page: number) {
       const response = await fetch(
         `https://www.cheapshark.com/api/1.0/games?ids=${userGamesIds
-          .slice(0 * page, 25 * (page + 1))
+          .slice(25 * page, 25 * (page + 1))
           .join(",")}`,
         { next: { revalidate: 60 * 10 } }
       );
-      const games = sortUserGamesBySavings(
+      const games = convertUserGamesWithoutSorting(
         (await response.json()) as { [key: string]: GameFromShark }
       );
       const listToDisplay: DealsListGame[] = [];
@@ -63,52 +66,79 @@ export default function UserGames({
   }, [page, userGamesIds]);
 
   return (
-    <ListOfDealsSectionStyled>
-      <ListOfDealsTableStyled>
-        <tbody>
-          <tr>
-            <th>Cover</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Retail Price</th>
-            <th>Wishlist</th>
-          </tr>
-          {deals.length > 0
-            ? deals.map((deal) => (
-                <tr key={deal.dealID}>
-                  {/* if it has steamAppID then it has nice cover, if not add class to manage the higher one */}
-                  <td>
-                    {deal.steamAppID !== null ? (
-                      <Image
-                        src={deal.thumb}
-                        width={120}
-                        height={45}
-                        alt={deal.title}
-                        className={"normalImg"}
-                      />
-                    ) : (
-                      <Image
-                        src={deal.thumb}
-                        width={128}
-                        height={184}
-                        alt={deal.title}
-                        className={"higherImg"}
-                      />
-                    )}
-                  </td>
-                  <td>
-                    <Link href={`/game-details/${deal.gameID}`}>
-                      {deal.title}
-                    </Link>
-                  </td>
-                  <td>{deal.salePrice}$</td>
-                  <td>{deal.normalPrice}$</td>
-                  <td>get out</td>
-                </tr>
-              ))
-            : null}
-        </tbody>
-      </ListOfDealsTableStyled>
-    </ListOfDealsSectionStyled>
+    <div className="userGames">
+      <ListOfDealsSectionStyled>
+        <ListOfDealsTableStyled>
+          <tbody>
+            <tr>
+              <th>Cover</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Retail Price</th>
+              <th>Wishlist</th>
+            </tr>
+            {deals.length > 0
+              ? deals.map((deal) => (
+                  <tr key={deal.dealID}>
+                    {/* if it has steamAppID then it has nice cover, if not add class to manage the higher one */}
+                    <td>
+                      {deal.steamAppID !== null ? (
+                        <Image
+                          src={deal.thumb}
+                          width={120}
+                          height={45}
+                          alt={deal.title}
+                          className={"normalImg"}
+                        />
+                      ) : (
+                        <Image
+                          src={deal.thumb}
+                          width={128}
+                          height={184}
+                          alt={deal.title}
+                          className={"higherImg"}
+                        />
+                      )}
+                    </td>
+                    <td>
+                      <Link href={`/game-details/${deal.gameID}`}>
+                        {deal.title}
+                      </Link>
+                    </td>
+                    <td>{deal.salePrice}$</td>
+                    <td>{deal.normalPrice}$</td>
+                    <td>
+                      <ButtonStyled>Delete</ButtonStyled>
+                    </td>
+                  </tr>
+                ))
+              : null}
+          </tbody>
+        </ListOfDealsTableStyled>
+      </ListOfDealsSectionStyled>
+      <PageControlStyled>
+        <div>
+          <h4>
+            Page {page + 1}/{Math.ceil(userGamesIds.length / 25)}
+          </h4>
+          <ButtonStyled
+            onClick={() => {
+              if (page - 1 >= 0) setPage((n) => n - 1);
+            }}
+          >
+            Prev
+          </ButtonStyled>
+          <ButtonStyled
+            onClick={() => {
+              if (page + 1 < Math.ceil(userGamesIds.length / 25))
+                setPage((n) => n + 1);
+            }}
+          >
+            Next
+          </ButtonStyled>
+          {userGamesIds.length}
+        </div>
+      </PageControlStyled>
+    </div>
   );
 }

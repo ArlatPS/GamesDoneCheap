@@ -16,3 +16,15 @@ export function sortUserGamesBySavings(games: {
   return arrOfGames;
 }
 export type GameFromSharkWithID = GameFromShark & { id: string };
+
+export function convertUserGamesWithoutSorting(games: {
+  [key: string]: GameFromShark;
+}) {
+  const arrOfGames: GameFromSharkWithID[] = [];
+  for (let key of Object.keys(games)) {
+    let game: GameFromSharkWithID = games[key] as GameFromSharkWithID;
+    game.id = key;
+    arrOfGames.push(game);
+  }
+  return arrOfGames;
+}

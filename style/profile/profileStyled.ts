@@ -15,6 +15,15 @@ export const ProfileMainStyled = styled.main`
     margin: 0 5px;
   }
   .signedInSection {
+    .userGames {
+      padding: 2rem;
+      table {
+        margin-top: 0rem;
+      }
+      div {
+        margin-top: 1rem;
+      }
+    }
     @media (min-width: ${theme.md}) {
       display: flex;
       .userGames {
