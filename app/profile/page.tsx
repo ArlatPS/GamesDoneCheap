@@ -24,9 +24,6 @@ export default async function UserPage() {
     <ProfileMainStyled>
       <SignedIn>
         <section className="signedInSection">
-          {user !== null ? (
-            <UserGames userGamesIds={userGamesIds} userId={user.id} />
-          ) : null}
           <div className="userProfile">
             <UserProfile
               appearance={{
@@ -42,6 +39,9 @@ export default async function UserPage() {
               }}
             />
           </div>
+          {user !== null ? (
+            <UserGames userGamesIds={userGamesIds} userId={user.id} />
+          ) : null}
         </section>
       </SignedIn>
       <SignedOut>

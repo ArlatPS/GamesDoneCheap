@@ -5,6 +5,7 @@ import { theme } from "@/theme";
 export const ProfileMainStyled = styled.main`
   min-height: 90vh;
   margin: 0 10%;
+  display: flex;
   @media (min-width: ${theme.xxl}) {
     margin: 0 20%;
   }
@@ -27,10 +28,20 @@ export const ProfileMainStyled = styled.main`
       div {
         margin-top: 1rem;
       }
+      #deleteButton {
+        font-size: 16px;
+        @media (max-width: ${theme.md}) {
+          font-size: 14px;
+        }
+        @media (max-width: ${theme.sm}) {
+          font-size: 12px;
+        }
+      }
     }
-    @media (min-width: ${theme.md}) {
+    @media (min-width: 1500px) {
       display: flex;
       .userGames {
+        order: -1;
         width: 50%;
       }
       .userProfile {

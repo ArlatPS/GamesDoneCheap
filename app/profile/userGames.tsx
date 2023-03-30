@@ -129,6 +129,7 @@ export default function UserGames({
                         onClick={() => {
                           handleDeleteGame(game.gameID);
                         }}
+                        id="deleteButton"
                       >
                         Delete
                       </ButtonStyled>
