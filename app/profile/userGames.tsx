@@ -18,15 +18,18 @@ import { useCallback, useEffect, useState } from "react";
 
 export default function UserGames({
   userGamesIds,
+  userId,
 }: {
   userGamesIds: string[];
+  userId: string;
 }) {
+  const [gamesIds, setGamesIds] = useState(userGamesIds);
   const [page, setPage] = useState(0);
-  const [deals, setDeals] = useState<DealsListGame[]>([]);
+  const [games, setGames] = useState<DealsListGame[]>([]);
   useEffect(() => {
     async function getPage(page: number) {
       const response = await fetch(
-        `https://www.cheapshark.com/api/1.0/games?ids=${userGamesIds
+        `https://www.cheapshark.com/api/1.0/games?ids=${gamesIds
           .slice(25 * page, 25 * (page + 1))
           .join(",")}`,
         { next: { revalidate: 60 * 10 } }
@@ -60,11 +63,25 @@ export default function UserGames({
         };
         listToDisplay.push(deal);
       });
-      setDeals(listToDisplay);
+      setGames(listToDisplay);
     }
     getPage(page);
-  }, [page, userGamesIds]);
+  }, [page, gamesIds]);
 
+  async function handleDeleteGame(id: string) {
+    setGamesIds(gamesIds.filter((gameId) => gameId != id));
+    const response = await fetch(
+      `/api/remove-game-for-user?id=${id}&userId=${userId}`,
+      { cache: "no-cache" }
+    );
+    const responseAfterJSON = await response.json();
+    if (responseAfterJSON.success) {
+      if (gamesIds.length % 25 == 1 && page > 0) {
+        setPage((n) => n - 1);
+      }
+      setGamesIds(gamesIds.filter((gameId) => gameId != id));
+    }
+  }
   return (
     <div className="userGames">
       <ListOfDealsSectionStyled>
@@ -77,38 +94,44 @@ export default function UserGames({
               <th>Retail Price</th>
               <th>Wishlist</th>
             </tr>
-            {deals.length > 0
-              ? deals.map((deal) => (
-                  <tr key={deal.dealID}>
+            {games.length > 0
+              ? games.map((game, index) => (
+                  <tr key={game.dealID}>
                     {/* if it has steamAppID then it has nice cover, if not add class to manage the higher one */}
                     <td>
-                      {deal.steamAppID !== null ? (
+                      {game.steamAppID !== null ? (
                         <Image
-                          src={deal.thumb}
+                          src={game.thumb}
                           width={120}
                           height={45}
-                          alt={deal.title}
+                          alt={game.title}
                           className={"normalImg"}
                         />
                       ) : (
                         <Image
-                          src={deal.thumb}
+                          src={game.thumb}
                           width={128}
                           height={184}
-                          alt={deal.title}
+                          alt={game.title}
                           className={"higherImg"}
                         />
                       )}
                     </td>
                     <td>
-                      <Link href={`/game-details/${deal.gameID}`}>
-                        {deal.title}
+                      <Link href={`/game-details/${game.gameID}`}>
+                        {game.title}
                       </Link>
                     </td>
-                    <td>{deal.salePrice}$</td>
-                    <td>{deal.normalPrice}$</td>
+                    <td>{game.salePrice}$</td>
+                    <td>{game.normalPrice}$</td>
                     <td>
-                      <ButtonStyled>Delete</ButtonStyled>
+                      <ButtonStyled
+                        onClick={() => {
+                          handleDeleteGame(game.gameID);
+                        }}
+                      >
+                        Delete
+                      </ButtonStyled>
                     </td>
                   </tr>
                 ))
@@ -119,7 +142,7 @@ export default function UserGames({
       <PageControlStyled>
         <div>
           <h4>
-            Page {page + 1}/{Math.ceil(userGamesIds.length / 25)}
+            Page {page + 1}/{Math.max(Math.ceil(gamesIds.length / 25), 1)}
           </h4>
           <ButtonStyled
             onClick={() => {
@@ -130,13 +153,12 @@ export default function UserGames({
           </ButtonStyled>
           <ButtonStyled
             onClick={() => {
-              if (page + 1 < Math.ceil(userGamesIds.length / 25))
+              if (page + 1 < Math.ceil(gamesIds.length / 25))
                 setPage((n) => n + 1);
             }}
           >
             Next
           </ButtonStyled>
-          {userGamesIds.length}
         </div>
       </PageControlStyled>
     </div>

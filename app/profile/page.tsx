@@ -24,7 +24,9 @@ export default async function UserPage() {
     <ProfileMainStyled>
       <SignedIn>
         <section className="signedInSection">
-          <UserGames userGamesIds={userGamesIds} />
+          {user !== null ? (
+            <UserGames userGamesIds={userGamesIds} userId={user.id} />
+          ) : null}
           <div className="userProfile">
             <UserProfile
               appearance={{

@@ -19,6 +19,10 @@ export const ProfileMainStyled = styled.main`
       padding: 2rem;
       table {
         margin-top: 0rem;
+        td:nth-of-type(5) {
+          border-top-right-radius: 1rem;
+          border-bottom-right-radius: 1rem;
+        }
       }
       div {
         margin-top: 1rem;
