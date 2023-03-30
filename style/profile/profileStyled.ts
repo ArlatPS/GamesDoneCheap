@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { theme } from "@/theme";
 
 export const ProfileMainStyled = styled.main`
-  min-height: 90vh;
+  min-height: 89vh;
   margin: 0 10%;
   display: flex;
   @media (min-width: ${theme.xxl}) {
@@ -48,5 +48,11 @@ export const ProfileMainStyled = styled.main`
         width: 50%;
       }
     }
+  }
+  .signedOutSection {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
   }
 `;

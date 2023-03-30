@@ -60,7 +60,7 @@ export default async function UserDeals() {
   return (
     <UserDealsStyled>
       <SignedIn>
-        <h2>Deals for {user?.username}</h2>
+        <h2>Best deals for {user?.username}</h2>
         {listToDisplay.length == 0 ? (
           <ListOfDealsSectionStyled>
             <div className="addGamesInfo">
@@ -70,7 +70,7 @@ export default async function UserDeals() {
           </ListOfDealsSectionStyled>
         ) : (
           <ListOfDeals
-            deals={listToDisplay}
+            deals={listToDisplay.slice(0, 10)}
             stores={stores}
             optionalClassName="listOfUserDeals"
           />

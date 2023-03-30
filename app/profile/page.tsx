@@ -1,7 +1,4 @@
-import { DealsListGame } from "@/globalTypes";
-import getStores from "@/lib/getStores";
 import { getUserGamesIds } from "@/lib/userLib/getUserGamesIds";
-import { GameFromSharkWithID } from "@/lib/userLib/sortUserGamesBySavings";
 import { ProfileMainStyled } from "@/style/profile/profileStyled";
 import { theme } from "@/theme";
 import {
@@ -12,6 +9,7 @@ import {
   currentUser,
 } from "@clerk/nextjs/app-beta";
 import { dark } from "@clerk/themes";
+import SignInSection from "./signInSection";
 import UserGames from "./userGames";
 
 export default async function UserPage() {
@@ -45,7 +43,7 @@ export default async function UserPage() {
         </section>
       </SignedIn>
       <SignedOut>
-        <SignIn />
+        <SignInSection />
       </SignedOut>
     </ProfileMainStyled>
   );
