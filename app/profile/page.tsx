@@ -1,3 +1,7 @@
+import { DealsListGame } from "@/globalTypes";
+import getStores from "@/lib/getStores";
+import { getUserGamesIds } from "@/lib/userLib/getUserGamesIds";
+import { GameFromSharkWithID } from "@/lib/userLib/sortUserGamesBySavings";
 import { ProfileMainStyled } from "@/style/profile/profileStyled";
 import { theme } from "@/theme";
 import {
@@ -5,15 +9,22 @@ import {
   SignedOut,
   UserProfile,
   SignIn,
+  currentUser,
 } from "@clerk/nextjs/app-beta";
 import { dark } from "@clerk/themes";
+import UserGames from "./userGames";
 
 export default async function UserPage() {
+  const user = await currentUser();
+  let userGamesIds: string[] = [];
+  if (user !== null) {
+    userGamesIds = await getUserGamesIds(user.id);
+  }
   return (
     <ProfileMainStyled>
       <SignedIn>
         <section className="signedInSection">
-          <div className="userGames"></div>
+          <UserGames userGamesIds={userGamesIds} />
           <div className="userProfile">
             <UserProfile
               appearance={{

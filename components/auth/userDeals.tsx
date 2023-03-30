@@ -24,7 +24,7 @@ export default async function UserDeals() {
         `https://www.cheapshark.com/api/1.0/games?ids=${userGamesIds
           .slice(0, 25)
           .join(",")}`,
-        { next: { revalidate: 0 } }
+        { next: { revalidate: 60 * 10 } }
       );
       // sort
       games = sortUserGamesBySavings(
