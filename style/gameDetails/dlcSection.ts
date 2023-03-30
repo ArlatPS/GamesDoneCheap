@@ -4,7 +4,7 @@ import { theme } from "@/theme";
 
 export const DLCSectionStyled = styled.section`
   display: flex;
-  width: 90%;
+  /* width: 90%; */
   flex-wrap: wrap;
   justify-content: center;
   align-content: flex-start;

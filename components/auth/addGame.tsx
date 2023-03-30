@@ -1,4 +1,5 @@
 "use client";
+import { theme } from "@/theme";
 import { useAuth } from "@clerk/nextjs";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Switch from "react-switch";
@@ -62,24 +63,9 @@ export default function AddGame({ gameId }: { gameId: string }) {
               changeGameForUser("remove", gameId, userId, setGameAdded);
             }
           }}
+          onColor={theme.colors.blue}
+          offColor={theme.colors.grey}
         />
-        {/* {gameAdded ? (
-          <button
-            onClick={() => {
-              changeGameForUser("remove", gameId, userId, setGameAdded);
-            }}
-          >
-            REMOVE
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              changeGameForUser("add", gameId, userId, setGameAdded);
-            }}
-          >
-            ADD
-          </button>
-        )} */}
       </div>
     );
   } else {

@@ -89,7 +89,7 @@ export default function FreeGame({
               </div>
             ) : (
               <div className="hoursLeft">
-                <h3>{timeLeft.value}</h3>
+                <h3>{timeLeft.value > 0 ? timeLeft.value : 0}</h3>
                 <h4>{timeLeft.value == 1 ? "hour" : "hours"} left</h4>
               </div>
             )
