@@ -263,7 +263,7 @@ export const StorePickerStyled = styled.div`
   }
 `;
 
-export const PageControl = styled.div`
+export const PageControlStyled = styled.div`
   display: flex;
   justify-content: center;
   div {

@@ -5,7 +5,10 @@ import SearchControls from "./searchControls";
 import { State, stateReducer } from "./reducer";
 import getStores from "@/lib/getStores";
 import { DealsListGame } from "@/globalTypes";
-import { MainAllDealsStyled, PageControl } from "@/style/allDeals/mainStyled";
+import {
+  MainAllDealsStyled,
+  PageControlStyled,
+} from "@/style/allDeals/mainStyled";
 import { ButtonStyled } from "@/style/button";
 
 const initialState: State = {
@@ -100,7 +103,7 @@ export default function Deals() {
         hasUpdated={state.hasUpdated}
         stores={state.stores}
       />
-      <PageControl>
+      <PageControlStyled>
         <div>
           <h4>
             Page {state.page + 1}/{state.maxPages + 1}
@@ -112,7 +115,7 @@ export default function Deals() {
             Next
           </ButtonStyled>
         </div>
-      </PageControl>
+      </PageControlStyled>
     </MainAllDealsStyled>
   );
 }

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { theme } from "@/theme";
 
 export const ProfileMainStyled = styled.main`
+  min-height: 90vh;
   margin: 0 10%;
   @media (min-width: ${theme.xxl}) {
     margin: 0 20%;
