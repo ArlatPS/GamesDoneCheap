@@ -311,6 +311,9 @@ export const PageControlStyled = styled.div`
 export const SectionAroundAllDealsResult = styled.section`
   margin: 2rem 0;
   min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   @media (max-width: ${theme.sm}) {
     margin: 1rem 0;
   }

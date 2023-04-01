@@ -57,6 +57,7 @@ export const ListOfDealsTableStyled = styled.table`
   border-spacing: 0 1rem;
   td {
     border: 1px dotted ${theme.colors.red};
+    max-width: 350px;
   }
   // left border of row with radius
   td:nth-of-type(1) {

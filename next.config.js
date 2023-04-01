@@ -18,6 +18,8 @@ const nextConfig = {
         pathname: "**",
       },
     ],
+    // top much resource usage on vercel - many, different image covers
+    unoptimized: true,
   },
   compiler: {
     styledComponents: true,
