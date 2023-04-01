@@ -131,7 +131,7 @@ export default function UserGames({
                         }}
                         id="deleteButton"
                       >
-                        Delete
+                        Remove
                       </ButtonStyled>
                     </td>
                   </tr>
@@ -140,28 +140,30 @@ export default function UserGames({
           </tbody>
         </ListOfDealsTableStyled>
       </ListOfDealsSectionStyled>
-      <PageControlStyled>
-        <div>
-          <h4>
-            Page {page + 1}/{Math.max(Math.ceil(gamesIds.length / 25), 1)}
-          </h4>
-          <ButtonStyled
-            onClick={() => {
-              if (page - 1 >= 0) setPage((n) => n - 1);
-            }}
-          >
-            Prev
-          </ButtonStyled>
-          <ButtonStyled
-            onClick={() => {
-              if (page + 1 < Math.ceil(gamesIds.length / 25))
-                setPage((n) => n + 1);
-            }}
-          >
-            Next
-          </ButtonStyled>
-        </div>
-      </PageControlStyled>
+      {gamesIds.length > 25 ? (
+        <PageControlStyled>
+          <div>
+            <h4>
+              Page {page + 1}/{Math.max(Math.ceil(gamesIds.length / 25), 1)}
+            </h4>
+            <ButtonStyled
+              onClick={() => {
+                if (page - 1 >= 0) setPage((n) => n - 1);
+              }}
+            >
+              Prev
+            </ButtonStyled>
+            <ButtonStyled
+              onClick={() => {
+                if (page + 1 < Math.ceil(gamesIds.length / 25))
+                  setPage((n) => n + 1);
+              }}
+            >
+              Next
+            </ButtonStyled>
+          </div>
+        </PageControlStyled>
+      ) : null}
     </div>
   );
 }

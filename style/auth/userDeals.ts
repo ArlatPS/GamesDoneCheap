@@ -4,6 +4,7 @@ import { theme } from "@/theme";
 
 export const UserDealsStyled = styled.section`
   margin: 0;
+  margin-bottom: 2rem;
   padding: 0;
   width: 100%;
   h2 {
