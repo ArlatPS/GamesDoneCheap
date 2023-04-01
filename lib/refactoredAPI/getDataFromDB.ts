@@ -25,17 +25,20 @@ export async function getDataFromDB() {
 
       // pass found list to Response
       const listFromDb = await ListOfAllDealsDb.find({});
-      const listOfAllGamesFromDB = JSON.parse(
-        listFromDb[0].data
-      ) as GameForDB[];
+      if (listFromDb[0] && listFromDb[0]?.data) {
+        const listOfAllGamesFromDB = JSON.parse(
+          listFromDb[0].data
+        ) as GameForDB[];
 
-      return {
-        success: true,
-        listOfGames: listOfAllGamesFromDB,
-      };
+        return {
+          success: true,
+          listOfGames: listOfAllGamesFromDB,
+        };
+      }
     }
   } catch (e) {
     console.error(e);
     return { success: false, listOfGames: [] };
   }
+  return { success: false, listOfGames: [] };
 }

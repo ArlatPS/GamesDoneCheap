@@ -26,17 +26,20 @@ export async function GET(request: Request) {
 
       // pass found list to Response
       const listFromDb = await ListOfAllDealsDb.find({});
-      const listOfAllGamesFromDB = JSON.parse(
-        listFromDb[0].data
-      ) as GameForDB[];
+      if (listFromDb[0] && listFromDb[0]?.data) {
+        const listOfAllGamesFromDB = JSON.parse(
+          listFromDb[0].data
+        ) as GameForDB[];
 
-      return NextResponse.json({
-        success: true,
-        listOfGames: listOfAllGamesFromDB,
-      });
+        return NextResponse.json({
+          success: true,
+          listOfGames: listOfAllGamesFromDB,
+        });
+      }
     }
   } catch (e) {
     console.error(e);
     return NextResponse.json({ success: false, listOfDeals: [] });
   }
+  return NextResponse.json({ success: false, listOfDeals: [] });
 }

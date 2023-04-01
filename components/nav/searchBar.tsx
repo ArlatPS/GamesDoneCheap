@@ -16,27 +16,32 @@ export default function SearchBar() {
   const queryDeferred = useDeferredValue(query);
 
   useEffect(() => {
-    async function fetchAutoCompletes() {
-      try {
-        if (queryDeferred.length >= 3) {
-          const response = await fetch(
-            `/api/autocomplete?query=${queryDeferred}`,
-            // { next: { revalidate: 60 } }
-            { cache: "no-store" }
-          );
-          const responseAfterJSON = (await response.json()) as {
-            success: boolean;
-            completionsWithData: GameForDB[];
-          };
-          if (responseAfterJSON.success) {
-            setCompletes(responseAfterJSON.completionsWithData);
+    const controller = new AbortController();
+    const signal = controller.signal;
+    if (queryDeferred.length >= 3) {
+      fetch(
+        `/api/autocomplete?query=${queryDeferred}`,
+        // { next: { revalidate: 60 } }
+        { cache: "no-store", signal }
+      )
+        .then((res) => res.json())
+        .then((resAfter) => {
+          if (resAfter?.success) {
+            setCompletes(resAfter.completionsWithData as GameForDB[]);
           }
-        } else {
-          setCompletes([]);
-        }
-      } catch {}
+        })
+        .catch((err) => {
+          if (err.name === "AbortError") {
+            console.log("cancelled");
+          } else {
+            // console.error(err);
+            // console.log("aa");
+          }
+        });
     }
-    fetchAutoCompletes();
+    return () => {
+      controller.abort();
+    };
   }, [queryDeferred]);
 
   return (
