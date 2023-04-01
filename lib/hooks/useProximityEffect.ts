@@ -88,7 +88,9 @@ export default function useProximityEffect(
 
   // getBoundingClientRect() provides real position in viewport
   useEffect(() => {
+    let cancel = false;
     if (
+      !cancel &&
       proximityRef.current?.getBoundingClientRect().top &&
       proximityRef.current?.getBoundingClientRect().left &&
       proximityRef.current?.getBoundingClientRect().height &&
@@ -105,6 +107,9 @@ export default function useProximityEffect(
         )
       );
     }
+    return () => {
+      cancel = true;
+    };
   }, [proximityRef, threshold, globalPositionDeferred]);
   return distance;
 }
