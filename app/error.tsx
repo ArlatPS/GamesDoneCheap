@@ -24,14 +24,19 @@ export default function Error({
   return (
     <ErrorStyled>
       <h2>Something went wrong!</h2>
-      <ButtonStyled
-        onClick={
-          // try to refresh
-          () => router.refresh()
-        }
-      >
-        Try again
-      </ButtonStyled>
+      <form action="">
+        <ButtonStyled
+          onClick={
+            // try to refresh
+            () => {
+              router.replace("/");
+              router.refresh();
+            }
+          }
+        >
+          Try again
+        </ButtonStyled>
+      </form>
       <ErrorSVG />
     </ErrorStyled>
   );
