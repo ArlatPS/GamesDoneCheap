@@ -1,6 +1,6 @@
 # [GAMES DONE CHEAP](https://gg-puce.vercel.app/)
 
-## Website to check out best video game deals and compare prices on different platforms (🏗👷‍♂️ under construction)
+## Website to find best video game deals and compare prices on different platforms
 
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
@@ -10,7 +10,7 @@
 
 ## Home Page
 
-![Home Page](https://res.cloudinary.com/dtct3niec/image/upload/v1679344076/github/home_page.png)
+![Home Page](https://res.cloudinary.com/dtct3niec/image/upload/v1680706344/home_page2.png)
 
 ## Technology
 
@@ -24,16 +24,19 @@
 
 - website takes advantage of new features of Next JS 13 - **appDir, Client and Server Components, Route Handlers**
 - deals are provided by interaction with **CheapShark API** and game descriptions are fetched from **Steam API**
+- users system with authentication provided by **Clerk**
+- **logged in users can whishlist a game** and best deals for whishlisted games will be displayed on home page and profile page
 - free games section with timer and **custom hook useProximityEffect**
 - best deals section with filtered currently best deals
 - all deals page with rich filtering options
-- search bar with autocomplete which is implemented with Trie data structure
+- search bar with autocomplete implemented with Trie data structure
 - hosted on Vercel
+- mobile app created with **React Native** (🏗👷‍♂️ under construction) [Link](https://github.com/ArlatPS/gdc_mobile)
+
+## Game Details With DLC
+
+![Game Details](https://res.cloudinary.com/dtct3niec/image/upload/v1680706343/game_details_2.png)
 
 ## All Deals With Filters
 
 ![Filters](https://res.cloudinary.com/dtct3niec/image/upload/v1679344077/github/all_deals.png)
-
-## Game Details With DLC
-
-![Game Details](https://res.cloudinary.com/dtct3niec/image/upload/v1679344077/github/game_details.png)
