@@ -8,7 +8,7 @@ import { ArticleWithProximityEffect } from "@/style/articleWithProximityEffect";
 import { FreeGameDiv } from "@/style/freeGame";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 
 function getStoreToDisplay(game: DealsListGame, stores: StoreFromShark[]) {
   let gameStoreToDisplay: StoreFromShark | undefined = undefined;
@@ -40,6 +40,9 @@ export default function FreeGame({
     return calculateTimeLeft(game.lastChange);
   }, [game.lastChange]);
 
+  // image error
+  const [imgError, setImgError] = useState(false);
+
   return (
     <ArticleWithProximityEffect
       // ignore here is necessary because it doesn't see styled.sth.attrs
@@ -62,20 +65,30 @@ export default function FreeGame({
               <h4>{gameStore.storeName}</h4>
             </div>
           ) : null}
-          {game.steamAppID !== null ? (
-            <Image
-              width={400}
-              height={200}
-              src={`https://cdn.akamai.steamstatic.com/steam/apps/${game.steamAppID}/header.jpg`}
-              alt="Cover photo from Steam"
-            />
+          {!imgError ? (
+            game.steamAppID !== null ? (
+              <Image
+                width={400}
+                height={200}
+                src={`https://cdn.akamai.steamstatic.com/steam/apps/${game.steamAppID}/header.jpg`}
+                alt="Cover photo from Steam"
+                onError={() => {
+                  setImgError(true);
+                }}
+              />
+            ) : (
+              <Image
+                width={400}
+                height={200}
+                src={game.thumb}
+                alt="Cover photo from CheapShark API"
+                onError={() => {
+                  setImgError(true);
+                }}
+              />
+            )
           ) : (
-            <Image
-              width={400}
-              height={200}
-              src={game.thumb}
-              alt="Cover photo from CheapShark API"
-            />
+            <div className="forPaddingOnImgError" />
           )}
           <h3>{game.title}</h3>
           {/* display time left if offer is from Epic - they last 7 days */}

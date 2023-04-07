@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { theme } from "@/theme";
 
 export const FreeGameDiv = styled.div`
+  max-width: 100%;
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -18,6 +20,10 @@ export const FreeGameDiv = styled.div`
     text-align: center;
     margin: 0.5em;
   }
+  .forPaddingOnImgError {
+    height: 200px;
+    width: 1px;
+  }
   @media (max-width: ${theme.md}) {
     h3 {
       font-size: 26px;
@@ -27,7 +33,8 @@ export const FreeGameDiv = styled.div`
     h3 {
       font-size: 20px;
     }
-    img {
+    img,
+    .forPaddingOnImgError {
       height: 100px;
     }
   }
