@@ -1,0 +1,5 @@
+.next
+.vercel
+.swc
+.vscode
+./node_modules
