@@ -20,7 +20,10 @@ export default function DropDownStores() {
         <div className="divAround">
           {storesOfInterest.map((store) => (
             <div key={store.storeID}>
-              <Link href={`/store/${store.storeName}`}>
+              <Link
+                href={`/store/${store.storeName}`}
+                onClick={() => setOpened(false)}
+              >
                 {store.storeNameDisplay}
               </Link>
             </div>
