@@ -3,3 +3,4 @@
 .swc
 .vscode
 ./node_modules
+.env.local
