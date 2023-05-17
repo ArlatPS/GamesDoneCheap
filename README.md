@@ -1,4 +1,4 @@
-# [GAMES DONE CHEAP](https://gg-puce.vercel.app/)
+# [GAMES DONE CHEAP](http://psulich.pro:8000/)
 
 ## Website for finding best video game deals and comparing prices on different platforms
 
@@ -30,7 +30,7 @@
 - best deals section with filtered currently best deals
 - all deals page with rich filtering options
 - search bar with autocomplete implemented with Trie data structure
-- hosted on Vercel
+- self-hosted on a VPS
 - mobile app created with **React Native** (🏗👷‍♂️ under construction) [Link](https://github.com/ArlatPS/gdc_mobile)
 
 ## Game Details With DLC
