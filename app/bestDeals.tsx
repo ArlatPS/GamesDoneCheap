@@ -31,12 +31,12 @@ const fetchBestDeals = async (length: number) => {
 
 // to assure for production is at least one free game
 const freeGameForProd: DealsListGame = {
-  internalName: "JUSTCAUSE2",
-  title: "Just Cause 2",
+  internalName: "",
+  title: "No free games available",
   metacriticLink: "/game/pc/just-cause-2",
-  dealID: "n4VivWiz9xVo54bIegFI2S0MZGlMViNEL%2B4QMfk9zW4%3D",
-  storeID: "3",
-  gameID: "180",
+  dealID: "",
+  storeID: "0",
+  gameID: "0",
   salePrice: "1.50",
   normalPrice: "14.99",
   isOnSale: "1",
@@ -45,12 +45,11 @@ const freeGameForProd: DealsListGame = {
   steamRatingText: "Very Positive",
   steamRatingPercent: "90",
   steamRatingCount: "38792",
-  steamAppID: "8190",
+  steamAppID: "",
   releaseDate: 1269302400,
   lastChange: 1679567745,
   dealRating: "9.8",
-  thumb:
-    "https://cdn.cloudflare.steamstatic.com/steam/apps/8190/capsule_sm_120.jpg?t=1660140289",
+  thumb: "",
 };
 
 // filter out deals that don't have steamAppID and are not free
@@ -89,18 +88,27 @@ async function fetchFreeGames() {
     console.error("CHEAP SHARK API UNAVAILABLE");
   }
 }
-
+function getRandomNumber(max: number) {
+  return Math.floor(max * Math.random());
+}
 export default async function BestDeals() {
   const bestDeals = await fetchBestDeals(15);
   let free = await fetchFreeGames();
+  let freeGamesAvailable = true;
   // get stores
   const stores = await getStores();
   if (bestDeals != undefined && free != undefined) {
     // for production extra cards with free games
-    // free = [...free, freeGameForProd, freeGameForProd];
+    if (free.length === 0) {
+      free = [bestDeals[getRandomNumber(15)], bestDeals[getRandomNumber(15)]];
+      freeGamesAvailable = false;
+    }
     return (
       <section className="sectionToOmit">
-        <FreeGamesAny freeGames={free} />
+        <FreeGamesAny
+          freeGames={free}
+          freeGamesAvailable={freeGamesAvailable}
+        />
         <section className="mainPageSection">
           <UserDealsAny />
           <h2>Best Deals</h2>
